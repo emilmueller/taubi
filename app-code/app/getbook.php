@@ -80,7 +80,7 @@
     
     $response = curl_exec($rest);  
     
-    echo $response;  
+    
     print_r($response);  
     curl_close($rest);
 
