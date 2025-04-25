@@ -120,7 +120,7 @@
       $pages = $book['pages'];
       $author = "";
       for_each( $book['authors'] as $a => $aut){
-        $author += $aut." / ";
+        $author += $a." / ";
       }
       echo $author;
 
