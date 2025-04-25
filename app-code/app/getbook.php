@@ -118,11 +118,11 @@
       
       $title = $book['title'];
       $pages = $book['pages'];
-      // $author = "";
+      $author = "TEST";
       // for_each( $book['authors'] as $key => $value){
       //   $author .= $value." / ";
       // }
-      // echo $author;
+      echo $author;
 
 
 
