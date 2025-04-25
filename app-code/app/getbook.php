@@ -82,7 +82,7 @@
     $book = json_decode($response,true);
 
     echo "<pre>";
-    print_r($book);
+    print_r($book['book']);
     echo "TITEL: ".$book['title'];
     echo "</pre>";
 
