@@ -107,8 +107,7 @@
 // isbn VARCHAR(255),
 // price VARCHAR(255)
 
-$stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $firstname, $lastname, $email);
+
 
 
       $sql = "insert into books (title, pages, author, publisher, language, book_condition, image_url, reserved_by, date_published, isbn,price) VALUES ( ?,?,?,?,?,?,?,?,?,?,?)";
