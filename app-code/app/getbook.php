@@ -80,7 +80,7 @@
     
     $response = curl_exec($rest);  
     $book = json_decode($response,true);
-    // $book = $book['book'];
+    $book = $book['book'];
 
     
 
@@ -117,21 +117,26 @@
 
 
 
-    $sql = "insert into books (title, pages, author, publisher, language, book_condition, image_url, reserved_by, date_published, isbn,price) VALUES ( ?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, reserved_by, date_published, isbn,price) VALUES ( ?,?,?,?,?,?,?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sisssssisss", $title, $pages, $author, $publisher, $language, $book_condition, $image_url, $reserved_by, $date_published, $isbn, $price);
+    $stmt->bind_param("sissssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn);
       
-    // $title = $book['title'];
-    // $pages = $book['pages'];
-    // $author = "";
-    // foreach($book['authors'] as $key => $value){
-    //   $author .= $value." / ";
-    // }
-    // $author =substr($author, 0, -3);
-    // echo $author;
-    // $publisher= $book['publisher'];
-    // $language = $book]'language'];
-    // $book_condition = $book['book']
+    $title = $book['title'];
+    $pages = $book['pages'];
+    $author = "";
+    foreach($book['authors'] as $key => $value){
+      $author .= $value." / ";
+    }
+    $author =substr($author, 0, -3);
+    echo $author;
+    $publisher= $book['publisher'];
+    $language = $book]'language'];
+    $image_url = $book['image'];
+    $date_published =$book['date_published'];
+    $isbn = $book['isbn13'];
+
+    stmt->execute();
+
 
 
 
