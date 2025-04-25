@@ -121,16 +121,16 @@
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sisssssisss", $title, $pages, $author, $publisher, $language, $book_condition, $image_url, $reserved_by, $date_published, $isbn, $price);
       
-    $title = $book['title'];
-    $pages = $book['pages'];
-    $author = "";
-    foreach($book['authors'] as $key => $value){
-      $author .= $value." / ";
-    }
-    $author =substr($author, 0, -3);
-    echo $author;
-    $publisher= $book['publisher'];
-    $language = $book]'language'];
+    // $title = $book['title'];
+    // $pages = $book['pages'];
+    // $author = "";
+    // foreach($book['authors'] as $key => $value){
+    //   $author .= $value." / ";
+    // }
+    // $author =substr($author, 0, -3);
+    // echo $author;
+    // $publisher= $book['publisher'];
+    // $language = $book]'language'];
     // $book_condition = $book['book']
 
 
