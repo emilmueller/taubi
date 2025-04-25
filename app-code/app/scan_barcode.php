@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="ZXing for JS">
 
-  <title>Scan Barcode</title>
+  <title>ZXing TypeScript | Decoding from camera stream</title>
 
   <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
     href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
@@ -23,9 +23,14 @@
     <section class="container" id="demo-content">
       <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
 
-      
+      <p>
+        <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
+      </p>
 
-      
+      <p>This example shows how to scan any supported 1D/2D code with ZXing javascript library from the device video
+        camera. If more
+        than one video input devices are available (for example front and back camera) the example shows how to read
+        them and use a select to change the input device.</p>
 
       <div>
         <a class="button" id="startButton">Start</a>
