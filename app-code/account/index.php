@@ -73,3 +73,45 @@
       </a>
     </div>
   </div>
+
+<div class="container my-5">
+  <div class="row">
+     <div class="col-md-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <h3 id="user-name" class="card-title">Loading Username...</h3>
+            <p id="user-email" class="text-muted">Loading Email...</p>
+          </div>
+        </div>
+      </div>
+    <div class="col-md-8">
+    	<p>your books here</p>
+        <!-- TODO: populate from backendapi-->
+    </div>
+  </div>
+</div>
+<script>
+    //load user data
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fetch user data from the backend API
+      fetch('/api/account/get_user_data.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+          }
+          return response.json();
+        })
+        .then(user => {
+          // Populate the fields with user data
+          document.getElementById('user-name').textContent = user.name;
+          document.getElementById('user-email').textContent = user.email;
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+		//TODO: show error
+        });
+	});
+</script>
+</body>
+</html>
