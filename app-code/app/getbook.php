@@ -63,6 +63,8 @@
 <body id="body">
     <?php 
     include "../config.php";
+    
+
     $isbn = $_GET['isbn'];
     $url = 'https://api2.isbndb.com/book/'.$isbn;  
     $restKey = $isbnapikey; 
@@ -92,15 +94,9 @@
     
 
     // Create connection
-      $sucess = 1;
-			$conn = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
+      
 
-			// Check connection
-			if ($conn->connect_error) {
-				$success=0;
-				die("Connection failed: " . $conn->connect_error);
-			}
-
+			
 //       id INT AUTO_INCREMENT PRIMARY KEY,
 //       reserved_by INT,
 // publisher VARCHAR(255),
