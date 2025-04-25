@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: taubi-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: bookexchange
+      MYSQL_USER: taubi
+      MYSQL_PASSWORD: taubi123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  server:
+    image: php:8.2-apache
+    container_name: taubi-backend
+    restart: always
+    volumes:
+      - ./app-code:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
