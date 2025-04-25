@@ -84,13 +84,10 @@
         <input type="text" id="searchInput" class="form-control" placeholder="Suche nach Titel, ISBN, Autor oder Beschreibung...">
       </div>
       <div class="col-md-3 mb-2">
-        <select id="fachFilter" class="form-select">
-          <option value="">Alle Fächer</option>
-          <option value="Mathe">Mathe</option>
-          <option value="Deutsch">Deutsch</option>
-          <option value="Englisch">Englisch</option>
-		  <!-- TODO: dynamisch von api endpoint laden -->
-        </select>
+	<select id="fachFilter" class="form-select">
+	  <option value="">Alle Fächer</option>
+	</select>
+
       </div>
     </div>
 
@@ -108,37 +105,32 @@
     const searchInput = document.getElementById('searchInput');
     const fachFilter = document.getElementById('fachFilter');
 
+    // Function to load books
+    async function loadBooks() {
+      try {
+        const response = await fetch('/api/get_books.php');
+        const data = await response.json();
 
-	<!-- TODO: dynamisch von api endpoint laden -->
-	async function loadBooks() {
-	  try {
-	    const response = await fetch('/api/get_books.php');
-	    const data = await response.json();
+        // Transform API data to match your book object structure
+        const books = data.map(book => ({
+          title: book.title,
+          author: book.author,
+          description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
+          image_url: book.image_url,
+          isbn: book.isbn,
+          seller: book.sold_by || '0', // fallback if no seller
+          seller_name: book.seller_name, // if your API doesn't return seller name
+          tags: book.tags
+        }));
 
-	    // Transform API data to match your book object structure
-	    const books = data.map(book => ({
-	      title: book.title,
-	      author: book.author,
-	      description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
-	      image_url: book.image_url,
-	      isbn: book.isbn,
-	      seller: book.reserved_by || '0', // fallback if no seller
-	      seller_name: 'Unbekannt', // if your API doesn't return seller name
-	      tags: book.tags
-	    }));
+        console.log(books);
+        return books;
+      } catch (error) {
+        console.error('Error loading books:', error);
+      }
+    }
 
-	    console.log(books);
-	    // You can now render `books` to the DOM
-	  } catch (error) {
-	    console.error('Error loading books:', error);
-	  }
-	return books;
-	}
-
-	// Call the function to load books
-	const books=loadBooks();
-
-
+    // Function to render books
     function renderBooks(filteredBooks) {
       bookCardsContainer.innerHTML = '';
       filteredBooks.forEach(book => {
@@ -152,7 +144,7 @@
               <p class="card-text">${book.description}</p>
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
-              <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}');">Kontakt</button>
+              <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
             </div>
           </div>
         `;
@@ -160,6 +152,7 @@
       });
     }
 
+    // Function to filter books based on search input and selected Fach
     function filterBooks() {
       const query = searchInput.value.toLowerCase();
       const selectedFach = fachFilter.value;
@@ -177,22 +170,29 @@
       renderBooks(filtered);
     }
 
-    // Initial render
-    renderBooks(books);
+    // Call the function to load books and then render them
+    loadBooks().then(loadedBooks => {
+      books = loadedBooks; // Store the loaded books
+      renderBooks(books);  // Render books after loading
+    });
 
     // Filter on input or dropdown change
     searchInput.addEventListener('input', filterBooks);
     fachFilter.addEventListener('change', filterBooks);
 
-    function show_message_modal(book_title, book_seller_name){
+    // Function to show the message modal
+    function show_message_modal(book_title, book_seller_name,book_seller_id){
       document.getElementById("message_text").value="Hallo "+book_seller_name+" Ich würde gerne "+book_title+" haben.";
+      document.getElementById("message_seller_id").value=book_seller_id;
       var message_modal = new bootstrap.Modal(document.getElementById('send_message'));
       message_modal.show();
     }
 
+    // Function to send a message
     function send_message(){
       const message = document.getElementById("message_text").value;
-      fetch('https://www.jakach.ch/api/something?message=' + encodeURIComponent(message))
+      const seller_id = document.getElementById("message_seller_id").value;
+      fetch('/api/send_message.php?message=' + encodeURIComponent(message) +"&seller_id="+encodeURIComponent(seller_id))
         .then(response => response.json())
         .then(data => {
           if (data.status === 'success') {
@@ -206,6 +206,7 @@
         });
     }
 
+    // Function to show notifications
     function show_notification(message, type = 'success', duration = 3000) {
       const notif = document.getElementById('notification');
       notif.textContent = message;
@@ -215,10 +216,32 @@
         notif.classList.remove('show');
       }, duration);
     }
+
+   async function loadTags() {
+    try {
+      const response = await fetch('/api/get_tags.php');
+      const data = await response.json();
+
+      const fachFilter = document.getElementById('fachFilter');
+
+      data.tags.forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag;
+        fachFilter.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Fehler beim Laden der Tags:', error);
+    }
+  }
+
+  // Call this when your page loads
+  document.addEventListener('DOMContentLoaded', loadTags);
   </script>
 
   <div id="notification"></div>
 
+  <!-- Modal to send message -->
   <div class="modal fade" id="send_message" tabindex="-1" aria-labelledby="send_message" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -229,7 +252,8 @@
         <div class="modal-body">
           Gib eine Kurze Nachricht für den/die Verkäufer*in des Buches an.
           <textarea class="form-control mt-3" id="message_text" rows="4" placeholder="Deine Nachricht..."></textarea>
-        </div>
+          <input type="text" style="display:none" id="message_seller_id">
+	</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="send_message()">Absenden</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>
