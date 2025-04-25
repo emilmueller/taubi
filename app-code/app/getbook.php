@@ -84,7 +84,7 @@
 
     echo "<pre>";
     print_r($book);
-    echo "TITEL: ".$book['TITLE'];
+    
     echo "</pre>";
 
     // Create connection
@@ -116,7 +116,13 @@
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("sisssssisss", $title, $pages, $author, $publisher, $language, $book_condition, $image_url, $reserved_by, $date_published, $isbn, $price);
       
-      
+      $title = $book['title'];
+      $pages = $book['pages'];
+      $author = "";
+      for_each( $a in $book['authors']){
+        $author += $a." / ";
+      }
+      echo $author;
 
     curl_close($rest);
 
