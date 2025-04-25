@@ -12,7 +12,9 @@ services:
       - taubi-db-storage:/var/lib/mysql
 
   taubi-srv:
-    image: php:apache
+    build:
+      context: .
+      dockerfile: srv_dockerfile
     container_name: taubi-srv
     restart: unless-stopped
     networks:
@@ -23,6 +25,8 @@ services:
     depends_on:
       - taubi-db
     volumes:
+      - ./apache-conf:/etc/apache2/sites-available
+      - ./php-conf:/usr/local/etc/php/
       - ./app-code:/var/www/html
 networks:
   taubi-network:
