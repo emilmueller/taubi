@@ -63,7 +63,7 @@
 <body id="body">
     <?php 
     include "../config.php";
-    $url = 'https://api2.isbndb.com/book/9783596279194';  
+    $url = 'https://api2.isbndb.com/book/9783596270194';  
     $restKey = $isbnapikey; 
     echo("Weiter so:".$restKey);
     
