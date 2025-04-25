@@ -123,7 +123,7 @@
       // for_each( $book['authors'] as $key => $value){
       //   $author .= $value." / ";
       // }
-      echo $author;
+      echo "--------------".$author;
 
 
 
