@@ -113,7 +113,7 @@
 
 
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, reserved_by, date_published, isbn,price) VALUES ( ?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn) VALUES ( ?,?,?,?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sissssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn);
       
