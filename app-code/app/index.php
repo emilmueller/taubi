@@ -110,12 +110,34 @@
 
 
 	<!-- TODO: dynamisch von api endpoint laden -->
-    const books = [
-      { title: 'Mathebuch 1', author: 'Autor A', description: 'Mathe Basics', image_url: 'https://picsum.photos/200/300', isbn: '123', seller: '1', seller_name: 'ueli', tags: ['Mathe'] },
-      { title: 'Deutschbuch 1', author: 'Autor B', description: 'Grammatik Grundlagen', image_url: 'https://picsum.photos/200/300', isbn: '456', seller: '2', seller_name: 'anna', tags: ['Deutsch'] },
-      { title: 'Englischbuch 1', author: 'Autor C', description: 'English for Beginners', image_url: 'https://picsum.photos/200/300', isbn: '789', seller: '3', seller_name: 'ben', tags: ['Englisch'] },
-      { title: 'Mixbuch 1', author: 'Autor D', description: 'Für Mathe und Deutsch geeignet', image_url: 'https://picsum.photos/200/300', isbn: '999', seller: '4', seller_name: 'mia', tags: ['Mathe', 'Deutsch'] },
-    ];
+	async function loadBooks() {
+	  try {
+	    const response = await fetch('/api/get_books.php');
+	    const data = await response.json();
+
+	    // Transform API data to match your book object structure
+	    const books = data.map(book => ({
+	      title: book.title,
+	      author: book.author,
+	      description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
+	      image_url: book.image_url,
+	      isbn: book.isbn,
+	      seller: book.reserved_by || '0', // fallback if no seller
+	      seller_name: 'Unbekannt', // if your API doesn't return seller name
+	      tags: book.tags
+	    }));
+
+	    console.log(books);
+	    // You can now render `books` to the DOM
+	  } catch (error) {
+	    console.error('Error loading books:', error);
+	  }
+	return books;
+	}
+
+	// Call the function to load books
+	const books=loadBooks();
+
 
     function renderBooks(filteredBooks) {
       bookCardsContainer.innerHTML = '';
