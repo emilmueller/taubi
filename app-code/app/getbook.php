@@ -79,9 +79,15 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest);  
+    $book = json_decode($response,true);
+
+    echo "<pre>";
+    print_r($book);
+    echo "</pre>";
+
+
     
-    
-    print_r($response);  
+
     curl_close($rest);
 
 
