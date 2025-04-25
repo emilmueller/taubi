@@ -85,8 +85,14 @@
         </div>
       </div>
     <div class="col-md-8">
-    	<p>your books here</p>
-        <!-- TODO: populate from backendapi-->
+	<div class="container mt-4">
+    <h2>Meine Bücher</h2>
+
+    	<div class="row row-cols-1 row-cols-md-3 g-4" id="bookCards">
+      		<!-- Cards will be added dynamically here -->
+	  </div>
+	</div>
+
     </div>
   </div>
 </div>
@@ -94,7 +100,7 @@
     //load user data
     document.addEventListener('DOMContentLoaded', () => {
       // Fetch user data from the backend API
-      fetch('/api/account/get_user_data.php')
+      fetch('/api/get_user_data.php')
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch user data');
@@ -103,7 +109,7 @@
         })
         .then(user => {
           // Populate the fields with user data
-          document.getElementById('user-name').textContent = user.name;
+          document.getElementById('user-name').textContent = user.username;
           document.getElementById('user-email').textContent = user.email;
 
         })
@@ -112,6 +118,71 @@
 		//TODO: show error
         });
 	});
+
+	const bookCardsContainer = document.getElementById('bookCards');
+
+
+    // Function to load books for the specified user
+    async function loadBooks() {
+      try {
+        const response = await fetch(`/api/get_books.php`);
+        const data = await response.json();
+
+        // Transform API data to match your book object structure
+        const books = data.map(book => ({
+          title: book.title,
+          author: book.author,
+          description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`,
+          image_url: book.image_url,
+          isbn: book.isbn,
+          seller: book.sold_by || '0',
+          seller_name: book.seller_name,
+          tags: book.tags,
+	  id: book.id
+        }));
+
+        return books;
+      } catch (error) {
+        console.error('Error loading books:', error);
+      }
+    }
+
+    // Function to render books
+    function renderBooks(filteredBooks) {
+      bookCardsContainer.innerHTML = '';
+      filteredBooks.forEach(book => {
+	if(book.seller==1){ //TODO: add actuall user id here e.g. from $_SESSIOn
+        const card = document.createElement('div');
+        card.classList.add('col');
+        card.innerHTML = `
+          <div class="card h-100">
+            <img src="${book.image_url}" class="card-img-top" alt="Buchbild">
+            <div class="card-body">
+              <h5 class="card-title">${book.title}</h5>
+              <!--<p class="card-text">${book.description}</p>-->
+              <p class="text-muted">Autor: ${book.author}</p>
+              <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
+              <button class="btn btn-danger" onclick="delete_book(${book.id})">Löschen</button> <!-- delete Button -->
+            </div>
+          </div>
+        `;
+        bookCardsContainer.appendChild(card);
+	}
+      });
+    }
+
+    // Call the function to load books and then render them
+    loadBooks().then(loadedBooks => {
+      renderBooks(loadedBooks);  // Render books after loading
+    });
+
+    // Function to handle the "Edit" button (Placeholder for edit functionality)
+    function delete_book(book_id) {
+	fetch("/api/delete_book.php?id="+book_id); // delete
+	loadBooks().then(loadedBooks => {
+      		renderBooks(loadedBooks);  // Render books after loading
+    	});
+    }
 </script>
 </body>
 </html>
