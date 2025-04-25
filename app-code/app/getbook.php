@@ -65,8 +65,8 @@
     include "../config.php";
     $url = 'https://api2.isbndb.com/book/9783596270194';  
     $restKey = $isbnapikey; 
-    echo("Weiter so:".$restKey);
-    
+
+    echo "Nun läufts<br/>";
     $headers = array(  
       "Content-Type: application/json",  
       "Authorization: " . $restKey  
