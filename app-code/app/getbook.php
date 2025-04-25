@@ -80,7 +80,7 @@
     
     $response = curl_exec($rest);  
     $book = json_decode($response,true);
-    $book = $book['book'];
+    // $book = $book['book'];
 
     
 
@@ -129,7 +129,9 @@
     }
     $author =substr($author, 0, -3);
     echo $author;
-    $publisher= "";
+    $publisher= $book['publisher'];
+    $language = $book]'language'];
+    // $book_condition = $book['book']
 
 
 
