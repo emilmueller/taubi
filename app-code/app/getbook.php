@@ -64,7 +64,7 @@
     <?php 
     $url = 'https://api2.isbndb.com/book/9783596279194';  
     $restKey = $isbnapikey; 
-    print($restKey);
+    echo("Weiter so:".$restKey);
     
     $headers = array(  
       "Content-Type: application/json",  
