@@ -88,7 +88,8 @@
     foreach($book['authors'] as $key => $value){
       $author .= $value." / ";
     }
-    echo "--------------".$author;
+    $author =substr($author, 0, -3);
+    echo $author;
 
 
     // echo "<pre>";
