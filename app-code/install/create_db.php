@@ -90,6 +90,7 @@
 			    date_published VARCHAR(255),
 			    author VARCHAR(255),
 			    isbn VARCHAR(255),
+			    sold_by INT,
 			    price VARCHAR(255)
                         );";
 
