@@ -85,7 +85,7 @@
     echo "<pre>";
     print_r($book);
     
-    echo "</pre>";
+    
 
     // Create connection
 			$conn = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
@@ -129,7 +129,7 @@
 
     curl_close($rest);
 
-
+    echo "</pre>";
 
     ?>  
 </body>
