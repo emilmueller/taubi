@@ -58,7 +58,7 @@
       background-color: #dc3545;
     }
   </style>
-  <?php include "config_setup.php"; ?>
+  <?php include "../install/config_setup.php"; ?>
 </head>
 <body id="body">
     <?php 
