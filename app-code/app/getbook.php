@@ -58,10 +58,11 @@
       background-color: #dc3545;
     }
   </style>
-  <?php include "../install/config_setup.php"; ?>
+  
 </head>
 <body id="body">
     <?php 
+    include "../install/config_setup.php";
     $url = 'https://api2.isbndb.com/book/9783596279194';  
     $restKey = $isbnapikey; 
     echo("Weiter so:".$restKey);
