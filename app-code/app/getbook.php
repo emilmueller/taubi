@@ -84,7 +84,7 @@
 
     echo "<pre>";
     print_r($book);
-    echo "TITEL: ".$book['title'];
+    echo "TITEL: ".$book['TITLE'];
     echo "</pre>";
 
     // Create connection
