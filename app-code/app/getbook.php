@@ -63,7 +63,8 @@
 <body id="body">
     <?php 
     include "../config.php";
-    $url = 'https://api2.isbndb.com/book/9783596270194';  
+    $isbn = $_GET['isbn'];
+    $url = 'https://api2.isbndb.com/book/'.$isbn;  
     $restKey = $isbnapikey; 
 
     echo "Nun läufts<br/>";
