@@ -1,28 +1,37 @@
 services:
-  db:
-    image: mariadb:latest
+  taubi-db:
+    image: yobasystems/alpine-mariadb:latest
     container_name: taubi-db
-    restart: always
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: bookexchange
-      MYSQL_USER: taubi
-      MYSQL_PASSWORD: taubi123
-    ports:
-      - "3306:3306"
+      MYSQL_ROOT_PASSWORD: 1234
+    networks:
+      taubi-network:
+        ipv4_address: 192.168.5.2
     volumes:
-      - db_data:/var/lib/mysql
+      - taubi-db-storage:/var/lib/mysql
 
-  server:
-    image: php:8.2-apache
-    container_name: taubi-backend
-    restart: always
+  taubi-srv:
+    image: php:apache
+    container_name: taubi-srv
+    restart: unless-stopped
+    networks:
+      taubi-network:
+        ipv4_address: 192.168.5.3
+    ports:
+       - "80:80"
+    depends_on:
+      - taubi-db
     volumes:
       - ./app-code:/var/www/html
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
+networks:
+  taubi-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.5.0/24
 
 volumes:
-  db_data:
+  taubi-db-storage:
+    external: true
