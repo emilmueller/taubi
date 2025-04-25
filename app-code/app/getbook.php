@@ -118,12 +118,15 @@
       
       $title = $book['title'];
       $pages = $book['pages'];
-      // $author = "";
-      // for_each( $book['authors'] as $key => $value){
-      //   $author .= $value." / ";
-      // }
-      // echo $author;
+      $author = "";
+      for_each( $book['authors'] as $key => $value){
+        $author .= $value." / ";
+      }
+      echo $author;
 
+
+
+      
     curl_close($rest);
 
 
