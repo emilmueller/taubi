@@ -119,8 +119,8 @@
       $title = $book['title'];
       $pages = $book['pages'];
       $author = "";
-      for_each( $a in $book['authors']){
-        $author += $a." / ";
+      for_each( $book['authors'] as $a => $aut){
+        $author += $aut." / ";
       }
       echo $author;
 
