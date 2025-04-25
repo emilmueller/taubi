@@ -22,7 +22,7 @@ $fromName = "Taubi";
 $toEmail = $buyer_email;
 $toName = $buyer_username;
 $subject = "Jemand ist an deinem Buch interessiert";
-$body = "Hallo ".$buyer_username." Jemand interessiert sich für dein Buch auf Taubi. Hier ist die Nachricht: ".$message;
+$body = "Hallo ".$buyer_username." Jemand interessiert sich für dein Buch auf Taubi.<br>Hier ist die Nachricht:<br><br>".$message;
 
 // API endpoint
 $url = "https://api.sendgrid.com/v3/mail/send";
@@ -46,7 +46,7 @@ $data = [
     ],
     'content' => [
         [
-            'type' => 'text/plain',
+            'type' => 'text/html',
             'value' => $body
         ]
     ]
