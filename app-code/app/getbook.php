@@ -82,13 +82,14 @@
     $book = json_decode($response,true);
     $book = $book['book'];
 
-    echo "<pre>";
-    print_r($book);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($book);
+    // echo "</pre>";
     
     
 
     // Create connection
+      $sucess = 1;
 			$conn = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
 
 			// Check connection
