@@ -80,9 +80,10 @@
     
     $response = curl_exec($rest);  
     $book = json_decode($response,true);
+    $book = $book['book'];
 
     echo "<pre>";
-    print_r($book['book']);
+    print_r($book);
     echo "TITEL: ".$book['title'];
     echo "</pre>";
 
