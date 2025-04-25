@@ -85,8 +85,37 @@
     print_r($book);
     echo "</pre>";
 
+    // Create connection
+			$conn = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
 
-    
+			// Check connection
+			if ($conn->connect_error) {
+				$success=0;
+				die("Connection failed: " . $conn->connect_error);
+			}
+
+//       id INT AUTO_INCREMENT PRIMARY KEY,
+//       reserved_by INT,
+// publisher VARCHAR(255),
+// book_condition VARCHAR(255),
+// language VARCHAR(255),
+// image_url VARCHAR(255),
+// title VARCHAR(255),
+// pages INT,
+// date_published VARCHAR(255),
+// author VARCHAR(255),
+// isbn VARCHAR(255),
+// price VARCHAR(255)
+
+$stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $firstname, $lastname, $email);
+
+
+      $sql = "insert into books (title, pages, author, publisher, language, book_condition, image_url, reserved_by, date_published, isbn,price) VALUES ( ?,?,?,?,?,?,?,?,?,?,?)";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("sisssssisss", $title, $pages, $author, $publisher, $language, $book_condition, $image_url, $reserved_by, $date_published, $isbn, $price);
+      
+      echo $book['title'];
 
     curl_close($rest);
 
