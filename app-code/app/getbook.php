@@ -131,7 +131,7 @@
     $date_published =$book['date_published'];
     $isbn = $book['isbn13'];
 
-    stmt->execute();
+    $stmt->execute();
 
 
 
