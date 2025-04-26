@@ -11,7 +11,8 @@ COPY ssl/server.crt /etc/apache2/conf/server.cert
 COPY ssl/server.key /etc/apache2/conf/server.key
 
     # Enable SSL module for Apache
-RUN a2enmod ssl
+RUN a2enmod ssl && \
+a2enmod rewrite 
 
 # Restart Apache to apply changes
 RUN service apache2 restart
