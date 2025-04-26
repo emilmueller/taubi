@@ -5,7 +5,12 @@ RUN apt-get update && \
     apt-get install -y libzip-dev zip zlib1g-dev git unzip && \
     docker-php-ext-install mysqli zip
 
-# Enable SSL module for Apache
+
+# Copy Certificates
+COPY /etc/ssl/certs/server.crt /var/www/html/server.certs
+COPY /etc/ssl/private/server.key /var/www/html/server.key
+
+    # Enable SSL module for Apache
 RUN a2enmod ssl
 
 # Restart Apache to apply changes
