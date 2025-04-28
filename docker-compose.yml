@@ -21,6 +21,7 @@ services:
       taubi-network:
         ipv4_address: 192.168.5.3
     ports:
+       - "80:80"
        - "443:443"
     depends_on:
       - taubi-db

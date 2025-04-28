@@ -94,6 +94,7 @@
               if (result) {
                 console.log(result)
                 document.getElementById('result').textContent = result.text
+                window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)

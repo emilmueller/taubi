@@ -125,11 +125,11 @@
                         }
 
 			// Create book_tags table
-                        $sql="CREATE TABLE IF NOT EXISTS book_tags (
-                            id INT AUTO_INCREMENT PRIMARY KEY,
-			    book_id INT,
-			    tag_id INT
-                        );";
+							$sql="CREATE TABLE IF NOT EXISTS book_tags (
+								id INT AUTO_INCREMENT PRIMARY KEY,
+					book_id INT,
+					tag_id INT
+							);";
 
 
                         if ($conn->query($sql) === TRUE) {
