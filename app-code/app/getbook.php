@@ -127,7 +127,7 @@
     echo $author;
     $publisher= $book['publisher'];
     $language = $book['language'];
-    $image_url = $book['image'];
+    $image_url = $book['image_original'];
     $date_published =$book['date_published'];
     $isbn = $book['isbn13'];
 
