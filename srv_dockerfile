@@ -7,8 +7,8 @@ RUN apt-get update && \
 
 
 # Copy Certificates
-COPY ./ssl/server.crt /etc/apache2/conf/server.cert
-COPY ./ssl/server.key /etc/apache2/conf/server.key
+#COPY ./ssl/server.crt /etc/apache2/conf/server.cert
+#COPY ./ssl/server.key /etc/apache2/conf/server.key
 
     # Enable SSL module for Apache
 RUN a2enmod ssl && \
