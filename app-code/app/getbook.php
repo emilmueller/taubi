@@ -165,7 +165,7 @@
  
     
     <!-- Book Form  -->
-    <img src="<?php echo $image_url ?>" class="col-md-12" alt="Buchbild">
+    <img src="<?php echo $image_url ?>" class="col-md-4" alt="Buchbild">
     <div class="row align-items-center">
       <div class="col-lg-2 mb-2">
           <label for="titleInput" class="col-form-label">Titel</label>
