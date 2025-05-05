@@ -203,7 +203,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       document.getElementById("info_seller").innerHTML=book_seller;
       document.getElementById("info_title").innerHTML=book_title;
       document.getElementById("info_author").innerHTML=book_author;
-      document.getElementById("info_pages").innerHTML="book_pages;
+      document.getElementById("info_pages").innerHTML=book_pages;
       document.getElementById("info_language").innerHTML=book_language;
       document.getElementById("info_date_published").innerHTML=book_date_published;
       document.getElementById("info_price").innerHTML=book_price;
@@ -287,30 +287,30 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 <!-- Modal to show info -->
 <div class="modal fade" id="info_modal" tabindex="-1" aria-labelledby="send_message" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-scrollable" style="max-width: 500px;">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
+      <div class="modal-header">
         <h5 class="modal-title">Buchinformationen</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
-        <img src="" id="info_image" class="img-fluid rounded mb-3" alt="Book Image" style="max-height: 300px;">
-        <div class="info-details">
-          <p class="card-text"><strong>Titel:</strong> <span id="info_title"></span></p>
-          <p class="card-text"><strong>Autor:</strong> <span id="info_author"></span></p>
-          <p class="card-text"><strong>Seiten:</strong> <span id="info_pages"></span></p>
-          <p class="card-text"><strong>Sprache:</strong> <span id="info_language"></span></p>
-          <p class="card-text"><strong>Veröffentlichungsdatum:</strong> <span id="info_date_published"></span></p>
-          <p class="card-text"><strong>Verkäufer:</strong> <span id="info_seller"></span></p>
-          <p class="card-text"><strong>Preis:</strong> <span id="info_price"></span></p>
-        </div>
+      <div class="modal-body text-start">
+        <img src="" id="info_image" class="img-fluid rounded mb-3 d-block mx-auto" alt="Buchbild" style="max-height: 300px;">
+        <p class="card-text"><strong>Titel:</strong> <span id="info_title"></span></p>
+        <p class="card-text"><strong>Autor:</strong> <span id="info_author"></span></p>
+        <p class="card-text"><strong>Seiten:</strong> <span id="info_pages"></span></p>
+        <p class="card-text"><strong>Sprache:</strong> <span id="info_language"></span></p>
+        <p class="card-text"><strong>Veröffentlichungsdatum:</strong> <span id="info_date_published"></span></p>
+        <p class="card-text"><strong>Verkäufer:</strong> <span id="info_seller"></span></p>
+        <p class="card-text"><strong>Preis:</strong> <span id="info_price"></span></p>
       </div>
-      <div class="modal-footer justify-content-center">
+      <div class="modal-footer justify-content-end">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>
       </div>
     </div>
   </div>
 </div>
 
+
+</div>
 </body>
 </html>
