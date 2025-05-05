@@ -131,6 +131,7 @@
     $stmt->bind_param("sissssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn);
       
     $title = $book['title'];
+    echo $title;
     $pages = $book['pages'];
     $author = "";
     foreach($book['authors'] as $key => $value){
@@ -166,7 +167,7 @@
     <!-- Book Form  -->
     <div class="row align-items-center">
       <div class="col-lg-2 mb-2">
-          <label for="titleInput" class="col-form-label">Autor:in</label>
+          <label for="titleInput" class="col-form-label">Titel</label>
       </div>  
       <div class="col-lg-10">
           <input type="text" id="titleInput" class="form-control" placeholder="Titel" value=<?php echo $title ?> />
