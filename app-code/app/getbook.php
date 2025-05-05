@@ -28,7 +28,7 @@
       margin-bottom: 20px;
     }
 
-    .search-form {
+    .book-form {
       margin: 20px 0;
     }
 
@@ -61,7 +61,24 @@
   
 </head>
 <body id="body">
-    <?php 
+
+  <!-- Ribbon at the top -->
+  <div class="ribbon d-flex justify-content-between align-items-center">
+      <div>
+        <a href="/" class="btn btn-link">Bibliothek</a>
+        <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="/account" class="btn btn-link">
+          <i class="bi bi-person-circle"></i> Konto
+        </a>
+      </div>
+    </div>
+    <!-- Books Section -->
+  <div class="container mt-4">
+    <h2>Mein Buch</h2>
+
+  <?php 
     include "../config.php";
     
 
@@ -69,7 +86,7 @@
     $url = 'https://api2.isbndb.com/book/'.$isbn;  
     $restKey = $isbnapikey; 
 
-    echo "Nun läufts<br/>";
+    
     $headers = array(  
       "Content-Type: application/json",  
       "Authorization: " . $restKey  
@@ -87,9 +104,7 @@
     
 
 
-    echo "<pre>";
-    print_r($book);
-    echo "</pre>";
+    
     
     
 
@@ -131,7 +146,7 @@
     $date_published =$book['date_published'];
     $isbn = $book['isbn13'];
 
-    $stmt->execute();
+    //$stmt->execute();
 
 
 
@@ -140,5 +155,17 @@
 
     
 
-    ?>  
-</body>git
+    ?> 
+    
+    <!-- Search + Fach Dropdown -->
+    <div class="book-form row">
+      <div class="col-md-9 mb-2">
+        <input type="text" id="authoInput" class="form-control" placeholder="Autor:in" value=<? php echo $author ?>>
+      </div>
+      
+    </div>
+
+
+
+     
+</body>
