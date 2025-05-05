@@ -139,7 +139,7 @@
       $author .= $value." / ";
     }
     $author =substr($author, 0, -3);
-    echo $author;
+    
     $publisher= $book['publisher'];
     $language = $book['language'];
     $image_url = $book['image'];
@@ -160,7 +160,7 @@
     <!-- Search + Fach Dropdown -->
     <div class="book-form row">
       <div class="col-md-12 mb-2">
-        <label for="authorInput" class="form-label col-md-2">Autor:in</label>
+        <label for="authorInput" class="col-form-label col-md-2">Autor:in</label>
         <div class="col-md-10">
           <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value=<?php echo $author ?>/>
         </div>
