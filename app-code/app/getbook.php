@@ -74,11 +74,9 @@
         </a>
       </div>
     </div>
-    <!-- Books Section -->
-  <div class="container md-8">
-    <h2>Mein Buch</h2>
 
-  <?php 
+
+    <?php 
     include "../config.php";
     
 
@@ -156,8 +154,16 @@
     
 
     ?> 
+
+
+
+    <!-- Books Section -->
+  <div class="container md-8">
+    <h2>Mein Buch</h2>
+
+ 
     
-    <!-- Search + Fach Dropdown -->
+    <!-- Book Form  -->
     <div class="book-form row">
       <div class="mb-2">
         <div class="col-auto">
@@ -170,7 +176,7 @@
       
     </div>
 
-
+  </div>
 
      
 </body>
