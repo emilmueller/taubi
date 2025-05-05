@@ -166,12 +166,9 @@
     <!-- Book Form  -->
     <div class="book-form row">
       <div class="mb-2">
-        <div class="col-auto">
           <label for="authorInput" class="col-form-label">Autor:in</label>
-        </div>
-        <div class="col-auto">
+      
           <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value=<?php echo $author ?>/>
-        </div>
       </div>
       
     </div>
