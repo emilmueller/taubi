@@ -182,6 +182,22 @@
           <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
       </div>
     </div>
+    <div class="row align-items-center">
+      <div class="col-lg-2 mb-2">
+          <label for="puglisherInput" class="col-form-label">Verlag</label>
+      </div>  
+      <div class="col-lg-10">
+          <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-2 mb-2">
+          <label for="yaerInput" class="col-form-label">Jahr</label>
+      </div>  
+      <div class="col-lg-10">
+          <input type="text" id="yearInput" class="form-control" placeholder="Jahr" value="<?php echo $date_published ?>" />
+      </div>
+    </div>
       
     
 
