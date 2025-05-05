@@ -164,12 +164,19 @@
  
     
     <!-- Book Form  -->
-    <div class="book-form row align-items-center">
+    <div class="row align-items-center">
+      <div class="col-lg-2 mb-2">
+          <label for="titleInput" class="col-form-label">Autor:in</label>
+      </div>  
+      <div class="col-lg-10">
+          <input type="text" id="titleInput" class="form-control" placeholder="Titel" value=<?php echo $title ?> />
+      </div>
+    </div>
+    <div class="row align-items-center">
       <div class="col-lg-2 mb-2">
           <label for="authorInput" class="col-form-label">Autor:in</label>
       </div>  
       <div class="col-lg-10">
-      
           <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value=<?php echo $author ?> />
       </div>
     </div>
