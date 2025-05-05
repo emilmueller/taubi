@@ -1,10 +1,18 @@
 <?php
-// Start the session
 session_start();
 
-//dummy data TODO: REMOVE
-$_SESSION["email"]='ueli@ksw.ch';
-$_SESSION["username"]='ueli';
+// Check if the user is logged in
+if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+        $response = [
+            "error" => "not authorized"
+        ];
+        echo json_encode($response);
+    exit();
+}
+?>
+<?php
+// Start the session
+session_start();
 
 // Check if the session variables 'email' and 'username' are set
 if (isset($_SESSION['email']) && isset($_SESSION['username'])) {

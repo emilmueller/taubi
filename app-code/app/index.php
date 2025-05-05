@@ -154,6 +154,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
               <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
+	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
           </div>
         `;
@@ -194,6 +195,19 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       document.getElementById("message_text").value="Hallo "+book_seller_name+" Ich würde gerne "+book_title+" haben.";
       document.getElementById("message_seller_id").value=book_seller_id;
       var message_modal = new bootstrap.Modal(document.getElementById('send_message'));
+      message_modal.show();
+    }
+
+    function show_info_modal(book_title, book_seller,book_author,book_pages,book_language, book_date_published,book_price,book_image){
+      document.getElementById("info_image").src=book_image;
+      document.getElementById("info_seller").innerHTML=book_seller;
+      document.getElementById("info_title").innerHTML=book_title;
+      document.getElementById("info_author").innerHTML=book_author;
+      document.getElementById("info_pages").innerHTML="book_pages;
+      document.getElementById("info_language").innerHTML=book_language;
+      document.getElementById("info_date_published").innerHTML=book_date_published;
+      document.getElementById("info_price").innerHTML=book_price;
+      var message_modal = new bootstrap.Modal(document.getElementById('info_modal'));
       message_modal.show();
     }
 
@@ -270,6 +284,33 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       </div>
     </div>
   </div>
+
+<!-- Modal to show info -->
+<div class="modal fade" id="info_modal" tabindex="-1" aria-labelledby="send_message" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Buchinformationen</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" id="info_image" class="img-fluid rounded mb-3" alt="Book Image" style="max-height: 300px;">
+        <div class="info-details">
+          <p class="card-text"><strong>Titel:</strong> <span id="info_title"></span></p>
+          <p class="card-text"><strong>Autor:</strong> <span id="info_author"></span></p>
+          <p class="card-text"><strong>Seiten:</strong> <span id="info_pages"></span></p>
+          <p class="card-text"><strong>Sprache:</strong> <span id="info_language"></span></p>
+          <p class="card-text"><strong>Veröffentlichungsdatum:</strong> <span id="info_date_published"></span></p>
+          <p class="card-text"><strong>Verkäufer:</strong> <span id="info_seller"></span></p>
+          <p class="card-text"><strong>Preis:</strong> <span id="info_price"></span></p>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
