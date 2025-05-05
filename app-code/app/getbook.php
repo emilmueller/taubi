@@ -75,7 +75,7 @@
       </div>
     </div>
     <!-- Books Section -->
-  <div class="container mt-4">
+  <div class="container md-8">
     <h2>Mein Buch</h2>
 
   <?php 
