@@ -150,9 +150,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <img src="${book.image_url}" class="card-img-top" alt="Buchbild">
             <div class="card-body">
               <h5 class="card-title">${book.title}</h5>
-              <p class="card-text">${book.description}</p>
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
+	      <p class="text-muted">Verkäufer: ${book.seller_name}</p>
               <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
 	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
