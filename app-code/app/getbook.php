@@ -127,7 +127,7 @@
     echo $author;
     $publisher= $book['publisher'];
     $language = $book['language'];
-    $image_url = $book['image_original'];
+    $image_url = $book['image'];
     $date_published =$book['date_published'];
     $isbn = $book['isbn13'];
 
@@ -141,4 +141,4 @@
     
 
     ?>  
-</body>
+</body>git
