@@ -160,7 +160,8 @@
     <!-- Search + Fach Dropdown -->
     <div class="book-form row">
       <div class="col-md-9 mb-2">
-        <input type="text" id="authoInput" class="form-control" placeholder="Autor:in" value=<?php echo $author ?>>
+        <label for="authorInput">Autor:in</label>
+        <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value=<?php echo $author ?>>
       </div>
       
     </div>
