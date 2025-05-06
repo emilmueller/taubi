@@ -150,7 +150,7 @@
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
     document.getElementById('rotateButtonCW').addEventListener('click', function(){
-      alert("HO");
+      document.getElementById('video').style.transform='rotate(90deg)';
 
 
 
