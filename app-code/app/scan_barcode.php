@@ -84,19 +84,12 @@
       </div>
     </div>
 
-  <main class="wrapper" style="padding-top:2em">
 
-    <section class="container" id="demo-content">
-      <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
+      <h1 class="title">Buch erfassen</h1>
 
-      <p>
-        <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
-      </p>
+      
 
-      <p>This example shows how to scan any supported 1D/2D code with ZXing javascript library from the device video
-        camera. If more
-        than one video input devices are available (for example front and back camera) the example shows how to read
-        them and use a select to change the input device.</p>
+      
 
       <div>
         <a class="button" id="startButton">Start</a>
@@ -116,9 +109,8 @@
       <label>Result:</label>
       <pre><code id="result"></code></pre>
 
-      <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/multi-camera/">source code</a>
-        for this example.</p>
-    </section>
+      
+   
 
     <footer class="footer">
       <section class="container">
@@ -127,7 +119,7 @@
       </section>
     </footer>
 
-  </main>
+
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
