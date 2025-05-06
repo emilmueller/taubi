@@ -92,8 +92,8 @@
     
 
     <div>
-      <a class="button" id="startButton">Start</a>
-      <a class="button" id="resetButton">Reset</a>
+      <button class="btn" id="startButton">Start</button>
+      <button class="btn" id="resetButton">Reset</button>
     </div>
 
     <div>
@@ -101,7 +101,7 @@
     </div>
 
     <div id="sourceSelectPanel" style="display:none">
-      <label for="sourceSelect">Change video source:</label>
+      <label for="sourceSelect">Kamera:</label>
       <select id="sourceSelect" style="max-width:400px">
       </select>
     </div>
@@ -114,7 +114,7 @@
 
     <footer class="footer">
       <section class="container">
-        <p>ZXing TypeScript Demo. Licensed under the <a target="_blank"
+        <p>Licensed under the <a target="_blank"
             href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
       </section>
     </footer>
