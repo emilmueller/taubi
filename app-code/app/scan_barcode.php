@@ -91,7 +91,7 @@
       <div class="col-lg-2 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-10">
+      <div class="col-lg-6">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
     </div>
@@ -99,19 +99,21 @@
     
 
     
-    <div class="row align-items-center">
-      <div class="col-lg-4">
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+    <div class="row align-items-center mt-20">
+      <div class="col-lg-2">
+        <h3>ISBN-Nummer scannen</h2>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-6">
+
+        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
         <button class="btn btn-secondary" id="startButton">Start</button>
         <button class="btn btn-secondary" id="resetButton">Reset</button>
-      </div>
-
-      <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
-        <label for="sourceSelect">Kamera:</label>
-        <select id="sourceSelect" style="max-width:400px">
-        </select>
+      
+        <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
+          <label for="sourceSelect">Kamera:</label>
+          <select id="sourceSelect" style="max-width:400px">
+          </select>
+        </div>
       </div>
     </div>
 
