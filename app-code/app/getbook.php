@@ -64,16 +64,16 @@
 
   <!-- Ribbon at the top -->
   <div class="ribbon d-flex justify-content-between align-items-center">
-      <div>
-        <a href="/" class="btn btn-link">Bibliothek</a>
-        <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
-      </div>
-      <div class="d-flex align-items-center">
-        <a href="/account" class="btn btn-link">
-          <i class="bi bi-person-circle"></i> Konto
-        </a>
-      </div>
+    <div>
+      <a href="/" class="btn btn-link">Bibliothek</a>
+      <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
     </div>
+    <div class="d-flex align-items-center">
+      <a href="/account" class="btn btn-link">
+        <i class="bi bi-person-circle"></i> Konto
+      </a>
+    </div>
+  </div>
 
 
     <?php 
@@ -165,39 +165,44 @@
  
     
     <!-- Book Form  -->
-    <img src="<?php echo $image_url ?>" class="col-md-4" alt="Buchbild">
-    <div class="row align-items-center">
-      <div class="col-lg-2 mb-2">
-          <label for="titleInput" class="col-form-label">Titel</label>
-      </div>  
-      <div class="col-lg-10">
-          <input type="text" id="titleInput" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row align-items-center">
+          <div class="col-lg-2 mb-2">
+              <label for="titleInput" class="col-form-label">Titel</label>
+          </div>  
+          <div class="col-lg-10">
+              <input type="text" id="titleInput" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-lg-2 mb-2">
+              <label for="authorInput" class="col-form-label">Autor:in</label>
+          </div>  
+          <div class="col-lg-10">
+              <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-lg-2 mb-2">
+              <label for="puglisherInput" class="col-form-label">Verlag</label>
+          </div>  
+          <div class="col-lg-10">
+              <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-lg-2 mb-2">
+              <label for="yaerInput" class="col-form-label">Jahr</label>
+          </div>  
+          <div class="col-lg-10">
+              <input type="text" id="yearInput" class="form-control" placeholder="Jahr" value="<?php echo $date_published ?>" />
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row align-items-center">
-      <div class="col-lg-2 mb-2">
-          <label for="authorInput" class="col-form-label">Autor:in</label>
-      </div>  
-      <div class="col-lg-10">
-          <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
+      <div class="col-lg-4">
+        <img src="<?php echo $image_url ?>" alt="Buchbild">
       </div>
-    </div>
-    <div class="row align-items-center">
-      <div class="col-lg-2 mb-2">
-          <label for="puglisherInput" class="col-form-label">Verlag</label>
-      </div>  
-      <div class="col-lg-10">
-          <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
-      </div>
-    </div>
-    <div class="row align-items-center">
-      <div class="col-lg-2 mb-2">
-          <label for="yaerInput" class="col-form-label">Jahr</label>
-      </div>  
-      <div class="col-lg-10">
-          <input type="text" id="yearInput" class="form-control" placeholder="Jahr" value="<?php echo $date_published ?>" />
-      </div>
-    </div>
       
     
 
