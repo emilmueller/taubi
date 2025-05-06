@@ -115,16 +115,14 @@
           <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
             <label for="sourceSelect">Kamera:</label>
             <select id="sourceSelect" style="max-width:400px"></select>
-            <button id="rotateButtonCW" class="btn btn-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+            <button id="HFlipButton" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows" viewBox="0 0 16 16">
+                <path d="M1.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L2.707 7.5h10.586l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L13.293 8.5H2.707l1.147 1.146a.5.5 0 0 1-.708.708z"/>
               </svg>
             </button>
-            <button id="rotateButtonCCW" class="btn btn-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+            <button id="VFlipButton" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-vertical" viewBox="0 0 16 16">
+                <path d="M8.354 14.854a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 13.293V2.707L6.354 3.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 2.707v10.586l1.146-1.147a.5.5 0 0 1 .708.708z"/>
               </svg>
             </button>
           </div>
@@ -149,18 +147,20 @@
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
-    let gespiegelt = false;
+    let hgespiegelt = false;
+    let vgespiegelt = false;
 
-    document.getElementById('rotateButtonCW').addEventListener('click', function(){
-      gespiegelt = !gespiegelt;
-      document.getElementById('video').style.transform= gespiegelt ? "scaleX(-1)" : "scaleX(1)";
+    document.getElementById('HFlipButton').addEventListener('click', function(){
+      hgespiegelt = !hgespiegelt;
+      document.getElementById('video').style.transform= hgespiegelt ? "scaleX(-1)" : "scaleX(1)";
 
 
 
     });
 
-    document.getElementById('rotateButtonCCW').addEventListener('click', function(){
-      document.getElementById('video').style.transform='scaleY(-1)';
+    document.getElementById('VFlipButton').addEventListener('click', function(){
+      vgespiegelt = !vgespiegelt;
+      document.getElementById('video').style.transform= vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
 
 
 
