@@ -70,7 +70,7 @@
   </style>
 </head>
 
-<body>
+<body id="body">
   <!-- Ribbon at the top -->
   <div class="ribbon d-flex justify-content-between align-items-center">
     <div>
