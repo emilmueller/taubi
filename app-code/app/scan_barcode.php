@@ -166,12 +166,12 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 console.log(result)
-                document.getElementById('isbnInput').value = result.text
+                document.getElementById('isbnInput').text = result.text
                 //window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
-                document.getElementById('isbnInput').value = err
+                document.getElementById('isbnInput').text = err
               }
             })
             console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
@@ -179,7 +179,7 @@
 
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
-            document.getElementById('result').value = '';
+            document.getElementById('result').text = '';
             console.log('Reset.')
           })
 
