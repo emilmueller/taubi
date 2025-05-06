@@ -149,8 +149,11 @@
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
+    let gespiegelt = false;
+
     document.getElementById('rotateButtonCW').addEventListener('click', function(){
-      document.getElementById('video').style.transform='scaleX(-1)';
+      gespiegelt = !gespiegelt;
+      document.getElementById('video').style.transform== gespiegelt ? "scaleX(-1)" : "scaleX(1)";
 
 
 
