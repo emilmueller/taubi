@@ -92,8 +92,8 @@
     
 
     <div>
-      <button class="btn" id="startButton">Start</button>
-      <button class="btn" id="resetButton">Reset</button>
+      <button class="btn btn-secondary" id="startButton">Start</button>
+      <button class="btn btn-secondary" id="resetButton">Reset</button>
     </div>
 
     <div>
