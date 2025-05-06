@@ -149,6 +149,14 @@
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
+    document.getElementById('rotateButtonCW').addEventListener('click', function(){
+      alert("HO");
+
+
+
+    });
+
+
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
