@@ -166,12 +166,12 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 console.log(result)
-                document.getElementById('isbnInput').textContent = result.text
+                document.getElementById('isbnInput').value = result.text
                 //window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
-                document.getElementById('result').textContent = err
+                document.getElementById('isbnInput').value = err
               }
             })
             console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
