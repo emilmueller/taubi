@@ -179,7 +179,7 @@
 
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
-            document.getElementById('result').textContent = '';
+            document.getElementById('result').value = '';
             console.log('Reset.')
           })
 
