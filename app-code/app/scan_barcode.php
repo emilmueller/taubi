@@ -73,41 +73,41 @@
 <body>
   <!-- Ribbon at the top -->
   <div class="ribbon d-flex justify-content-between align-items-center">
-      <div>
-        <a href="/" class="btn btn-link">Bibliothek</a>
-        <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
-      </div>
-      <div class="d-flex align-items-center">
-        <a href="/account" class="btn btn-link">
-          <i class="bi bi-person-circle"></i> Konto
-        </a>
-      </div>
+    <div>
+      <a href="/" class="btn btn-link">Bibliothek</a>
+      <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
+    </div>
+    <div class="d-flex align-items-center">
+      <a href="/account" class="btn btn-link">
+        <i class="bi bi-person-circle"></i> Konto
+      </a>
+    </div>
+  </div>
+
+  <div class="container md-8">
+    <h1 class="title">Buch erfassen</h1>
+
+    
+
+    
+
+    <div>
+      <a class="button" id="startButton">Start</a>
+      <a class="button" id="resetButton">Reset</a>
     </div>
 
+    <div>
+      <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+    </div>
 
-      <h1 class="title">Buch erfassen</h1>
+    <div id="sourceSelectPanel" style="display:none">
+      <label for="sourceSelect">Change video source:</label>
+      <select id="sourceSelect" style="max-width:400px">
+      </select>
+    </div>
 
-      
-
-      
-
-      <div>
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
-      </div>
-
-      <div>
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-      </div>
-
-      <div id="sourceSelectPanel" style="display:none">
-        <label for="sourceSelect">Change video source:</label>
-        <select id="sourceSelect" style="max-width:400px">
-        </select>
-      </div>
-
-      <label>Result:</label>
-      <pre><code id="result"></code></pre>
+    <label>Result:</label>
+    <pre><code id="result"></code></pre>
 
       
    
@@ -118,6 +118,7 @@
             href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
       </section>
     </footer>
+  </div>
 
 
 
