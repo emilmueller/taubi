@@ -99,7 +99,7 @@
     
 
     
-    <div class="row align-items-center mt-20">
+    <div class="row align-items-center pt-5">
       <div class="col-lg-2">
         <h4>Scannen</h4>
       </div>
