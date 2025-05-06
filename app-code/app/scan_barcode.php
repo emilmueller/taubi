@@ -6,14 +6,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="ZXing for JS">
 
-  <title>ZXing TypeScript | Decoding from camera stream</title>
+  <title>Buch erfassen</title>
 
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+  <!-- <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
     href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
     href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
   <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+    href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css"> -->
+    <style>
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .ribbon {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .ribbon a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+    }
+
+    .card-deck .card {
+      margin-bottom: 20px;
+    }
+
+    .book-form {
+      margin: 20px 0;
+    }
+
+    #notification {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+      background-color: #333;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    #notification.show {
+      opacity: 1;
+    }
+
+    #notification.success {
+      background-color: #28a745;
+    }
+
+    #notification.error {
+      background-color: #dc3545;
+    }
+  </style>
 </head>
 
 <body>
