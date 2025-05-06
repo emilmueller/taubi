@@ -87,27 +87,35 @@
   <div class="container md-8">
     <h1 class="title">Buch erfassen</h1>
 
+    <div class="row align-items-center">
+      <div class="col-lg-2 mb-2">
+          <label for="isbnInput" class="col-form-label">ISBN:</label>
+      </div>  
+      <div class="col-lg-10">
+          <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
+      </div>
+    </div>
+
     
 
     
+    <div class="row align-items-center">
+      <div class="col-lg-4">
+        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+      </div>
+      <div class="col-lg-4">
+        <button class="btn btn-secondary" id="startButton">Start</button>
+        <button class="btn btn-secondary" id="resetButton">Reset</button>
+      </div>
 
-    <div>
-      <button class="btn btn-secondary" id="startButton">Start</button>
-      <button class="btn btn-secondary" id="resetButton">Reset</button>
+      <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
+        <label for="sourceSelect">Kamera:</label>
+        <select id="sourceSelect" style="max-width:400px">
+        </select>
+      </div>
     </div>
 
-    <div>
-      <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-    </div>
-
-    <div id="sourceSelectPanel" style="display:none">
-      <label for="sourceSelect">Kamera:</label>
-      <select id="sourceSelect" style="max-width:400px">
-      </select>
-    </div>
-
-    <label>Result:</label>
-    <pre><code id="result"></code></pre>
+    
 
       
    
@@ -152,8 +160,8 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 console.log(result)
-                document.getElementById('result').textContent = result.text
-                window.open("getbook.php?isbn="+result.text);
+                document.getElementById('isbnInput').textContent = result.text
+                //window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
