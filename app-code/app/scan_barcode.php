@@ -115,7 +115,7 @@
           <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
             <label for="sourceSelect">Kamera:</label>
             <select id="sourceSelect" style="max-width:400px"></select>
-            <button id="rotateButton" class="btn btn-secondary"><span class="glyphicon glyphicon-repeat" ></span></button>
+            <button id="rotateButton" class="btn btn-secondary"><span class="glyphicon glyphicon-repeat" > </span></button>
           </div>
         </div>
       </div>
