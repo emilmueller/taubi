@@ -101,18 +101,20 @@
     
     <div class="row align-items-center mt-20">
       <div class="col-lg-2">
-        <h3>ISBN-Nummer scannen</h2>
+        <h4>Scannen</h4>
       </div>
       <div class="col-lg-6">
+        <div class="row">
 
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-        <button class="btn btn-secondary" id="startButton">Start</button>
-        <button class="btn btn-secondary" id="resetButton">Reset</button>
-      
-        <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
-          <label for="sourceSelect">Kamera:</label>
-          <select id="sourceSelect" style="max-width:400px">
-          </select>
+          <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+          <button class="btn btn-secondary" id="startButton">Start</button>
+          <button class="btn btn-secondary" id="resetButton">Reset</button>
+        
+          <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
+            <label for="sourceSelect">Kamera:</label>
+            <select id="sourceSelect" style="max-width:400px">
+            </select>
+          </div>
         </div>
       </div>
     </div>
