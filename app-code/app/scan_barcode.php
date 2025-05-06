@@ -105,10 +105,12 @@
       </div>
       <div class="col-lg-6">
         <div class="row">
-
-          <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-          <button class="btn btn-secondary" id="startButton">Start</button>
-          <button class="btn btn-secondary" id="resetButton">Reset</button>
+          <div class="col">
+            <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+            <button class="btn btn-secondary" id="startButton">Start</button>
+            <button class="btn btn-secondary" id="resetButton">Reset</button>
+          </div>
+          
         
           <div class="col-lg-4" id="sourceSelectPanel" style="display:none">
             <label for="sourceSelect">Kamera:</label>
