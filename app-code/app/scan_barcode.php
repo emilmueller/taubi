@@ -106,7 +106,7 @@
       <div class="col-lg-6">
         <div class="row">
           <div class="col">
-            <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+            <video id="video" width="300" height="200" style="border: 1px solid gray"></video><br/>
             <button class="btn btn-secondary" id="startButton">Start</button>
             <button class="btn btn-secondary" id="resetButton">Reset</button>
           </div>
