@@ -153,7 +153,7 @@
 
     document.getElementById('rotateButtonCW').addEventListener('click', function(){
       gespiegelt = !gespiegelt;
-      document.getElementById('video').style.transform== gespiegelt ? "scaleX(-1)" : "scaleX(1)";
+      document.getElementById('video').style.transform= gespiegelt ? "scaleX(-1)" : "scaleX(1)";
 
 
 
