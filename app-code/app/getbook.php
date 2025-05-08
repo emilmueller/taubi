@@ -217,7 +217,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <label for="pagesInput" class="col-form-label">Seiten</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="pagesInput" class="form-control" placeholder="erschienen" value="<?php echo $pages ?>" />
+              <input type="text" id="pagesInput" class="form-control" placeholder="Anz. Seiten" value="<?php echo $pages ?>" />
           </div>
         </div>
         <div class="row align-items-center">
