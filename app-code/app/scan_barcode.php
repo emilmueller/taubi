@@ -227,6 +227,19 @@
 
             sourceSelect.onchange = () => {
               selectedDeviceId = sourceSelect.value;
+              codeReader.reset()
+              codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+              if (result) {
+                console.log(result)
+                document.getElementById('isbnInput').value = result.text
+                //window.open("getbook.php?isbn="+result.text);
+              }
+              if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err)
+                document.getElementById('isbnInput').value = err
+              }
+            })
+
             };
 
             const sourceSelectPanel = document.getElementById('sourceSelectPanel')
