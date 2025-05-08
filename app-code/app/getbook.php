@@ -164,12 +164,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       <div class="row">
         <div class="col-lg-4 align-items-center d-flex justify-content-center">
           <div class="row">
-            <div class="col-sm-10 col-md-12">
+            <div class="col-sm-10 col-lg-12">
               <img src="<?php echo $image_url ?>" alt="Buchbild">
               
               <input type="hidden" name="image_url" value="<?php echo $image_url ?>"/>
             </div>
-            <div class="col-sm-2 col-md-12">
+            <div class="col-sm-2 col-lg-12">
             
               <button id="HFlipButton" class="btn btn-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows" viewBox="0 0 16 16">
