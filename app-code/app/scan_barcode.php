@@ -115,7 +115,7 @@
       </div>
       <div class="col-lg-7">
         <div class="row">
-          <div class="col-lg-4 col-md-7">
+          <div class="col-lg-6 col-md-12">
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
             <video id="video" width="100%" height="100%" style="border: 1px solid gray"></video><br/>
@@ -124,7 +124,7 @@
       
           
         
-        <div class="col-lg-4 col-md-7" id="sourceSelectPanel" style="display:none">
+        <div class="col-lg-6 col-md-12" id="sourceSelectPanel" style="display:none">
           <label for="sourceSelect">Kamera:</label>
           <select id="sourceSelect" style="max-width:400px"></select>
           <div class="pt-5 row">
