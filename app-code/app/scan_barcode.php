@@ -182,7 +182,8 @@
     var qrcode = new QRCode(document.getElementById('qrcode'), {
       width:100,
       height:100
-    }).makeCode(scanUrl);
+    });
+    qrcode.makeCode(scanUrl);
 
     let hgespiegelt = false;
     let vgespiegelt = false;
