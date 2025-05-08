@@ -1,8 +1,8 @@
 <?php
 
 include "../config.php";
-$sql = "
-insert into users (username, email) VALUES (`ueli`, `ueli@ksw.ch`);"
+
+$sql = "insert into users (username, email) VALUES ('ueli', 'ueli@ksw.ch');"
     
 $result = $conn->query($sql);
 
