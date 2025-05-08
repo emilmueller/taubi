@@ -2,7 +2,7 @@
 
 include "../config.php";
 
-$sql = "insert into users (username, email) VALUES ('ueli', 'ueli@ksw.ch');"
+$sql = "INSERT INTO users (username, email) VALUES ('ueli', 'ueli@ksw.ch');"
     
 $result = $conn->query($sql);
 
