@@ -101,8 +101,12 @@
       <div class="col-lg-1 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-7">
+      <div class="col-lg-5">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
+      </div>
+      <div class="col-lg-2">
+        <button id="okButton" class="btn btn-secondary">OK</button>
+      
       </div>
     </div>
 
@@ -254,7 +258,7 @@
               if (result) {
                 console.log(result)
                 document.getElementById('isbnInput').value = result.text
-                //window.open("getbook.php?isbn="+result.text);
+                window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
