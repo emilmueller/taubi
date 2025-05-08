@@ -125,7 +125,7 @@
           
         
         <div class="col-lg-6 col-md-12" id="sourceSelectPanel" >
-          <div class="row">
+          <div class="row pt-5">
             <label for="sourceSelect">Kamera:</label>
             <select id="sourceSelect" style="max-width:400px"></select>
           </div>
@@ -133,14 +133,14 @@
             <label>Kamerabild spiegeln</label>
           </div>
           <div class="row pt-2 align-items-center">
-            <div class="col">
+            <div class="col-2">
               <button id="HFlipButton" class="btn btn-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows" viewBox="0 0 16 16">
                   <path d="M1.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L2.707 7.5h10.586l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L13.293 8.5H2.707l1.147 1.146a.5.5 0 0 1-.708.708z"/>
                 </svg>
               </button>
             </div>
-            <div class="col">
+            <div class="col-2">
               <button id="VFlipButton" class="btn btn-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-vertical" viewBox="0 0 16 16">
                   <path d="M8.354 14.854a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 13.293V2.707L6.354 3.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 2.707v10.586l1.146-1.147a.5.5 0 0 1 .708.708z"/>
