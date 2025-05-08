@@ -179,9 +179,10 @@
     const sessionId = 'session-' + Math.random().toString(36).substring(2);
     const scanUrl = `https://taubi.jakach.ch/app/barcode_sanner.php?session=${sessionId}`;
 
-    QRCode.toCanvas(document.getElementById('qrcode'), scanUrl, error => {
-      if (error) console.error(error);
-    });
+    var qrcode = new QRCode(document.getElementById('qrcode'), {
+      width:100,
+      height:100
+    }).makeCode(scanURL);
 
     let hgespiegelt = false;
     let vgespiegelt = false;
