@@ -148,7 +148,7 @@
               </button>
             </div>
           </div>
-          <div class="row pt-5">
+          <div class="row pt-5 d-md-none">
             <div class="col">
               Wechsle aufs Handy
             </div>
