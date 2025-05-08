@@ -200,7 +200,15 @@
               <label for="yaerInput" class="col-form-label">Erschienen</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
+              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $isbn ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
+              <label for="isbnInput" class="col-form-label">ISBN</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="isbnInput" class="form-control" placeholder="ISBN" value="<?php echo $date_published ?>" />
           </div>
         </div>
       </div>
