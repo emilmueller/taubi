@@ -17,11 +17,9 @@ $sql = "
 SELECT
     b.*,
     u.username AS seller_name,
-    o.user_id AS owner_id,
     JSON_ARRAYAGG(t.name) AS tags
 FROM books b
 LEFT JOIN users u ON b.sold_by = u.id
-LEFT JOIN book_users o ON b.id = o.book_id
 LEFT JOIN book_tags bt ON b.id = bt.book_id
 LEFT JOIN tags t ON bt.tag_id = t.id
 GROUP BY b.id;
