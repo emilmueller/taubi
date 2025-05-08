@@ -19,7 +19,7 @@ SELECT
     u.username AS seller_name,
     JSON_ARRAYAGG(t.name) AS tags
 FROM books b
-LEFT JOIN users u ON b.sold_by = u.id
+LEFT JOIN users u ON u.id = b.sold_by
 LEFT JOIN book_tags bt ON b.id = bt.book_id
 LEFT JOIN tags t ON bt.tag_id = t.id
 GROUP BY b.id;
