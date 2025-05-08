@@ -149,7 +149,7 @@
                 Wechsle aufs Handy
               </div>
               <div class="col">
-                <canvas id="qrcode"></canvas>
+                <div id="qrcode"></div>
               </div>
           
             </div>
