@@ -252,6 +252,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" value="<?php echo $_SESSION['username']." (".$_SESSION['email'].")" ?>"/>
           </div>
         </div>
+        <div class="row align-items-center">
+          <div class="col-4">
+              <button id="okButton" class="btn btn-secondary">Buch speichern</button>
+          </div>
+        </div>
       </div>
       
       
