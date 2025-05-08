@@ -94,17 +94,17 @@
     </div>
   </div>
 
-  <div class="container md-8">
+  <div class="container">
     <h1 class="title">Buch erfassen</h1>
 
     <div class="row align-items-center">
-      <div class="col-lg-1 mb-2">
+      <div class="col-2 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-5">
+      <div class="col-5">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
-      <div class="col-lg-2">
+      <div class="col-2">
         <button id="okButton" class="btn btn-secondary">OK</button>
       
       </div>
