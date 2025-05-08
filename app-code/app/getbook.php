@@ -166,6 +166,9 @@
     
     <!-- Book Form  -->
     <div class="row">
+      <div class="col-lg-4">
+        <img src="<?php echo $image_url ?>" alt="Buchbild">
+      </div>
       <div class="col-lg-8">
         <div class="row align-items-center">
           <div class="col-lg-2 mb-2">
@@ -200,9 +203,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <img src="<?php echo $image_url ?>" alt="Buchbild">
-      </div>
+      
       
     
 
