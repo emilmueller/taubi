@@ -125,8 +125,10 @@
           
         
         <div class="col-lg-6 col-md-12" id="sourceSelectPanel" >
-          <label for="sourceSelect">Kamera:</label>
-          <select id="sourceSelect" style="max-width:400px"></select>
+          <div class="row">
+            <label for="sourceSelect">Kamera:</label>
+            <select id="sourceSelect" style="max-width:400px"></select>
+          </div>
           <div class="pt-5 row">
             <label>Kamerabild spiegeln</label>
           </div>
