@@ -108,9 +108,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $book = json_decode($response,true);
     $book = $book['book'];
 
-    echo "<pre>";
-    echo json_encode($book, JSON_PRETTY_PRINT);
-    echo "</pre>";
+    // echo "<pre>";
+    // echo json_encode($book, JSON_PRETTY_PRINT);
+    // echo "</pre>";
 
 
     
