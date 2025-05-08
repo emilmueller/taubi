@@ -8,8 +8,8 @@ $stmt->bind_param('ss', $_POST['username'], $_POST['email']);
     
 $result = $stmt->execute();
 
-
-
 // Close connection
 $conn->close();
+
+location($_POST['target']);
 ?>
