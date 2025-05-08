@@ -1,15 +1,3 @@
-<?php
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
-        $response = [
-            "error" => "not authorized"
-        ];
-        echo json_encode($response);
-    exit();
-}
-?>
 <?php 
 
     include "../config.php";
@@ -31,7 +19,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $isbn = $_POST['isbn'];
     $book_condition = $_POST['book_condition'];
     $price = $_POST['price'];
+    
     $stmt->execute();
+    
     $bookID = $stmt->lastInsertId();
     echo $bookID;
    // $sql = "insert into book_users "
