@@ -118,7 +118,7 @@
           <div class="col-lg-6 col-md-12">
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
-            <video id="video" width="100%" height="100%" style="border: 1px solid gray"></video><br/>
+            <video id="video" width="100%" style="border: 1px solid gray"></video><br/>
             
         </div>
       
