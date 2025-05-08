@@ -160,7 +160,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
  
     
     <!-- Book Form  -->
-    <form>
+    <form method="post" action="save_book.php">
       <div class="row">
         <div class="col-lg-4 align-items-center d-flex justify-content-center">
           <img src="<?php echo $image_url ?>" alt="Buchbild">
