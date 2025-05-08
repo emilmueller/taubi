@@ -222,6 +222,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         </div>
         <div class="row align-items-center">
           <div class="col-2 mb-2">
+              <label for="languageInput" class="col-form-label">Sprache</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="languageInput" class="form-control" placeholder="Sprache" value="<?php echo $language ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
               <label for="isbnInput" class="col-form-label">ISBN</label>
           </div>  
           <div class="col-10">
