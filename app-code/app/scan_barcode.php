@@ -177,7 +177,7 @@
   <script type="text/javascript">
 
     const sessionId = 'session-' + Math.random().toString(36).substring(2);
-    const scanUrl = `https://taubi.jakach.ch/app/barcode_sanner.php?session=${sessionId}`;
+    const scanUrl = `https://taubi.jakach.ch/app/scan_barcode.php?session=${sessionId}`;
 
     var qrcode = new QRCode(document.getElementById('qrcode'), {
       width:100,
