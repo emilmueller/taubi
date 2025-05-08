@@ -12,7 +12,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch Book from DB</title>
+  <title>Buchsuche</title>
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -115,22 +115,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     
 
-    // Create connection
-      
-
-			
-//       id INT AUTO_INCREMENT PRIMARY KEY,
-//       reserved_by INT,
-// publisher VARCHAR(255),
-// book_condition VARCHAR(255),
-// language VARCHAR(255),
-// image_url VARCHAR(255),
-// title VARCHAR(255),
-// pages INT,
-// date_published VARCHAR(255),
-// author VARCHAR(255),
-// isbn VARCHAR(255),
-// price VARCHAR(255)
+    
 
 
 
@@ -179,92 +164,94 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       <div class="col-lg-4 align-items-center d-flex justify-content-center">
         <img src="<?php echo $image_url ?>" alt="Buchbild">
       </div>
-      <div class="col-lg-8">
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="titleInput" class="col-form-label">Titel</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="titleInput" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
+      <form>
+        <div class="col-lg-8">
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="titleInput" class="col-form-label">Titel</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="titleInput" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="authorInput" class="col-form-label">Autor:in</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="authorInput" class="col-form-label">Autor:in</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="puglisherInput" class="col-form-label">Verlag</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="puglisherInput" class="col-form-label">Verlag</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="yaerInput" class="col-form-label">Erschienen</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="yaerInput" class="col-form-label">Erschienen</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="pagesInput" class="col-form-label">Seiten</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="pagesInput" class="form-control" placeholder="Anz. Seiten" value="<?php echo $pages ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="pagesInput" class="col-form-label">Seiten</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="pagesInput" class="form-control" placeholder="Anz. Seiten" value="<?php echo $pages ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="languageInput" class="col-form-label">Sprache</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="languageInput" class="form-control" placeholder="Sprache" value="<?php echo $language ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="languageInput" class="col-form-label">Sprache</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="languageInput" class="form-control" placeholder="Sprache" value="<?php echo $language ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="isbnInput" class="col-form-label">ISBN</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="isbnInput" class="form-control" placeholder="ISBN" value="<?php echo $isbn ?>" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="isbnInput" class="col-form-label">ISBN</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="isbnInput" class="form-control" placeholder="ISBN" value="<?php echo $isbn ?>" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="zustandInput" class="col-form-label">Zustand</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="zustandInput" class="form-control" placeholder="Zustand"  />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="zustandInput" class="col-form-label">Zustand</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="zustandInput" class="form-control" placeholder="Zustand"  />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="preisInput" class="col-form-label">Preis</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="preisInput" class="form-control" placeholder="Preis" />
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="preisInput" class="col-form-label">Preis</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="preisInput" class="form-control" placeholder="Preis" />
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-2 mb-2">
-              <label for="ownerInput" class="col-form-label">Verkäufer:in</label>
-          </div>  
-          <div class="col-10">
-              <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" value="<?php echo $_SESSION['username']." (".$_SESSION['email'].")" ?>"/>
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="ownerInput" class="col-form-label">Verkäufer:in</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" value="<?php echo $_SESSION['username']." (".$_SESSION['email'].")" ?>"/>
+            </div>
           </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-4">
-              <button id="okButton" class="btn btn-secondary">Buch speichern</button>
+          <div class="row align-items-center">
+            <div class="col-4">
+                <button id="okButton" type="submit" class="btn btn-secondary">Buch speichern</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
       
       
