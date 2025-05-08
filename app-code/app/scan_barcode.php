@@ -16,7 +16,8 @@
     href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css"> -->
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/qrcode.min.js"></script>
     <style>
     body {
       transition: background-color 0.3s, color 0.3s;
