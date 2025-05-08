@@ -148,7 +148,7 @@
               </button>
             </div>
           </div>
-          <div class="row pt-5 d-sm-none d-md-block">
+          <div class="row pt-5 d-sm-none">
             <div class="col">
               Wechsle aufs Handy
             </div>
@@ -184,8 +184,8 @@
     const scanUrl = `https://taubi.jakach.ch/app/scan_barcode.php?session=${sessionId}`;
 
     var qrcode = new QRCode(document.getElementById('qrcode'), {
-      width:100,
-      height:100
+      width:150,
+      height:150
     });
     qrcode.makeCode(scanUrl);
 
