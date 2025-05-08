@@ -118,6 +118,7 @@
           <div class="col-lg-6 col-md-12">
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
+          <select id="sourceSelect"></select>
             <video id="video" width="100%" style="border: 1px solid gray"></video><br/>
             
         </div>
@@ -125,10 +126,6 @@
           
         
         <div class="col-lg-6 col-md-12" id="sourceSelectPanel" >
-          <div class="row pt-5">
-            <label for="sourceSelect">Kamera:</label>
-            <select id="sourceSelect" style="max-width:400px"></select>
-          </div>
           <div class="pt-5 row">
             <label>Kamerabild spiegeln</label>
           </div>
@@ -207,6 +204,12 @@
 
 
     });
+
+    function startCamera(codereader){
+
+
+
+    }
 
 
     window.addEventListener('load', function () {
