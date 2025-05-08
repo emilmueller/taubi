@@ -124,7 +124,7 @@
       
           
         
-        <div class="col-lg-6 col-md-12" id="sourceSelectPanel" style="display:none">
+        <div class="col-lg-6 col-md-12" id="sourceSelectPanel" >
           <label for="sourceSelect">Kamera:</label>
           <select id="sourceSelect" style="max-width:400px"></select>
           <div class="pt-5 row">
