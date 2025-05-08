@@ -197,10 +197,10 @@
         </div>
         <div class="row align-items-center">
           <div class="col-2 mb-2">
-              <label for="yaerInput" class="col-form-label">Jahr</label>
+              <label for="yaerInput" class="col-form-label">Erschienen</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="Jahr" value="<?php echo $date_published ?>" />
+              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published->format('dd.mm.YYYY') ?>" />
           </div>
         </div>
       </div>
