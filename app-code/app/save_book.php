@@ -33,7 +33,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     $stmt->execute();
     
-    $bookID = $stmt->lastInsertId();
+    $bookID = $conn->lastInsertId();
     echo "Go for it ". $bookID;
    // $sql = "insert into book_users "
 
