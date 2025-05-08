@@ -201,6 +201,8 @@
 
     });
 
+    
+
     document.getElementById('VFlipButton').addEventListener('click', function(){
       vgespiegelt = !vgespiegelt;
       document.getElementById('video').style.transform= vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
@@ -209,11 +211,20 @@
 
     });
 
-    function startCamera(codereader){
+
+    document.getElementById('okButton').addEventListener('click', function(){
+      let result = document.getElementById('isbnInput').value;
+      if(result){
+        window.open("getbook.php?isbn="+result);
+      }else{
+        alert("Keine ISBN-Nummer eingegeben");
+      }
 
 
 
-    }
+    });
+
+    
 
 
     window.addEventListener('load', function () {
