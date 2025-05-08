@@ -139,7 +139,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     $language = $book['language'];
     $image_url = $book['image'];
-    $date_published =date_format(date_create($book['date_published']),'d.m.Y');
+    $date_published =$book['date_published'];
     $isbn = $book['isbn13'];
 
     //$stmt->execute();
