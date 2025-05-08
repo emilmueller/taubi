@@ -35,6 +35,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     $bookID = $conn->insert_id;
     echo "Go for it ". $bookID;
-   // $sql = "insert into book_users "
+    $sql = "insert into book_users (book_id, user_id) VALUES (?,?);";
+    $stmt->bind_param("ii", $bookID, $_SESSION['id']);
+    $stmt-> execute();
 
 ?>
