@@ -160,11 +160,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
  
     
     <!-- Book Form  -->
-    <div class="row">
-      <div class="col-lg-4 align-items-center d-flex justify-content-center">
-        <img src="<?php echo $image_url ?>" alt="Buchbild">
-      </div>
-      <form>
+    <form>
+      <div class="row">
+        <div class="col-lg-4 align-items-center d-flex justify-content-center">
+          <img src="<?php echo $image_url ?>" alt="Buchbild">
+        </div>
+        
         <div class="col-lg-8">
           <div class="row align-items-center">
             <div class="col-2 mb-2">
@@ -251,13 +252,15 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <button id="okButton" type="submit" class="btn btn-secondary">Buch speichern</button>
             </div>
           </div>
-        </form>
-      </div>
+          
+        </div>
+    </form>
       
       
     
 
   </div>
+  
 
      
 </body>
