@@ -2,9 +2,11 @@
 
 include "../config.php";
 
-$sql = "INSERT INTO users (username, email) VALUES ('ueli', 'ueli@ksw.ch');";
+$sql = "INSERT INTO users (username, email) VALUES (?,?);";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ss', $_POST['username'], $_POST['email']);
     
-$result = $conn->query($sql);
+$result = $stmt->execute();
 
 
 
