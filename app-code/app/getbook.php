@@ -241,7 +241,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <label for="ownerInput" class="col-form-label">Verkäufer:in</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" value="<?php echo $_SESSION['username']." (".$_SESSION['email'].")" ?>/>
+              <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" value="<?php echo $_SESSION['username']." (".$_SESSION['email'].")" ?>"/>
           </div>
         </div>
       </div>
