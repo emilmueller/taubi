@@ -32,6 +32,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $price = $_POST['price'];
     
     $stmt->execute();
+
+    header("Location:index.php");
     
     
 
