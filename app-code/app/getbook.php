@@ -143,7 +143,7 @@
 
     $language = $book['language'];
     $image_url = $book['image'];
-    $date_published =$book['date_published'];
+    $date_published =date_format(date_create($book['date_published']),'dd.mm.YYYY');
     $isbn = $book['isbn13'];
 
     //$stmt->execute();
@@ -200,7 +200,7 @@
               <label for="yaerInput" class="col-form-label">Erschienen</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo date_format($date_published, 'dd.mm.YYYY') ?>" />
+              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
           </div>
         </div>
       </div>
