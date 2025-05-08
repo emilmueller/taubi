@@ -16,7 +16,7 @@ include "../config.php";
 $sql = "
 SELECT
     b.*,
-    u.username AS seller_name,
+    u.username AS sellar_name,
     JSON_ARRAYAGG(t.name) AS tags
 FROM books b
 LEFT JOIN users u ON b.sold_by = u.id
