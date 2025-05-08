@@ -143,7 +143,7 @@
 
     $language = $book['language'];
     $image_url = $book['image'];
-    $date_published =date_format(date_create($book['date_published']),'dd.mm.YYYY');
+    $date_published =date_format(date_create($book['date_published']),'d.m.Y');
     $isbn = $book['isbn13'];
 
     //$stmt->execute();
