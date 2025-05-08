@@ -214,6 +214,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         </div>
         <div class="row align-items-center">
           <div class="col-2 mb-2">
+              <label for="pagesInput" class="col-form-label">Seiten</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="pagesInput" class="form-control" placeholder="erschienen" value="<?php echo $pages ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
               <label for="isbnInput" class="col-form-label">ISBN</label>
           </div>  
           <div class="col-10">
