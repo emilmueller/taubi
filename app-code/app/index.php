@@ -126,6 +126,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           author: book.author,
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
           image_url: book.image_url,
+          pages: book.pages,
+          book_condition: book.book_condition,
+          price: book.price,
+          date_published: book.date_published,
+          language: book.language,
           isbn: book.isbn,
           seller: book.sold_by || '0', // fallback if no seller
           seller_name: book.seller_name, // if your API doesn't return seller name
