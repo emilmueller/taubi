@@ -111,7 +111,7 @@
     
     <div class="row align-items-center pt-5">
       <div class="col-lg-1">
-        <h5>Scannen</h5>
+        
       </div>
       <div class="col-lg-7">
         <div class="row">
