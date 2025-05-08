@@ -31,10 +31,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $book_condition = $_POST['book_condition'];
     $price = $_POST['price'];
     
-    // $stmt->execute();
+    $stmt->execute();
     
-    // $bookID = $stmt->lastInsertId();
-    echo "Go for it". $date_published;
+    $bookID = $stmt->lastInsertId();
+    echo "Go for it ". $bookID;
    // $sql = "insert into book_users "
 
 ?>
