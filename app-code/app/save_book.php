@@ -14,8 +14,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     include "../config.php";
 
     $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?);";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
     
     $title = $_POST['title'];
 
