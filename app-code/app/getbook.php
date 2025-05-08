@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+    header("LOCATION:/login/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="de">
 <head>
@@ -200,7 +209,7 @@
               <label for="yaerInput" class="col-form-label">Erschienen</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $isbn ?>" />
+              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
           </div>
         </div>
         <div class="row align-items-center">
@@ -208,7 +217,31 @@
               <label for="isbnInput" class="col-form-label">ISBN</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="isbnInput" class="form-control" placeholder="ISBN" value="<?php echo $date_published ?>" />
+              <input type="text" id="isbnInput" class="form-control" placeholder="ISBN" value="<?php echo $isbn ?>" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
+              <label for="zustandInput" class="col-form-label">Zustand</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="zustandInput" class="form-control" placeholder="Zustand"  />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
+              <label for="preisInput" class="col-form-label">Preis</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="preisInput" class="form-control" placeholder="Preis" />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-2 mb-2">
+              <label for="ownerInput" class="col-form-label">Verkäufer:in</label>
+          </div>  
+          <div class="col-10">
+              <input type="text" id="ownerInput" class="form-control" placeholder="Verkäufer:in" />
           </div>
         </div>
       </div>
