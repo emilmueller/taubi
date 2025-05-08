@@ -140,7 +140,7 @@
     $author =substr($author, 0, -3);
     
     $publisher= $book['publisher'];
-    echo $publisher;
+
     $language = $book['language'];
     $image_url = $book['image'];
     $date_published =$book['date_published'];
@@ -160,7 +160,7 @@
 
 
     <!-- Books Section -->
-  <div class="container md-8">
+  <div class="container">
     <h2>Mein Buch</h2>
 
  
@@ -172,34 +172,34 @@
       </div>
       <div class="col-lg-8">
         <div class="row align-items-center">
-          <div class="col-lg-2 mb-2">
+          <div class="col-2 mb-2">
               <label for="titleInput" class="col-form-label">Titel</label>
           </div>  
-          <div class="col-lg-10">
+          <div class="col-10">
               <input type="text" id="titleInput" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
           </div>
         </div>
         <div class="row align-items-center">
-          <div class="col-lg-2 mb-2">
+          <div class="col-2 mb-2">
               <label for="authorInput" class="col-form-label">Autor:in</label>
           </div>  
-          <div class="col-lg-10">
+          <div class="col-10">
               <input type="text" id="authorInput" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
           </div>
         </div>
         <div class="row align-items-center">
-          <div class="col-lg-2 mb-2">
+          <div class="col-2 mb-2">
               <label for="puglisherInput" class="col-form-label">Verlag</label>
           </div>  
-          <div class="col-lg-10">
+          <div class="col-10">
               <input type="text" id="publisherInput" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
           </div>
         </div>
         <div class="row align-items-center">
-          <div class="col-lg-2 mb-2">
+          <div class="col-2 mb-2">
               <label for="yaerInput" class="col-form-label">Jahr</label>
           </div>  
-          <div class="col-lg-10">
+          <div class="col-10">
               <input type="text" id="yearInput" class="form-control" placeholder="Jahr" value="<?php echo $date_published ?>" />
           </div>
         </div>
