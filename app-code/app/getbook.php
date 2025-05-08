@@ -109,7 +109,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $book = $book['book'];
 
     echo "<pre>";
-    echo $book;
+    echo json_encode($book, JSON_PRETTY_PRINT);
     echo "</pre>";
 
 
