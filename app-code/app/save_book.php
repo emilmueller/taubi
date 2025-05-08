@@ -25,6 +25,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $publisher= $_POST['publisher'];
 
     $language = $_POST['language'];
+    
     $image_url = $_POST['image_url'];
     $date_published =$_POST['date_published'];
     $isbn = $_POST['isbn'];
