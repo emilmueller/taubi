@@ -143,6 +143,15 @@
                 </button>
               </div>
             </div>
+            <div class="row pt-5">
+              <div class="col">
+                Wechsle aufs Handy
+              </div>
+              <div class="col">
+                <canvas id="qrcode"></canvas>
+              </div>
+          
+            </div>
           </div>
         </div>
       </div>
@@ -165,6 +174,14 @@
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
+
+    const sessionId = 'session-' + Math.random().toString(36).substring(2);
+    const scanUrl = `https://taubi.jakach.ch/app/barcode_sanner.php?session=${sessionId}`;
+
+    QRCode.toCanvas(document.getElementById('qrcode'), scanUrl, error => {
+      if (error) console.error(error);
+    });
+
     let hgespiegelt = false;
     let vgespiegelt = false;
 
