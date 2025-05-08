@@ -13,9 +13,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php 
     include "../config.php";
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?);";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
+    $stmt->bind_param("sissssssssi", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id']);
     
     $title = $_POST['title'];
 
@@ -33,11 +33,6 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     $stmt->execute();
     
-    $bookID = $conn->insert_id;
-    echo "Go for it ". $bookID." -> ".$_SESSION['id'];
-    $sql = "insert into book_users (book_id, user_id) VALUES (?,?);";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $bookID, $_SESSION['id']);
-    $stmt->execute();
+    
 
 ?>
