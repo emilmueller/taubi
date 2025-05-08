@@ -118,7 +118,7 @@
             <div class="pt-5 row">
               <label>Kamerabild spiegeln</label>
             </div>
-            <div class="row">
+            <div class="row pt-2 align-items-center">
               <div class="col">
                 <button id="HFlipButton" class="btn btn-secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows" viewBox="0 0 16 16">
