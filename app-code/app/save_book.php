@@ -1,5 +1,4 @@
 <?php 
-
     include "../config.php";
 
     $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
