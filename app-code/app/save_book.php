@@ -1,7 +1,19 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+        $response = [
+            "error" => "not authorized"
+        ];
+        echo json_encode($response);
+    exit();
+}
+?>
 <?php 
     include "../config.php";
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
     
