@@ -23,7 +23,7 @@
     // $stmt->execute();
     
     // $bookID = $stmt->lastInsertId();
-    echo "Go for it". $bookID;
+    echo "Go for it". $_POST['title'];
    // $sql = "insert into book_users "
 
 ?>
