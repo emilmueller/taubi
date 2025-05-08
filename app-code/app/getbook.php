@@ -200,7 +200,7 @@
               <label for="yaerInput" class="col-form-label">Erschienen</label>
           </div>  
           <div class="col-10">
-              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo $date_published->format('dd.mm.YYYY') ?>" />
+              <input type="text" id="yearInput" class="form-control" placeholder="erschienen" value="<?php echo date_format($date_published, 'dd.mm.YYYY') ?>" />
           </div>
         </div>
       </div>
