@@ -2,28 +2,28 @@
 
     include "../config.php";
 
-    // $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
-    // $stmt = $conn->prepare($sql);
-    // $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price ) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sissssssss", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price);
     
-    // $title = $_POST['title'];
+    $title = $_POST['title'];
 
-    // $pages = $_POST['pages'];
-    // $author = $_POST['author'];
+    $pages = $_POST['pages'];
+    $author = $_POST['author'];
     
-    // $publisher= $_POST['publisher'];
+    $publisher= $_POST['publisher'];
 
-    // $language = $_POST['language'];
-    // $image_url = $_POST['image_url'];
-    // $date_published =date_create($_POST['date_published']);
-    // $isbn = $_POST['isbn'];
-    // $book_condition = $_POST['book_condition'];
-    // $price = $_POST['price'];
+    $language = $_POST['language'];
+    $image_url = $_POST['image_url'];
+    $date_published =date_create($_POST['date_published']);
+    $isbn = $_POST['isbn'];
+    $book_condition = $_POST['book_condition'];
+    $price = $_POST['price'];
     
     // $stmt->execute();
     
     // $bookID = $stmt->lastInsertId();
-    echo "Go for it". $_POST['title'];
+    echo "Go for it". $date_published;
    // $sql = "insert into book_users "
 
 ?>
