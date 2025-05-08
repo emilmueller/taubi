@@ -98,10 +98,10 @@
     <h1 class="title">Buch erfassen</h1>
 
     <div class="row align-items-center">
-      <div class="col-lg-2 mb-2">
+      <div class="col-lg-1 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-6">
+      <div class="col-lg-7">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
     </div>
@@ -110,10 +110,10 @@
 
     
     <div class="row align-items-center pt-5">
-      <div class="col-lg-2">
-        <h4>Scannen</h4>
+      <div class="col-lg-1">
+        <h5>Scannen</h5>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-7">
         <div class="row">
           <div class="col">
           <button class="btn btn-secondary" id="startButton">Start</button>
