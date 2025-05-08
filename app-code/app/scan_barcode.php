@@ -115,7 +115,7 @@
       </div>
       <div class="col-lg-7">
         <div class="row">
-          <div class="col-lg-6 col-md-12">
+          <div class="col-lg-8 col-md-12">
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
           <select id="sourceSelect"></select>
@@ -125,7 +125,7 @@
       
           
         
-        <div class="col-lg-6 col-md-12" id="sourceSelectPanel" >
+        <div class="col-lg-4 col-md-12" id="sourceSelectPanel" >
           <div class="pt-5 row">
             <label>Kamerabild spiegeln</label>
           </div>
