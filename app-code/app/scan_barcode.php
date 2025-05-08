@@ -116,9 +116,10 @@
       <div class="col-lg-6">
         <div class="row">
           <div class="col">
+          <button class="btn btn-secondary" id="startButton">Start</button>
+          <button class="btn btn-secondary" id="resetButton">Reset</button>
             <video id="video" width="100%" height="100%" style="border: 1px solid gray"></video><br/>
-            <button class="btn btn-secondary" id="startButton">Start</button>
-            <button class="btn btn-secondary" id="resetButton">Reset</button>
+            
           </div>
           
         
