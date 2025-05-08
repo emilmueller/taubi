@@ -140,6 +140,7 @@
     $author =substr($author, 0, -3);
     
     $publisher= $book['publisher'];
+    echo $publisher;
     $language = $book['language'];
     $image_url = $book['image'];
     $date_published =$book['date_published'];
