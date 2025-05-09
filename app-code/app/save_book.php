@@ -18,7 +18,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         die("Could not fetch image from the URL."); 
     } 
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by, image ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by, image_data ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sissssssssib", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id'], $imageData);
     
