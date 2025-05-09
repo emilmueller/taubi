@@ -5,11 +5,12 @@ header('Content-Type: application/json');
 
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = realpath(__DIR__.'../bookcovers/');
+error.log($uploadDir);
 
 
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
-}
+// if (!is_dir($uploadDir)) {
+//     mkdir($uploadDir, 0755, true);
+// }
 
 if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     echo json_encode([
