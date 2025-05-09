@@ -72,34 +72,51 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
-    const snapBtn = document.getElementById('snapBtn');
-    const uploadBtn = document.getElementById('uploadBtn');
+    const captureButton = document.getElementById('capture');
 
-    // Zugriff auf Webcam
-    navigator.mediaDevices.getUserMedia({ video: true })
+    // 1. Zugriff auf die Kamera anfragen
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(stream => {
         video.srcObject = stream;
       })
       .catch(err => {
-        alert("Zugriff auf Kamera fehlgeschlagen: " + err.message);
+        console.error('Kein Kamerazugriff:', err);
+        alert('Kann nicht auf die Kamera zugreifen.');
       });
 
-    // Foto aufnehmen
-    snapBtn.addEventListener('click', () => {
-      const context = canvas.getContext('2d');
+    // 2. Foto aufnehmen und hochladen
+    captureButton.addEventListener('click', () => {
+      const ctx = canvas.getContext('2d');
+      // Canvas-Größe an Video anpassen
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.classList.remove('d-none');
-      uploadBtn.classList.remove('d-none');
-    });
+      // Bild in Canvas zeichnen
+      ctx.drawImage(video, 0, 0);
 
-    // Foto "hochladen" (nur Demo)
-    uploadBtn.addEventListener('click', () => {
+      // Bild als Blob extrahieren (JPEG, Qualität 0.9)
       canvas.toBlob(blob => {
-        // Hier könntest du das Bild mit fetch() oder einem <form> hochladen
-        alert("Foto bereit zum Hochladen (Blob-Größe: " + blob.size + " bytes)");
-      }, 'image/jpeg');
+        // FormData für den Upload
+        const formData = new FormData();
+        formData.append('photo', blob, 'snapshot.jpg');
+
+        // per Fetch an deinen PHP-Handler senden
+        fetch('upload.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(json => {
+          if (json.success) {
+            alert('Foto erfolgreich hochgeladen: ' + json.filename);
+          } else {
+            alert('Upload fehlgeschlagen: ' + json.error);
+          }
+        })
+        .catch(err => {
+          console.error('Upload-Fehler:', err);
+          alert('Fehler beim Hochladen');
+        });
+      }, 'image/jpeg', 0.9);
     });
 
 
@@ -314,7 +331,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <video id="video" autoplay></video>
           <canvas id="canvas" class="d-none mt-2"></canvas>
           <div class="mt-3">
-            <button class="btn btn-success" id="snapBtn">Foto aufnehmen</button>
+            <button class="btn btn-success" id="capture">Foto aufnehmen</button>
             <button class="btn btn-secondary d-none" id="uploadBtn">Foto hochladen</button>
           </div>
         </div>
