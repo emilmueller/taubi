@@ -322,7 +322,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         formData.append('photo', blob, 'snapshot.jpg');
 
         // per Fetch an deinen PHP-Handler senden
-        fetch('upload.php', {
+        fetch('../fotoupload.php', {
           method: 'POST',
           body: formData
         })
