@@ -2,7 +2,9 @@
     include "../config.php";
 
     $sql = "SELECT image FROM books where id=38;";
-    $row = $conn->query($sql);
+    $res = $conn->query($sql);
+
+    $row = $res->fetch_assoc();
 
     header("Content-Type: image/jpeg");
     echo $row['image'];
