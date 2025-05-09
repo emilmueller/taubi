@@ -25,7 +25,7 @@
 
 			
 			// Execute SQL-Statement
-			$sql="ALTER TABLE books MODIFY COLUMN image LONGBLOB;";
+			$sql="ALTER TABLE books RENAME COLUMN image to image_data;";
 
 
 			if ($conn->query($sql) === TRUE) {
