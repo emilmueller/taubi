@@ -206,7 +206,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           </div>
           <div class="row align-items-center">
             <div class="col-2 mb-2">
-                <label for="puglisherInput" class="col-form-label">Verlag</label>
+                <label for="publisherInput" class="col-form-label">Verlag</label>
             </div>  
             <div class="col-10">
                 <input type="text" id="publisherInput" name="publisher" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
@@ -214,7 +214,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           </div>
           <div class="row align-items-center">
             <div class="col-2 mb-2">
-                <label for="yaerInput" class="col-form-label">Erschienen</label>
+                <label for="yearInput" class="col-form-label">Erschienen</label>
             </div>  
             <div class="col-10">
                 <input type="text" id="yearInput" name="date_published" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
