@@ -28,6 +28,8 @@ services:
       - ./apache-conf:/etc/apache2/sites-available
       - ./php-conf:/usr/local/etc/php/
       - ./app-code:/var/www/html
+      - ./app-code/api/bookcovers:/var/www/html/bookcovers
+    command: /bin/sh -c "chmod -R 777 /var/www/html/bookcovers && apache2-foreground"
 networks:
   taubi-network:
     driver: bridge
