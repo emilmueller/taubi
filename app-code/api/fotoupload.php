@@ -8,9 +8,9 @@ $uploadDir = 'var/www/bookcovers/';
 error_log("------->".$uploadDir);
 
 
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
-}
+// if (!is_dir($uploadDir)) {
+//     mkdir($uploadDir, 0755, true);
+// }
 
 if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     echo json_encode([
