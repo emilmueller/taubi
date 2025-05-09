@@ -271,11 +271,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
       
     <!-- Modal-Overlay -->
-  <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header">
-          <h5 class="modal-title">Foto aufnehmen</h5>
+          <h5 class="modal-title" id="photoModalLabel">Foto aufnehmen</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
         </div>
         <div class="modal-body text-center">
