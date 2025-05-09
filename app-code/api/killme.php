@@ -8,9 +8,9 @@
 
     $row = $res->fetch_assoc();
 
-    header('Content-Type: image/jpeg');
+    //header('Content-Type: image/jpeg');
     
-    echo $row['image_data'];
+    echo len($row['image_data']);
 
 
     // $imageData = file_get_contents("https://sample-videos.com/img/Sample-jpg-image-100kb.jpg");
