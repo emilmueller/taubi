@@ -6,7 +6,7 @@
     $sql = "SELECT image_data,image_url FROM books where id='".$_GET['id']."';";
     $res = $conn->query($sql);
 
-    if ($res){
+    if ($res && $res->num_rows > 0){
 
         $row = $res->fetch_assoc();
         echo "Länge: ".$row['image_data'];
