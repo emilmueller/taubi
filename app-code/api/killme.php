@@ -9,7 +9,7 @@
     if ($res && $res->num_rows > 0){
 
         $row = $res->fetch_assoc();
-        echo "Länge: ".$row['image_data'];
+        echo "Länge: ".$row;
 
     } else{
         echo "NIX";
