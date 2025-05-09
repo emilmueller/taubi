@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = realpath(__DIR__.'../bookcovers/');
-error.log($uploadDir);
+error_log($uploadDir);
 
 
 // if (!is_dir($uploadDir)) {
