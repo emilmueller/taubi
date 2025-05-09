@@ -67,12 +67,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       background-color: #dc3545;
     }
   </style>
-  <script>
-    
-
-
-
-  </script>
+  
   
 </head>
 <body id="body">
