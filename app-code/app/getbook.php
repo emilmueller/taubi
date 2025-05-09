@@ -270,12 +270,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       </div>
     
       
-      
-    
-
-  </div>
-
-  <!-- Modal-Overlay -->
+    <!-- Modal-Overlay -->
   <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
@@ -293,7 +288,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         </div>
       </div>
     </div>
+  </div>  
+    
+
   </div>
+
+  
   
 
      
