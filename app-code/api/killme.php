@@ -1,3 +1,5 @@
+
+
 <?php 
     include "../config.php";
 
@@ -6,7 +8,7 @@
 
     $row = $res->fetch_assoc();
 
-    header("Content-Type: image/jpeg");
+    header('Content-Type: image/jpeg');
     echo $row['image'];
 
 
