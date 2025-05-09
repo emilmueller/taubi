@@ -6,11 +6,18 @@
     $sql = "SELECT image_data,image_url FROM books where id='".$_GET['id']."';";
     $res = $conn->query($sql);
 
-    $row = $res->fetch_assoc();
+    if ($res){
+
+        $row = $res->fetch_assoc();
+        echo "Länge: ".$row['image_data'];
+
+    } else{
+        echo "NIX";
+    }
 
     //header('Content-Type: image/jpeg');
     
-    echo "Länge: ".$row['image_data'];
+    
 
 
     // $imageData = file_get_contents("https://sample-videos.com/img/Sample-jpg-image-100kb.jpg");
