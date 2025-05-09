@@ -70,6 +70,37 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     }
   </style>
   <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snapBtn = document.getElementById('snapBtn');
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    // Zugriff auf Webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        alert("Zugriff auf Kamera fehlgeschlagen: " + err.message);
+      });
+
+    // Foto aufnehmen
+    snapBtn.addEventListener('click', () => {
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.classList.remove('d-none');
+      uploadBtn.classList.remove('d-none');
+    });
+
+    // Foto "hochladen" (nur Demo)
+    uploadBtn.addEventListener('click', () => {
+      canvas.toBlob(blob => {
+        // Hier könntest du das Bild mit fetch() oder einem <form> hochladen
+        alert("Foto bereit zum Hochladen (Blob-Größe: " + blob.size + " bytes)");
+      }, 'image/jpeg');
+    });
 
 
   </script>
