@@ -13,9 +13,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php 
     include "../config.php";
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?);";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by, image ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissssssssi", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id']);
+    $stmt->bind_param("sissssssssib", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id'], $imageData);
     
     $title = $_POST['title'];
 
@@ -25,12 +25,21 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $publisher= $_POST['publisher'];
 
     $language = $_POST['language'];
-    
+
     $image_url = $_POST['image_url'];
     $date_published =$_POST['date_published'];
     $isbn = $_POST['isbn'];
     $book_condition = $_POST['book_condition'];
     $price = $_POST['price'];
+
+
+    $imageData = file_get_contents($image_url);
+    if ($imageData === FALSE) { 
+        die("Could not fetch image from the URL."); 
+    } 
+
+
+
     
     $stmt->execute();
 
