@@ -85,6 +85,7 @@
 			    book_condition VARCHAR(255),
 			    language VARCHAR(255),
 			    image_url VARCHAR(255),
+				image BLOB, 
 			    title VARCHAR(255),
 			    pages INT,
 			    date_published VARCHAR(255),
@@ -154,22 +155,7 @@
 				</div>';
 			}
 
-			$sql = "CREATE TABLE IF NOT EXISTS book_users (
-				id INT AUTO_INCREMENT PRIMARY KEY, 
-				book_id INT, 
-				user_id INT
-			);";
-
-			if ($conn->query($sql) === TRUE) {
-				echo '<br><div class="alert alert-success" role="alert">
-								Book Users created successfully!
-				</div>';
-			} else {
-				$success=0;
-				echo '<br><div class="alert alert-danger" role="alert">
-								Error creating book users tags: ' . $conn->error .'
-				</div>';
-			}
+			
 
 
 			$conn->close();
