@@ -9,8 +9,8 @@
     if ($res && $res->num_rows > 0){
 
         $row = $res->fetch_assoc();
-        echo "Länge: ";
-        print_r($row);
+        header('Content-Type: image/jpeg');
+        echo $row['image_data'];
 
     } else{
         echo "NIX";
