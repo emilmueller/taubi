@@ -3,13 +3,13 @@
 <?php 
     include "../config.php";
 
-    $sql = "SELECT image FROM books where id=".$_GET['id'].";";
+    $sql = "SELECT image,image_url FROM books where id=".$_GET['id'].";";
     $res = $conn->query($sql);
 
     $row = $res->fetch_assoc();
 
     // header('Content-Type: image/jpeg');
-    pinrt_r($row);
+    pinrt_r($row['image_url']);
 
 
 ?>
