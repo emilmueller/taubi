@@ -9,7 +9,7 @@
     $row = $res->fetch_assoc();
 
     // header('Content-Type: image/jpeg');
-    pinrt_r($row['image_url']);
+    echo $row['image_url'];
 
 
 ?>
