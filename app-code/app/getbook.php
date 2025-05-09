@@ -164,7 +164,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
  
     
     <!-- Book Form  -->
-    
+    <form id="bookForm" method="post" action="save_book.php">
       <div class="row">
         <div class="col-lg-4 align-items-center d-flex justify-content-center">
           <div class="row">
@@ -260,14 +260,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           </div>
           <div class="row align-items-center">
             <div class="col-4">
-                <button id="okButton" class="btn btn-secondary">Buch speichern</button>
+                <button id="okButton" class="btn btn-secondary" onlick="submit()">Buch speichern</button>
             </div>
           </div>
           
         </div>
       </div>
     
-      
+      </form> 
     <!-- Modal-Overlay -->
   <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
