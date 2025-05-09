@@ -10,7 +10,7 @@
 
     //header('Content-Type: image/jpeg');
     
-    echo "Länge: ".len($row['image_data']);
+    echo "Länge: ".count($row['image_data']);
 
 
     // $imageData = file_get_contents("https://sample-videos.com/img/Sample-jpg-image-100kb.jpg");
