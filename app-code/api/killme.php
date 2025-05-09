@@ -9,7 +9,8 @@
     if ($res && $res->num_rows > 0){
 
         $row = $res->fetch_assoc();
-        echo "Länge: ".$row;
+        echo "Länge: ";
+        print_r($row);
 
     } else{
         echo "NIX";
