@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = dirname(__DIR__).'/bookcovers/';
-error_log("------->".$uploadDir);
+
 
 
 // if (!is_dir($uploadDir)) {
@@ -31,7 +31,7 @@ $ext = pathinfo($origName, PATHINFO_EXTENSION);
 // Generiere eindeutigen Dateinamen
 $filename = uniqid('cam_', true) . '.' . $ext;
 $target = $uploadDir . $filename;
-
+error_log("------->".$tmpName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
     echo json_encode([
