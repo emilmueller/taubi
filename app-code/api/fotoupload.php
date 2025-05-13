@@ -21,6 +21,16 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     exit;
 }
 
+$newFileName = $uploadDir.'/file.txt';
+
+if ( ! is_writable(dirname($newFileName))) {
+
+    error_log(dirname($newFileName) . ' must writable!!!');
+} else {
+
+   error_log("Alles gut");// blah blah blah
+}
+
 
 
 
