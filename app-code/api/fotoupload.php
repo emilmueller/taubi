@@ -30,7 +30,7 @@ $origName = basename($_FILES['photo']['name']);
 $ext = pathinfo($origName, PATHINFO_EXTENSION);
 
 // Generiere eindeutigen Dateinamen
-$filename = uniqid('cam_', true) . '.' . $ext;
+$filename = uniqid('cam_', true) . $ext;
 $target = $uploadDir . $filename;
 error_log("------->".$tmpName." --- ".$target);
 // Datei verschieben
