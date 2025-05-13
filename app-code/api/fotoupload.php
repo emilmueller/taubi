@@ -30,9 +30,10 @@ $origName = basename($_FILES['photo']['name']);
 $ext = pathinfo($origName, PATHINFO_EXTENSION);
 
 // Generiere eindeutigen Dateinamen
-$filename = uniqid('cam_', true) . $ext;
+$fileBaseName = uniqid('cam_', true);
+$filename =  $fileBaseName.'.'. $ext;
 $target = $uploadDir . $filename;
-error_log("------->".$tmpName." --- ".$target);
+error_log("------->".$fileBaseName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
     echo json_encode([
