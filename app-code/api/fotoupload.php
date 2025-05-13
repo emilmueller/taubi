@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = dirname(__DIR__).'/bookcovers/';
 
-
+print_r($_FILES);
 
 // if (!is_dir($uploadDir)) {
 //     mkdir($uploadDir, 0755, true);
