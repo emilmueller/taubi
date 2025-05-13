@@ -4,7 +4,7 @@
 header('Content-Type: application/json');
 
 // Verzeichnispfad für Uploads (schreibbar machen!)
-$uploadDir = '/var/www/bookcovers/';
+$uploadDir = 'bookcovers';
 error_log("------->".$uploadDir);
 
 
@@ -19,6 +19,9 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     ]);
     exit;
 }
+
+
+
 
 // Dateiinformationen
 $tmpName = $_FILES['photo']['tmp_name'];
