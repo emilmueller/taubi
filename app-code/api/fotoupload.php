@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 $uploadDir = dirname(__DIR__).'/bookcovers/';
 
 // print_r($_FILES);
-error_log(print_r($_FILES));
+error_log($_FILES);
 
 // if (!is_dir($uploadDir)) {
 //     mkdir($uploadDir, 0755, true);
