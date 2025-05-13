@@ -279,6 +279,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
         </div>
         <div class="modal-body text-center">
+          <select id="sourceSelect"></select>
           <video id="video" autoplay playsinline></video>
           <canvas id="canvas" class="d-none mt-2"></canvas>
           <div class="mt-3">
