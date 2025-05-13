@@ -69,6 +69,59 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       background-color: #dc3545;
     }
   </style>
+
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const captureButton = document.getElementById('capture');
+
+    // 1. Zugriff auf die Kamera anfragen
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        console.error('Kein Kamerazugriff:', err);
+        alert('Kann nicht auf die Kamera zugreifen.');
+      });
+
+    // 2. Foto aufnehmen und hochladen
+    captureButton.addEventListener('click', () => {
+      const ctx = canvas.getContext('2d');
+      // Canvas-Größe an Video anpassen
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      // Bild in Canvas zeichnen
+      ctx.drawImage(video, 0, 0);
+
+      // Bild als Blob extrahieren (JPEG, Qualität 0.9)
+      canvas.toBlob(blob => {
+        // FormData für den Upload
+        const formData = new FormData();
+        formData.append('photo', blob, 'snapshot.jpg');
+
+        // per Fetch an deinen PHP-Handler senden
+        fetch('../api/fotoupload.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(json => {
+          if (json.success) {
+            alert('Foto erfolgreich hochgeladen: ' + json.filename);
+          } else {
+            alert('Upload fehlgeschlagen: ' + json.error);
+          }
+        })
+        .catch(err => {
+          console.error('Upload-Fehler:', err);
+          alert('Fehler beim Hochladen');
+        });
+      }, 'image/jpeg', 0.9);
+    });
+
+
+  </script>
  
   
   
@@ -291,58 +344,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   </div>
 
-  <script>
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const captureButton = document.getElementById('capture');
-
-    // 1. Zugriff auf die Kamera anfragen
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-      .then(stream => {
-        video.srcObject = stream;
-      })
-      .catch(err => {
-        console.error('Kein Kamerazugriff:', err);
-        alert('Kann nicht auf die Kamera zugreifen.');
-      });
-
-    // 2. Foto aufnehmen und hochladen
-    captureButton.addEventListener('click', () => {
-      const ctx = canvas.getContext('2d');
-      // Canvas-Größe an Video anpassen
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      // Bild in Canvas zeichnen
-      ctx.drawImage(video, 0, 0);
-
-      // Bild als Blob extrahieren (JPEG, Qualität 0.9)
-      canvas.toBlob(blob => {
-        // FormData für den Upload
-        const formData = new FormData();
-        formData.append('photo', blob, 'snapshot.jpg');
-
-        // per Fetch an deinen PHP-Handler senden
-        fetch('../api/fotoupload.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(json => {
-          if (json.success) {
-            alert('Foto erfolgreich hochgeladen: ' + json.filename);
-          } else {
-            alert('Upload fehlgeschlagen: ' + json.error);
-          }
-        })
-        .catch(err => {
-          console.error('Upload-Fehler:', err);
-          alert('Fehler beim Hochladen');
-        });
-      }, 'image/jpeg', 0.9);
-    });
-
-
-  </script>
+ 
 
   
   
