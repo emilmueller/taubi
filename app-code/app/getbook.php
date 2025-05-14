@@ -298,15 +298,16 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   </div>
 
   <script>
-        document.getElementById('capture').addEventListener('click', function () {
-          document.getElementById('cameraInput').click();
+    $(document).ready(function() {
+        $('#capture').on('click', function () {
+          $('#cameraInput').click();
         });
 
 
-        document.getElementById('cameraInput').addEventlistener('change', function() {
-          alert("HOOOOOP");
-            const input = document.getElementById('cameraInput');
-            const file = input.files[0];
+        $('#cameraInput').on('change', function() {
+            alert("HOOOOOP");
+            
+            const file = this.files[0];
 
             if (!file) {
                 alert("Bitte zuerst ein Foto aufnehmen.");
@@ -360,6 +361,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
            
         });
+      });
     </script>
   <!-- <script>
     const video = document.getElementById('video');
