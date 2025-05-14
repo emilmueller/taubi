@@ -304,6 +304,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
         document.getElementById('cameraInput').addEventlistener('change', function() {
+          alert("HOOOOOP");
             const input = document.getElementById('cameraInput');
             const file = input.files[0];
 
