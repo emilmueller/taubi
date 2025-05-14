@@ -21,15 +21,7 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     exit;
 }
 
-$newFileName = $uploadDir.'/file.txt';
 
-if ( ! is_writable(dirname($newFileName))) {
-
-    error_log(dirname($newFileName) . ' must writable!!!');
-} else {
-
-   error_log("Alles gut");// blah blah blah
-}
 
 
 
@@ -43,17 +35,11 @@ $ext = pathinfo($origName, PATHINFO_EXTENSION);
 $fileBaseName = uniqid('cam_', false);
 $filename =  $fileBaseName.'.'. $ext;
 $target = $uploadDir . $filename;
-error_log("------->".$fileBaseName." --- ".$target);
+// error_log("------->".$fileBaseName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
-    echo json_encode([
-        'success' => true,
-        'filename' => $filename
-    ]);
+    echo "Foto hochgeladen.";
 } else {
-    echo json_encode([
-        'success' => false,
-        'error' => 'Konnte Datei nicht speichern.'
-    ]);
+    echo "Fehler beim Speichern der Datei";
 }
 ?>
