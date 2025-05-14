@@ -305,7 +305,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
         $('#cameraInput').on('change', function() {
-            alert("HOOOOOP");
+            
             
             const file = this.files[0];
 
@@ -329,15 +329,20 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                     canvas.toBlob(function(blob) {
                         const formData = new FormData();
                         formData.append("photo", blob, "snapshot.jpg");
-
-                        fetch("../api/fotoupload.php", {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(res => res.text())
-                        .then(text => alert(text))
-                        .then(end => $('#photoModal').modal('hide'))
-                        .catch(err => alert("Fehler: " + err));
+                        $.ajax({
+                          url: '../api/fotoupload.php',
+                          type: 'POST',
+                          data: formData,
+                          processData: false,
+                          contentType: false,
+                          success: function(response) {
+                            
+                          },
+                          error: function(err) {
+                            alert("Fehler beim Upload.");
+                          }
+                        });
+                        
                     }, "image/jpeg", 0.85);
                 };
                 img.src = event.target.result;
