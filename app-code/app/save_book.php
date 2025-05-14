@@ -15,9 +15,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     
 
-    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql = "insert into books (title, pages, author, publisher, language,  image_url, date_published, isbn, book_condition, price, sold_by ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissssssssi", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id'], $imageData);
+    $stmt->bind_param("sissssssssi", $title, $pages, $author, $publisher, $language, $image_url,  $date_published, $isbn, $book_condition, $price, $_SESSION['id']);
     
     $title = $_POST['title'];
 
