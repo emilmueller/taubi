@@ -77,6 +77,27 @@
 
 
     }
+    .target-box {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      width: 40%;
+      height: 40%;
+      border: 3px dashed red;
+      box-sizing: border-box;
+      background-color: rgba(255, 0, 0, 0.1); /* leichte Transparenz */
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Overlay klickt nicht in Video rein */
+    }
+
+
   </style>
 </head>
 
@@ -123,7 +144,10 @@
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
           <select id="sourceSelect"></select>
-          <video id="video" width="100%" style="border: 1px solid gray"></video><br/>
+          <video id="video" width="100%" style="border: 1px solid gray"></video>
+          <div class="overlay">
+            <div class="target-box"></div>
+          </div>
             
         </div>
       
