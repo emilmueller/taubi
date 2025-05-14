@@ -280,7 +280,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   $(document).ready(function(){
 
     $('#addBookButton').on('click', function(){
-      window.location = "scan_book.php";
+      window.location = "scan_barcode.php";
 
     });
 
