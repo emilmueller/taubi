@@ -200,7 +200,7 @@
           <button class="btn btn-secondary" id="resetButton">Reset</button>
           <select id="sourceSelect"></select>
           <div class="video-container">
-          <video id="video" width="100%" style="border: 1px solid gray"></video>
+          <video id="video" style="border: 1px solid gray"></video>
             <div class="overlay">
               <div class="mask top"></div>
               <div class="mask bottom"></div>
