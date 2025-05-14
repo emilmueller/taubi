@@ -359,7 +359,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
            
-        })
+        });
     </script>
   <!-- <script>
     const video = document.getElementById('video');
