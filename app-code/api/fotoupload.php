@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = dirname(__DIR__).'/bookcovers/';
+$webBaseAdress = "/bookcovers/";
 
 
 if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
@@ -38,7 +39,7 @@ if (move_uploaded_file($tmpName, $target)) {
     echo json_encode([
         'success' => true,
         'message' => "Upload erfolgreich",
-        'filename' => $filename
+        'filename' => $webBaseAdress.$filename
 
     ]);
     
