@@ -306,7 +306,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             }
 
             const formData = new FormData();
-            formData.append('photo', file);
+            formData.append('photo', file, 'snapshot.jpg');
 
             fetch('../api/fotoupload.php', {
                 method: 'POST',
