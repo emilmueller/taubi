@@ -77,15 +77,18 @@
 
 
     }
-    .target-box {
-      position: absolute;
-      top: 30%;
-      left: 30%;
-      width: 40%;
-      height: 40%;
-      border: 3px dashed red;
-      box-sizing: border-box;
-      background-color: rgba(255, 0, 0, 0.1); /* leichte Transparenz */
+
+
+    .video-container {
+      position: relative;
+      width: 640px;
+      height: 480px;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .overlay {
@@ -96,6 +99,58 @@
       height: 100%;
       pointer-events: none; /* Overlay klickt nicht in Video rein */
     }
+
+    /* Der transparente Bereich (z. B. 40% in der Mitte) */
+    .mask {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Oben */
+    .mask.top {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+    }
+
+    /* Unten */
+    .mask.bottom {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+    }
+
+    /* Links */
+    .mask.left {
+      top: 30%;
+      left: 0;
+      width: 30%;
+      height: 40%;
+    }
+
+    /* Rechts */
+    .mask.right {
+      top: 30%;
+      right: 0;
+      width: 30%;
+      height: 40%;
+    }
+
+
+    .target-box {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      width: 40%;
+      height: 40%;
+      border: 3px dashed white;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0.1); /* leichte Transparenz */
+    }
+
+    
 
 
   </style>
@@ -144,11 +199,16 @@
           <button class="btn btn-secondary" id="startButton">Start</button>
           <button class="btn btn-secondary" id="resetButton">Reset</button>
           <select id="sourceSelect"></select>
+          <div class="video-container">
           <video id="video" width="100%" style="border: 1px solid gray"></video>
-          <div class="overlay">
-            <div class="target-box"></div>
-          </div>
-            
+            <div class="overlay">
+              <div class="mask top"></div>
+              <div class="mask bottom"></div>
+              <div class="mask left"></div>
+              <div class="mask right"></div>
+              <div class="target-box"></div>
+            </div>
+          </div>  
         </div>
       
           
