@@ -6,12 +6,6 @@ header('Content-Type: application/json');
 // Verzeichnispfad für Uploads (schreibbar machen!)
 $uploadDir = dirname(__DIR__).'/bookcovers/';
 
-// print_r($_FILES);
-// error_log($_FILES);
-
-// if (!is_dir($uploadDir)) {
-//     mkdir($uploadDir, 0755, true);
-// }
 
 if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
     echo 'Keine Datei erhalten oder Upload-Fehler.';
@@ -38,11 +32,11 @@ $target = $uploadDir . $filename;
 
 
 
- error_log("------->".$fileBaseName." --- ".$target);
+//  error_log("------->".$fileBaseName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
     echo "Foto hochgeladen.";
-    error_log("---> ".$target." saved.");
+    error_log("---> Foto ".$target." saved.");
 } else {
     echo "Fehler beim Speichern der Datei";
 }
