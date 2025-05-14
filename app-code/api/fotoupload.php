@@ -38,7 +38,7 @@ if (move_uploaded_file($tmpName, $target)) {
     echo json_encode([
         'success' => true,
         'message' => "Upload erfolgreich",
-        'filenme' => $target
+        'filename' => $target
 
     ]);
     
