@@ -16,6 +16,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <style>
     body {
       transition: background-color 0.3s, color 0.3s;
@@ -90,7 +91,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <h2>Alle Bücher</h2>
       </div>
       <div class="col-2">
-        <button class="btn btn-secondary float-end" type="button">
+        <button class="btn btn-secondary float-end" type="button" id="addBookButton">
         <i class="bi bi-book"></i>
         Buch hinzufügen
         </button>
@@ -275,6 +276,19 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   // Call this when your page loads
   document.addEventListener('DOMContentLoaded', loadTags);
+
+  $(document).ready(function(){
+
+    $('#addBookButton').on('click', function(){
+      window.location = "scan_book.php";
+
+    });
+
+  });
+  
+
+
+
   </script>
 
   <div id="notification"></div>
