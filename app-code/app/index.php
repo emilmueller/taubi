@@ -85,7 +85,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   <!-- Books Section -->
   <div class="container mt-4">
+    
     <h2>Alle Bücher</h2>
+    <button class="btn btn-secondary float-end" type="button">
+    <i class="bi bi-book"></i>
+    Buch hinzufügen
+    <button>
 
     <!-- Search + Fach Dropdown -->
     <div class="search-form row">

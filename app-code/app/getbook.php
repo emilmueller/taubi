@@ -162,7 +162,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     <!-- Books Section -->
   <div class="container">
-    <h2>Mein Buch</h2>
+    <h2>Neues Buch</h2>
 
  
     
@@ -179,9 +179,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <div class="col-2 col-lg-12">
               <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
               <input type="file" id="cameraInput" style="display:none" accept="image/*" capture="environment">
-              <button id="addPicture" type="button" title="Foto aufnehmen" class="btn btn-secondary bi bi-camera">
-              
-              </button>
+              <button id="addPicture" type="button" title="Foto aufnehmen" class="btn btn-secondary bi bi-camera"></button>
             
             </div>
           </div>
