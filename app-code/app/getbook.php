@@ -272,29 +272,6 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       </div>
     
       </form> 
-    <!-- Modal-Overlay -->
-  <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title" id="photoModalLabel">Foto aufnehmen</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
-        </div>
-        <div class="modal-body text-center">
-          
-          <!-- <video id="video" autoplay playsinline></video>
-           -->
-          
-          
-          <div class="mt-3">
-          
-            <label for="cameraInput" class="btn btn-success" id="capture">Foto aufnehmen</label>
-            <button class="btn btn-secondary d-none" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  
     
 
   </div>
