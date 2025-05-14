@@ -297,7 +297,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             reader.onload = function (event) {
                 const img = new Image();
                 img.onload = function () {
-                    const maxWidth = 300;
+                    const maxWidth = 400;
                     const scale = maxWidth / img.width;
                     const canvas = document.getElementById('canvas');
                     canvas.width = maxWidth;
