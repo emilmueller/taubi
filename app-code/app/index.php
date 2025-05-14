@@ -90,7 +90,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     <button class="btn btn-secondary float-end" type="button">
     <i class="bi bi-book"></i>
     Buch hinzufügen
-    <button>
+  </button>
 
     <!-- Search + Fach Dropdown -->
     <div class="search-form row">
