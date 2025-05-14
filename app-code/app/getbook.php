@@ -18,6 +18,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <style>
     body {
       transition: background-color 0.3s, color 0.3s;
@@ -328,7 +329,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                         })
                         .then(res => res.text())
                         .then(text => alert(text))
-                        .then(end => document.getElementById('photoModal').classList.add('d-none'))
+                        .then(end => $('#photoModal').modal('hide'))
                         .catch(err => alert("Fehler: " + err));
                     }, "image/jpeg", 0.85);
                 };
