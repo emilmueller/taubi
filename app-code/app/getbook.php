@@ -335,11 +335,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                           data: formData,
                           processData: false,
                           contentType: false,
-                          success: function(response) {
-                            
-                          },
                           error: function(err) {
-                            alert("Fehler beim Upload.");
+                            alert("Fehler beim Upload: "+err);
                           }
                         });
                         
