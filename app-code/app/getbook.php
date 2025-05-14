@@ -336,7 +336,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                           processData: false,
                           contentType: false,
                           success: function(response) {
-                            alert("OK");  
+                            $('#photoModal').modal('hide');
                           },
                           error: function(err) {
                             alert("Fehler beim Upload: "+err);
