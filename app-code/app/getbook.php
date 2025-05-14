@@ -172,9 +172,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <div class="col-lg-4 align-items-center d-flex justify-content-center">
           <div class="row">
             <div class="col-10 col-lg-12">
-              <img src="<?php echo $image_url ?>" alt="Buchbild">
+              <img id="bookImage" src="<?php echo $image_url ?>" alt="Buchbild">
               
-              <input type="hidden" name="image_url" value="<?php echo $image_url ?>"/>
+              <input id="image_url_input" type="hidden" name="image_url" value="<?php echo $image_url ?>"/>
             </div>
             <div class="col-2 col-lg-12">
               <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
@@ -315,7 +315,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                           processData: false,
                           contentType: false,
                           success: function(response) {
-                            $('#photoModal').modal('hide');
+                            alert(response.filename);
+                            $('#bookImage').attr('src', response.filename);
+                            $('#image_url_input').attr('value', response.filename);
                           },
                           error: function(request, status, err) {
                             alert('Fehler beim Upload: ' + request.responseText);
