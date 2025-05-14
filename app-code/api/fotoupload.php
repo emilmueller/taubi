@@ -26,7 +26,7 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
 // Dateiinformationen
 $tmpName = $_FILES['photo']['tmp_name'];
 $origName = basename($_FILES['photo']['name']);
-$ext = pathinfo($origName, PATHINFO_EXTENSION);
+$text = pathinfo($origName, PATHINFO_EXTENSION);
 
 error_log("-----------------------> ".$origname. " / ".$text);
 
