@@ -28,7 +28,7 @@ $tmpName = $_FILES['photo']['tmp_name'];
 $origName = basename($_FILES['photo']['name']);
 $ext = pathinfo($origName, PATHINFO_EXTENSION);
 
-error_log("-----------------------> ".$text);
+error_log("-----------------------> ".$origname. " / ".$text);
 
 // Lade Bild in Speicher
 switch (strtolower($text)) {
