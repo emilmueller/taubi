@@ -145,7 +145,7 @@
       left: 30%;
       width: 40%;
       height: 40%;
-      border: 1px dashed white;
+      border: 1px dashed grey;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.1); /* leichte Transparenz */
     }
