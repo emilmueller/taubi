@@ -280,8 +280,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         </div>
         <div class="modal-body text-center">
           <select id="sourceSelect"></select>
-          <video id="video" autoplay playsinline></video>
-          <canvas id="canvas" class="d-none mt-2"></canvas>
+          <!-- <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" class="d-none mt-2"></canvas> -->
+          <input type="file" id="cameraInput" accept="image/*" capture="environment">
           <div class="mt-3">
             <button class="btn btn-success" id="capture">Foto aufnehmen</button>
             <button class="btn btn-secondary d-none" id="uploadBtn">Foto hochladen</button>
