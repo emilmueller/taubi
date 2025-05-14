@@ -328,7 +328,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                         })
                         .then(res => res.text())
                         .then(text => alert(text))
-                        .then(end => document.getElementById('photoModal').modal("hide"))
+                        .then(end => document.getElementById('photoModal').class('d-none'))
                         .catch(err => alert("Fehler: " + err));
                     }, "image/jpeg", 0.85);
                 };
