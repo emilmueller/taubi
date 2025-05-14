@@ -315,7 +315,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                           processData: false,
                           contentType: false,
                           success: function(response) {
-                            alert(response.filename);
+                            //alert(response.filename);
                             $('#bookImage').attr('src', response.filename);
                             $('#image_url_input').attr('value', response.filename);
                           },
