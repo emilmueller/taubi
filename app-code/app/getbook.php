@@ -286,8 +286,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <input type="file" id="cameraInput" accept="image/*" capture="environment">
           <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
           <div class="mt-3">
-            <button class="btn btn-success d-none" id="capture">Foto aufnehmen</button>
-            <button class="btn btn-secondary" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
+            <button class="btn btn-success" id="capture">Foto aufnehmen</button>
+            <button class="btn btn-secondary d-none" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
           </div>
         </div>
       </div>
@@ -298,7 +298,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   </div>
 
   <script>
-        function uploadPhoto() {
+        document.getElementById('capture').addEventListener('click', function () {
+          document.getElementById('cameraInput').click();
+        });
+
+
+        document.getElementById('cameraInput').addEventlistener('change', function() {
             const input = document.getElementById('cameraInput');
             const file = input.files[0];
 
@@ -353,7 +358,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
            
-        }
+        })
     </script>
   <!-- <script>
     const video = document.getElementById('video');
