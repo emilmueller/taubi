@@ -35,9 +35,19 @@ $target = $uploadDir . $filename;
 //  error_log("------->".$fileBaseName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
-    echo "Foto hochgeladen.";
+    echo json_encode([
+        'success' => true,
+        'message' => "Upload erfolgreich",
+        'filenme' => $target
+
+    ]);
+    
     error_log("---> Foto ".$target." saved.");
 } else {
-    echo "Fehler beim Speichern der Datei";
+    echo json_encode([
+        'success' => false,
+        'message' => "Fehler beim Speichern der Datei."
+        
+    ]);
 }
 ?>
