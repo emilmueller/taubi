@@ -39,6 +39,7 @@ $target = $uploadDir . $filename;
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
     echo "Foto hochgeladen.";
+    error_log("---> ".$target." saved.");
 } else {
     echo "Fehler beim Speichern der Datei";
 }
