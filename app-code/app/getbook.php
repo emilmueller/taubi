@@ -284,8 +284,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <canvas id="canvas" class="d-none mt-2"></canvas> -->
           <input type="file" id="cameraInput" accept="image/*" capture="environment">
           <div class="mt-3">
-            <button class="btn btn-success" id="capture">Foto aufnehmen</button>
-            <button class="btn btn-secondary d-none" id="uploadBtn">Foto hochladen</button>
+            <button class="btn btn-success d-none" id="capture">Foto aufnehmen</button>
+            <button class="btn btn-secondary" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
           </div>
         </div>
       </div>
@@ -294,6 +294,29 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
 
   </div>
+
+  <script>
+        function uploadPhoto() {
+            const input = document.getElementById('cameraInput');
+            const file = input.files[0];
+
+            if (!file) {
+                alert("Bitte zuerst ein Foto aufnehmen.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('photo', file);
+
+            fetch('../api/fotoupload.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.text())
+            .then(text => alert(text))
+            .catch(err => alert("Fehler: " + err));
+        }
+    </script>
   <!-- <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
