@@ -338,8 +338,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                           success: function(response) {
                             $('#photoModal').modal('hide');
                           },
-                          error: function(err) {
-                            alert("Fehler beim Upload: "+err);
+                          error: function(request, status, err) {
+                            alert('Fehler beim Upload: ' + request.responseText);
                           }
                         });
                         
