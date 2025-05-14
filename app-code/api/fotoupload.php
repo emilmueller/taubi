@@ -26,7 +26,8 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
 // Dateiinformationen
 $tmpName = $_FILES['photo']['tmp_name'];
 $origName = basename($_FILES['photo']['name']);
-$text = pathinfo($origName, PATHINFO_EXTENSION);
+$ext = pathinfo($origName, PATHINFO_EXTENSION);
+
 
 
 // Generiere eindeutigen Dateinamen
@@ -37,7 +38,7 @@ $target = $uploadDir . $filename;
 
 
 
-// error_log("------->".$fileBaseName." --- ".$target);
+ error_log("------->".$fileBaseName." --- ".$target);
 // Datei verschieben
 if (move_uploaded_file($tmpName, $target)) {
     echo "Foto hochgeladen.";
