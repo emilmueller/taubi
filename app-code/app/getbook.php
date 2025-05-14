@@ -286,7 +286,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <input type="file" id="cameraInput" class="d-none" accept="image/*" capture="environment">
           <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
           <div class="mt-3">
-            <button class="btn btn-success" id="capture">Foto aufnehmen</button>
+            <label for="cameraInput" class="btn btn-success" id="capture">Foto aufnehmen</label>
             <button class="btn btn-secondary d-none" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
           </div>
         </div>
