@@ -283,7 +283,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <!-- <video id="video" autoplay playsinline></video>
            -->
           <input type="file" id="cameraInput" accept="image/*" capture="environment">
-          <canvas id="canvas" class="d-none mt-2"></canvas>
+          <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
           <div class="mt-3">
             <button class="btn btn-success d-none" id="capture">Foto aufnehmen</button>
             <button class="btn btn-secondary" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
@@ -310,7 +310,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             reader.onload = function (event) {
                 const img = new Image();
                 img.onload = function () {
-                    const maxWidth = 800;
+                    const maxWidth = 400;
                     const scale = maxWidth / img.width;
                     const canvas = document.getElementById('canvas');
                     canvas.width = maxWidth;
