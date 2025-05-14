@@ -294,7 +294,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
 
   </div>
-  <script>
+  <!-- <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureButton = document.getElementById('capture');
@@ -345,7 +345,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     });
 
 
-  </script>
+  </script> -->
  
 
   
