@@ -81,8 +81,8 @@
 
     .video-container {
       position: relative;
-      width: 640px;
-      height: 480px;
+      width: 100%;
+      height: 0;
     }
 
     video {
