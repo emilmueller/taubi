@@ -281,8 +281,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <div class="modal-body text-center">
           <select id="sourceSelect"></select>
           <!-- <video id="video" autoplay playsinline></video>
-          <canvas id="canvas" class="d-none mt-2"></canvas> -->
+           -->
           <input type="file" id="cameraInput" accept="image/*" capture="environment">
+          <canvas id="canvas" class="d-none mt-2"></canvas>
           <div class="mt-3">
             <button class="btn btn-success d-none" id="capture">Foto aufnehmen</button>
             <button class="btn btn-secondary" id="uploadBtn" onclick="uploadPhoto()">Foto hochladen</button>
@@ -305,16 +306,51 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 return;
             }
 
-            const formData = new FormData();
-            formData.append('photo', file, 'snapshot.jpg');
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = new Image();
+                img.onload = function () {
+                    const maxWidth = 800;
+                    const scale = maxWidth / img.width;
+                    const canvas = document.getElementById('canvas');
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scale;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-            fetch('../api/fotoupload.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.text())
-            .then(text => alert(text))
-            .catch(err => alert("Fehler: " + err));
+                    canvas.toBlob(function(blob) {
+                        const formData = new FormData();
+                        formData.append("photo", blob, "resized.jpg");
+
+                        fetch("../api/fotoupload.php", {
+                            method: "POST",
+                            body: formData
+                        })
+                        .then(res => res.text())
+                        .then(text => alert(text))
+                        .catch(err => alert("Fehler: " + err));
+                    }, "image/jpeg", 0.85);
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
         }
     </script>
   <!-- <script>
