@@ -320,6 +320,13 @@
       });
 
 
+      
+
+
+
+    });
+
+    $(window).on('load', function() {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
       console.log('ZXing code reader initialized')
@@ -386,7 +393,8 @@
 
 
 
-    });
+
+    })
   </script>
 
 </body>
