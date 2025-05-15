@@ -222,7 +222,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       document.getElementById("info_pages").innerHTML=book_pages;
       document.getElementById("info_language").innerHTML=book_language;
       document.getElementById("info_date_published").innerHTML=book_date_published;
-      document.getElementById("info_book_condidtion").innerHTML=book_condition;
+      document.getElementById("info_book_condition").innerHTML=book_condition;
       document.getElementById("info_price").innerHTML=book_price;
       var message_modal = new bootstrap.Modal(document.getElementById('info_modal'));
       message_modal.show();
