@@ -170,7 +170,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
 	      <p class="text-muted">Verkäufer: ${book.seller_name}</p>
               <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
-	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.price}','${book.image_url}');">Mehr Infos</button>
+	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
           </div>
         `;
@@ -214,7 +214,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       message_modal.show();
     }
 
-    function show_info_modal(book_title, book_seller,book_author,book_pages,book_language, book_date_published,book_price,book_image){
+    function show_info_modal(book_title, book_seller,book_author,book_pages,book_language, book_date_published,book_condition, book_price,book_image){
       document.getElementById("info_image").src=book_image;
       document.getElementById("info_seller").innerHTML=book_seller;
       document.getElementById("info_title").innerHTML=book_title;
@@ -222,6 +222,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       document.getElementById("info_pages").innerHTML=book_pages;
       document.getElementById("info_language").innerHTML=book_language;
       document.getElementById("info_date_published").innerHTML=book_date_published;
+      document.getElementById("info_book_condidtion").innerHTML=book_condition;
       document.getElementById("info_price").innerHTML=book_price;
       var message_modal = new bootstrap.Modal(document.getElementById('info_modal'));
       message_modal.show();
@@ -330,6 +331,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <p class="card-text"><strong>Sprache:</strong> <span id="info_language"></span></p>
         <p class="card-text"><strong>Veröffentlichungsdatum:</strong> <span id="info_date_published"></span></p>
         <p class="card-text"><strong>Verkäufer:</strong> <span id="info_seller"></span></p>
+        <p class="card-text"><strong>Zustand:</strong> <span id="info_book_condition"></span></p>
         <p class="card-text"><strong>Preis:</strong> <span id="info_price"></span></p>
       </div>
       <div class="modal-footer justify-content-end">
