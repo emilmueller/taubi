@@ -369,6 +369,9 @@
                 console.log(result)
                 $('#isbnInput').val(result.text);
                 // window.open("getbook.php?isbn="+result.text);
+                $('#okButton').removeClass('btn-secondary');
+                $('#okButton').addClass('btn-success');
+                $('#okButton').prop('disabled', false);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
