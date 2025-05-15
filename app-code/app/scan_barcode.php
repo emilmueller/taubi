@@ -221,6 +221,11 @@
           </div>
           <div class="row pt-2 align-items-center">
             <div class="col-3">
+                <button id="RotateButton" class="btn btn-secondary bi bi-arrows-clockwise">
+                
+                </button>
+            </div>
+            <div class="col-3">
               <button id="HFlipButton" class="btn btn-secondary bi bi-arrows">
                
               </button>
@@ -374,6 +379,11 @@
       $('#HFlipButton').on('click', function(){
         hgespiegelt = !hgespiegelt;
         $('#video').css('transform',hgespiegelt ? "scaleX(-1)" : "scaleX(1)");
+      });
+
+      $('#RotateButton').on('click', function(){
+        
+        $('#video').css('transform','rotate(90deg)');
       });
 
 
