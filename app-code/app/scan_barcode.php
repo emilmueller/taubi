@@ -198,6 +198,7 @@
       <div class="col-lg-7">
         <div class="row">
           <div class="col-lg-8 col-md-12">
+            <label for="sourceSelect">Kamera: </label>
           <select id="sourceSelect"></select>
           <div class="video-container">
           <video id="video" style="border: 1px solid gray"></video>
