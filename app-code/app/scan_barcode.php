@@ -183,7 +183,7 @@
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
       <div class="col-2">
-        <button id="okButton" class="btn btn-secondary">OK</button>
+        <button id="okButton" class="btn btn-secondary" disabled>OK</button>
       
       </div>
     </div>
@@ -198,8 +198,6 @@
       <div class="col-lg-7">
         <div class="row">
           <div class="col-lg-8 col-md-12">
-          <button class="btn btn-secondary" id="startButton">Start</button>
-          <button class="btn btn-secondary" id="resetButton">Reset</button>
           <select id="sourceSelect"></select>
           <div class="video-container">
           <video id="video" style="border: 1px solid gray"></video>
@@ -294,69 +292,7 @@
 
 
     window.addEventListener('load', function () {
-      let selectedDeviceId;
-      const codeReader = new ZXing.BrowserMultiFormatReader()
-      console.log('ZXing code reader initialized')
-      codeReader.listVideoInputDevices()
-        .then((videoInputDevices) => {
-          const sourceSelect = document.getElementById('sourceSelect')
-          selectedDeviceId = videoInputDevices[0].deviceId
-          if (videoInputDevices.length >= 1) {
-            videoInputDevices.forEach((element) => {
-              const sourceOption = document.createElement('option')
-              sourceOption.text = element.label
-              sourceOption.value = element.deviceId
-              sourceSelect.appendChild(sourceOption)
-            })
-
-
-            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                document.getElementById('isbnInput').value = result.text
-                // window.open("getbook.php?isbn="+result.text);
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                document.getElementById('isbnInput').value = err
-              }
-            })
-            console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
-
-
-            sourceSelect.onchange = () => {
-              selectedDeviceId = sourceSelect.value;
-              codeReader.reset()
-              codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                document.getElementById('isbnInput').value = result.text
-                //window.open("getbook.php?isbn="+result.text);
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                document.getElementById('isbnInput').value = err
-              }
-            })
-
-            };
-
-            const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-            sourceSelectPanel.style.display = 'block'
-          }
-
-          
-
-          // document.getElementById('resetButton').addEventListener('click', () => {
-          //   codeReader.reset()
-          //   document.getElementById('isbnInput').value = '';
-          //   console.log('Reset.')
-          // })
-
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+      
     })
 
     $(document).ready(function(){
@@ -385,6 +321,71 @@
           alert("Keine ISBN-Nummer eingegeben");
         }
       });
+
+
+      let selectedDeviceId;
+      const codeReader = new ZXing.BrowserMultiFormatReader()
+      console.log('ZXing code reader initialized')
+      codeReader.listVideoInputDevices()
+        .then((videoInputDevices) => {
+          const sourceSelect = $('#sourceSelect');
+          selectedDeviceId = videoInputDevices[0].deviceId
+          if (videoInputDevices.length >= 1) {
+            videoInputDevices.forEach((element) => {
+              const sourceOption = document.createElement('option')
+              sourceOption.text = element.label
+              sourceOption.value = element.deviceId
+              sourceSelect.appendChild(sourceOption)
+            })
+
+
+            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+              if (result) {
+                console.log(result)
+                $('#isbnInput').val(result.text);
+                // window.open("getbook.php?isbn="+result.text);
+              }
+              if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err)
+                $('#isbnInput').val(err);
+              }
+            })
+            console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+
+
+            sourceSelect.onchange = () => {
+              selectedDeviceId = sourceSelect.value;
+              codeReader.reset()
+              codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+              if (result) {
+                console.log(result)
+                $('#isbnInput').val(result.text);
+                // window.open("getbook.php?isbn="+result.text);
+              }
+              if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err)
+                $('#isbnInput').val(err);
+              }
+            })
+
+            };
+
+            $('#sourceSelectPanel').css('display','block');
+            
+          }
+
+          
+
+          // document.getElementById('resetButton').addEventListener('click', () => {
+          //   codeReader.reset()
+          //   document.getElementById('isbnInput').value = '';
+          //   console.log('Reset.')
+          // })
+
+        })
+        .catch((err) => {
+          console.error(err)
+        })
 
 
 
