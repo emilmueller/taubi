@@ -126,7 +126,7 @@
 
     /* Links */
     .mask.left {
-      top: 40%;
+      top: 35%;
       left: 0;
       width: 20%;
       height: 30%;
@@ -134,7 +134,7 @@
 
     /* Rechts */
     .mask.right {
-      top: 40%;
+      top: 35%;
       right: 0;
       width: 20%;
       height: 30%;
@@ -149,7 +149,7 @@
       height: 30%;
       border: 1px dashed grey;
       box-sizing: border-box;
-      background-color: rgba(0, 0, 0, 0.1); /* leichte Transparenz */
+      background-color: rgba(0, 0, 0, 0.0); /* leichte Transparenz */
     }
 
     
