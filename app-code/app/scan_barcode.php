@@ -143,7 +143,7 @@
 
     .target-box {
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 20%;
       width: 60%;
       height: 30%;
