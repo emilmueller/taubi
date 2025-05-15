@@ -332,7 +332,7 @@
       console.log('ZXing code reader initialized')
       codeReader.listVideoInputDevices()
         .then((videoInputDevices) => {
-          const sourceSelect = $('#sourceSelect');
+          const sourceSelect = document.getElementById('sourceSelect');
           selectedDeviceId = videoInputDevices[0].deviceId
           if (videoInputDevices.length >= 1) {
             videoInputDevices.forEach((element) => {
