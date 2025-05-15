@@ -113,7 +113,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 40%;
+      height: 35%;
     }
 
     /* Unten */
@@ -121,7 +121,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 40%;
+      height: 35%;
     }
 
     /* Links */
@@ -129,7 +129,7 @@
       top: 40%;
       left: 0;
       width: 20%;
-      height: 20%;
+      height: 30%;
     }
 
     /* Rechts */
@@ -137,7 +137,7 @@
       top: 40%;
       right: 0;
       width: 20%;
-      height: 20%;
+      height: 30%;
     }
 
 
@@ -146,7 +146,7 @@
       top: 40%;
       left: 20%;
       width: 60%;
-      height: 20%;
+      height: 30%;
       border: 1px dashed grey;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.1); /* leichte Transparenz */
