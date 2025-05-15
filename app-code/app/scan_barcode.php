@@ -382,8 +382,9 @@
       });
 
       $('#RotateButton').on('click', function(){
-        
-        $('#video').css('transform','rotate(90deg)');
+        rotation += 90;
+        rotation = rotation%360;
+        $('#video').css('transform','rotate('+rotation+'deg)');
       });
 
 
