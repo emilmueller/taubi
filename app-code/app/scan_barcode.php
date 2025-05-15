@@ -176,13 +176,13 @@
     <h1 class="title">Buch erfassen</h1>
 
     <div class="row align-items-center">
-      <div class="col-1 col-md-2 mb-2">
+      <div class="col-lg-1 col-sm-2 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-5 col-md-8">
+      <div class="col-lg-6 col-sm-8">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
-      <div class="col-2 col-md-2">
+      <div class="col-lg-5 col-sm-2">
         <button id="okButton" class="btn btn-secondary" disabled>OK</button>
       
       </div>
