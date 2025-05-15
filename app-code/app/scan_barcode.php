@@ -18,6 +18,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script type="text/javascript" src="/js/qrcode.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <style>
     body {
       transition: background-color 0.3s, color 0.3s;
@@ -287,13 +289,7 @@
 
     
 
-    document.getElementById('VFlipButton').addEventListener('click', function(){
-      vgespiegelt = !vgespiegelt;
-      document.getElementById('video').style.transform= vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
-
-
-
-    });
+    
 
 
     document.getElementById('okButton').addEventListener('click', function(){
@@ -376,6 +372,18 @@
           console.error(err)
         })
     })
+
+    $(document).ready(function(){
+      
+      $('#VFlipButton').on('click', function(){
+        vgespiegelt = !vgespiegelt;
+        $('#video').css('transform',vgespiegelt ? "scaleY(-1)" : "scaleY(1)");
+
+
+
+      });
+
+    });
   </script>
 
 </body>
