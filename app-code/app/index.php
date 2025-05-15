@@ -111,7 +111,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="bookCards">
+    <div class="row row-cols-2 row-cols-md-4 g-4" id="bookCards">
       <!-- Cards will be added dynamically here -->
     </div>
   </div>
