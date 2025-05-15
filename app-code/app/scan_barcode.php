@@ -288,17 +288,7 @@
     
 
 
-    document.getElementById('okButton').addEventListener('click', function(){
-      let result = document.getElementById('isbnInput').value;
-      if(result){
-        window.open("getbook.php?isbn="+result);
-      }else{
-        alert("Keine ISBN-Nummer eingegeben");
-      }
-
-
-
-    });
+    
 
     
 
@@ -324,7 +314,7 @@
               if (result) {
                 console.log(result)
                 document.getElementById('isbnInput').value = result.text
-                window.open("getbook.php?isbn="+result.text);
+                // window.open("getbook.php?isbn="+result.text);
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
@@ -357,11 +347,11 @@
 
           
 
-          document.getElementById('resetButton').addEventListener('click', () => {
-            codeReader.reset()
-            document.getElementById('isbnInput').value = '';
-            console.log('Reset.')
-          })
+          // document.getElementById('resetButton').addEventListener('click', () => {
+          //   codeReader.reset()
+          //   document.getElementById('isbnInput').value = '';
+          //   console.log('Reset.')
+          // })
 
         })
         .catch((err) => {
@@ -385,6 +375,15 @@
         rotation += 90;
         rotation = rotation%360;
         $('#video').css('transform','rotate('+rotation+'deg)');
+      });
+
+      $('#okButton').on('click', function(){
+        let result = $('#isbnInput').val();
+        if(result){
+          window.open("getbook.php?isbn="+result);
+        }else{
+          alert("Keine ISBN-Nummer eingegeben");
+        }
       });
 
 
