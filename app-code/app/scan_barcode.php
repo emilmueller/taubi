@@ -182,7 +182,7 @@
       <div class="col-5 col-md-8">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
-      <div class="col-2 col-md-8">
+      <div class="col-2 col-md-2">
         <button id="okButton" class="btn btn-secondary" disabled>OK</button>
       
       </div>
