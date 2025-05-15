@@ -221,7 +221,7 @@
           </div>
           <div class="row pt-2 align-items-center">
             <div class="col-3">
-                <button id="RotateButton" class="btn btn-secondary bi bi-arrows-clockwise">
+                <button id="RotateButton" class="btn btn-secondary bi bi-arrow-clockwise">
                 
                 </button>
             </div>
