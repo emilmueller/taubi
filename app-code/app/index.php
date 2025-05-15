@@ -170,7 +170,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
 	      <p class="text-muted">Verkäufer: ${book.seller_name}</p>
               <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
-	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
+	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
           </div>
         `;
