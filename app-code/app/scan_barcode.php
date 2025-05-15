@@ -113,7 +113,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 30%;
+      height: 40%;
     }
 
     /* Unten */
@@ -121,32 +121,32 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 30%;
+      height: 40%;
     }
 
     /* Links */
     .mask.left {
-      top: 30%;
+      top: 40%;
       left: 0;
-      width: 30%;
-      height: 40%;
+      width: 20%;
+      height: 20%;
     }
 
     /* Rechts */
     .mask.right {
-      top: 30%;
+      top: 40%;
       right: 0;
-      width: 30%;
-      height: 40%;
+      width: 20%;
+      height: 20%;
     }
 
 
     .target-box {
       position: absolute;
-      top: 30%;
-      left: 30%;
-      width: 40%;
-      height: 40%;
+      top: 40%;
+      left: 20%;
+      width: 60%;
+      height: 20%;
       border: 1px dashed grey;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.1); /* leichte Transparenz */
