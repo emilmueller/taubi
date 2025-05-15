@@ -179,10 +179,10 @@
       <div class="col-lg-1 col-sm-2 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-6 col-sm-8">
+      <div class="col-lg-6 col-sm-7">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
       </div>
-      <div class="col-lg-5 col-sm-2">
+      <div class="col-lg-5 col-sm-3">
         <button id="okButton" class="btn btn-secondary" disabled>OK</button>
       
       </div>
