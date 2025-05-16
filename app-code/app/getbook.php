@@ -288,9 +288,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             $("#spinner").show();     // Spinner anzeigen
             $("#bookForm").hide();      // Ergebnisbereich ausblenden
           },
-          success: function(data){
+          success: function(response){
             $("#spinner").hide();     // Spinner anzeigen
-            console.log(data);
+            console.log(response.book);
 
 
             $("#bookForm").show();      // Ergebnisbereich ausblenden
