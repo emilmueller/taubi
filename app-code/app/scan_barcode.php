@@ -281,7 +281,7 @@
     let rotation = 0;
 
     
-    fucntion checkISBN(n){
+    function checkISBN(n){
       let s =0;
       let ci="";
       let xi=0;
