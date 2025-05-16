@@ -354,30 +354,11 @@
       $('#okButton').on('click', function(){
         let result = $('#isbnInput').val();
         
+        
         if(result){
-          $('#okButton').text('Suche Buch');
-          $('#okButton').prop('disabled', true);
-          $('#spinner').removeClass('d-none');
+         window.open("getbook.php?isbn="+result);
 
-          result = result.replaceAll('-','');
-          const site = window.open("getbook.php?isbn="+result);
-          if (site){
-            const interval = setInterval(() => {
-            try {
-              // Zugriff auf Dokument möglich? Dann ist die Seite geladen.
-              if (site.document.readyState === "complete") {
-                clearInterval(interval);
-                $('#spinner').addClass("d-none");
-                $('#okButton').prop('disabled', false);
-                $('#okButton').text("OK");
-              }
-            } catch (e) {
-              // Zugriff nicht erlaubt → Cross-Origin oder noch nicht geladen
-            }
-            // Optional: Timeout nach 10s, falls etwas hängt
-          }, 100);
-
-          }
+         
         }else{
           alert("Keine ISBN-Nummer eingegeben");
         }
