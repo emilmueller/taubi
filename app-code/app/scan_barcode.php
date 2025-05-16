@@ -354,7 +354,7 @@
         }
       });
 
-      $('#isbnInput').on('change', function() {
+      $('#isbnInput').on('input', function() {
         if(!checkISBN($(this).val())){
           $(this).addClass('is-invalid');
           $('#okButton').addClass('btn-secondary');
