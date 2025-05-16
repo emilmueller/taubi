@@ -180,7 +180,7 @@
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
       <div class="col-lg-6 col-8">
-          <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
+          <input type="number" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
           <!-- <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div> -->
       </div>
       <div class="col-lg-5 col-2">
