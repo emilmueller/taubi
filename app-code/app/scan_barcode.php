@@ -364,7 +364,7 @@
           $('#okButton').prop('disabled', true);
 
         }else{
-          this.removeClass('is-invalid');
+          $(this).removeClass('is-invalid');
           $('#okButton').removeClass('btn-secondary');
           $('#okButton').addClass('btn-success');
           $('#okButton').prop('disabled', false);
