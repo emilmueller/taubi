@@ -199,7 +199,7 @@
         <div class="row">
           <div class="col-lg-8 col-md-12">
             <label for="sourceSelect">Kamera: </label>
-          <select id="sourceSelect"></select>
+          <select class="form-select" id="sourceSelect"></select>
           <div class="video-container">
           <video id="video" style="border: 1px solid gray"></video>
             <div class="overlay">
@@ -214,7 +214,7 @@
       
           
         
-        <div class="form-select col-lg-4 col-md-12" id="sourceSelectPanel" >
+        <div class="col-lg-4 col-md-12" id="sourceSelectPanel" >
           <div class="pt-3 row">
             <label>Kamerabild drehen</label>
           </div>
