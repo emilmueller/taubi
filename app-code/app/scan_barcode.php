@@ -214,7 +214,7 @@
       
           
         
-        <div class="col-lg-4 col-md-12" id="sourceSelectPanel" >
+        <div class="form-select col-lg-4 col-md-12" id="sourceSelectPanel" >
           <div class="pt-3 row">
             <label>Kamerabild drehen</label>
           </div>
