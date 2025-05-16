@@ -133,18 +133,18 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         // Transform API data to match your book object structure
         const books = data.map(book => ({
-          title: escapeForHtmlAttr(book.title),
-          author: escapeForHtmlAttr(book.author),
+          title: book.title,
+          author: book.author,
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
           image_url: book.image_url,
           pages: book.pages,
-          book_condition: escapeForHtmlAttr(book.book_condition),
+          book_condition: book.book_condition,
           price: book.price,
           date_published: book.date_published,
           language: book.language,
           isbn: book.isbn,
           seller: book.sold_by || '0', // fallback if no seller
-          seller_name: escapeForHtmlAttr(book.seller_name), // if your API doesn't return seller name
+          seller_name: book.seller_name, // if your API doesn't return seller name
           tags: book.tags
         }));
 
@@ -156,8 +156,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     }
 
     function escapeForHtmlAttr(str) {
-      console.log(str.replace(/'/g, "\\'"));
-      return str.replace(/'/g, "\\'");
+      console.log(str.replace(/'/g, ""));
+      return str.replace(/'/g, "");
     }
 
     // Function to render books
