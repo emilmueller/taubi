@@ -3,6 +3,7 @@
     
 
     $isbn = $_GET['isbn'];
+    error_log("IIIIIIIIIIIIIIIIIIIIIISBN: ".$isbn);
     $url = 'https://api2.isbndb.com/book/'.$isbn;  
     $restKey = $isbnapikey; 
 
