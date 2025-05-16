@@ -304,6 +304,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               
               author+=item+", ";
             });
+            author = author.slice(0,-2);
             $('#authorInput').val(author);
             
              // $author = "";
