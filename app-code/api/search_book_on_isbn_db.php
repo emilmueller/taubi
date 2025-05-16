@@ -20,7 +20,7 @@
     
     $response = curl_exec($rest); 
     curl_close($rest);
-    echo json_decode($response,true);
+    echo json_encode($response,true);
     
     
 
