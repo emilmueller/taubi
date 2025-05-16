@@ -369,6 +369,7 @@
                 clearInterval(interval);
                 $('#spinner').addClass("d-none");
                 $('#okButton').prop('disabled', false);
+                $('#okButton').text("OK");
               }
             } catch (e) {
               // Zugriff nicht erlaubt → Cross-Origin oder noch nicht geladen
