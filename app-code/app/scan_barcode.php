@@ -184,7 +184,10 @@
           <!-- <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div> -->
       </div>
       <div class="col-lg-5 col-2">
-        <button id="okButton" class="btn btn-secondary" disabled>OK</button>
+        <button id="okButton" class="btn btn-secondary" disabled>
+          <span id="spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+          OK
+        </button>
       
       </div>
     </div>
@@ -352,8 +355,28 @@
         let result = $('#isbnInput').val();
         
         if(result){
+          $('#okButton').text('Suche Buch');
+          $('#okButton').prop('disabled', true);
+          $('#spinner').removeClass('d-none');
+
           result = result.replaceAll('-','');
-          window.open("getbook.php?isbn="+result);
+          const site = window.open("getbook.php?isbn="+result);
+          if (site){
+            const interval = setInterval(() => {
+            try {
+              // Zugriff auf Dokument möglich? Dann ist die Seite geladen.
+              if (site.document.readyState === "complete") {
+                clearInterval(interval);
+                $('#spinner').addClass("d-none");
+                $('#okButton').prop('disabled', false);
+              }
+            } catch (e) {
+              // Zugriff nicht erlaubt → Cross-Origin oder noch nicht geladen
+            }
+            // Optional: Timeout nach 10s, falls etwas hängt
+          }, 100);
+
+          }
         }else{
           alert("Keine ISBN-Nummer eingegeben");
         }
@@ -409,7 +432,6 @@
                 console.log(result)
                 if(checkISBN(result.text)){
                   $('#isbnInput').val(result.text);
-                  // window.open("getbook.php?isbn="+result.text);
                   $('#isbnInput').removeClass('is-invalid');
                   $('#isbnInput').addClass('is-valid');
                   $('#okButton').removeClass('btn-secondary');
@@ -439,7 +461,6 @@
                 console.log(result)
                 if(checkISBN(result.text)){
                   $('#isbnInput').val(result.text);
-                  // window.open("getbook.php?isbn="+result.text);
                   $('#isbnInput').removeClass('is-invalid');
                   $('#isbnInput').addClass('is-valid');
                   $('#okButton').removeClass('btn-secondary');
