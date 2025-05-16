@@ -143,11 +143,11 @@
 
     .target-box {
       position: absolute;
-      top: 35%;
-      left: 20%;
-      width: 60%;
-      height: 30%;
-      border: 1px dashed grey;
+      top: 34%;
+      left: 19%;
+      width: 62%;
+      height: 32%;
+      border: 1px solid white;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.0); /* leichte Transparenz */
     }
@@ -281,7 +281,37 @@
     let rotation = 0;
 
     
+    fucntion checkISBN(n){
+      let s =0;
+      let ci="";
+      let xi=0;
+      if(n.length == 10){
+        for (int i =0; i<n.length;i++){
+          ci=n.charAt(i);
+          if(ci=="x" || ci=="X"){
+            xi=10;
+          }else{
+            xi=parseInt(ci);
+          }
 
+          s+= (10-i)*xi;
+        }
+        return s%11==0;
+
+
+      }elseif(n.length ==13){
+        for (int i=0;i<n.length;i++){
+          xi=n.charAt(i);
+          s+=(1+(i%2)*2)*xi;
+
+        }
+        return s%10==0;
+
+
+      }else{
+        return false;
+      }
+    }
     
 
     
@@ -320,6 +350,13 @@
         }
       });
 
+      $('#isbnInput').on('change', function() {
+
+
+
+
+      });
+
 
       
 
@@ -347,11 +384,15 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 console.log(result)
-                $('#isbnInput').val(result.text);
-                // window.open("getbook.php?isbn="+result.text);
-                $('#okButton').removeClass('btn-secondary');
-                $('#okButton').addClass('btn-success');
-                $('#okButton').prop('disabled', false);
+                if(checkISBN(result.text)){
+                  $('#isbnInput').val(result.text);
+                  // window.open("getbook.php?isbn="+result.text);
+                  $('#okButton').removeClass('btn-secondary');
+                  $('#okButton').addClass('btn-success');
+                  $('#okButton').prop('disabled', false);
+                }else{
+                  alert('Die ISBN-Nummer ist nicht gültig.');
+                }
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
@@ -367,11 +408,15 @@
               codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 console.log(result)
-                $('#isbnInput').val(result.text);
-                // window.open("getbook.php?isbn="+result.text);
-                $('#okButton').removeClass('btn-secondary');
-                $('#okButton').addClass('btn-success');
-                $('#okButton').prop('disabled', false);
+                if(checkISBN(result.text)){
+                  $('#isbnInput').val(result.text);
+                  // window.open("getbook.php?isbn="+result.text);
+                  $('#okButton').removeClass('btn-secondary');
+                  $('#okButton').addClass('btn-success');
+                  $('#okButton').prop('disabled', false);
+                }else{
+                  alert('Die ISBN-Nummer ist nicht gültig.');
+                }
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
