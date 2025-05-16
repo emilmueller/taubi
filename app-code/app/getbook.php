@@ -177,7 +177,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <div class="col-10 col-lg-12">
               <img id="bookImage" src="<?php echo $image_url ?>" alt="Buchbild">
               
-              <input id="image_url_input" type="hidden" name="image_url" value="<?php echo $image_url ?>"/>
+              <input id="image_url_input" type="hidden" name="image_url" />
             </div>
             <div class="col-2 col-lg-12">
               <canvas id="canvas" class="d-none mt-2 d-none"></canvas>
@@ -194,7 +194,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="titleInput" class="col-form-label">Titel</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="titleInput" name="title" class="form-control" placeholder="Titel" value="<?php echo $title ?>" />
+                <input type="text" id="titleInput" name="title" class="form-control" placeholder="Titel"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -202,7 +202,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="authorInput" class="col-form-label">Autor:in</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="authorInput" name="author" class="form-control" placeholder="Autor:in" value="<?php echo $author ?>" />
+                <input type="text" id="authorInput" name="author" class="form-control" placeholder="Autor:in"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -210,7 +210,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="publisherInput" class="col-form-label">Verlag</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="publisherInput" name="publisher" class="form-control" placeholder="Verlag" value="<?php echo $publisher ?>" />
+                <input type="text" id="publisherInput" name="publisher" class="form-control" placeholder="Verlag" />
             </div>
           </div>
           <div class="row align-items-center">
@@ -218,7 +218,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="yearInput" class="col-form-label">Erschienen</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="yearInput" name="date_published" class="form-control" placeholder="erschienen" value="<?php echo $date_published ?>" />
+                <input type="text" id="yearInput" name="date_published" class="form-control" placeholder="erschienen"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -226,7 +226,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="pagesInput" class="col-form-label">Seiten</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="pagesInput" name="pages" class="form-control" placeholder="Anz. Seiten" value="<?php echo $pages ?>" />
+                <input type="text" id="pagesInput" name="pages" class="form-control" placeholder="Anz. Seiten"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -234,7 +234,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="languageInput" class="col-form-label">Sprache</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="languageInput" name="language" class="form-control" placeholder="Sprache" value="<?php echo $language ?>" />
+                <input type="text" id="languageInput" name="language" class="form-control" placeholder="Sprache"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -242,7 +242,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="isbnInput" class="col-form-label">ISBN</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="isbnInput" name="isbn" class="form-control" placeholder="ISBN" value="<?php echo $isbn ?>" />
+                <input type="text" id="isbnInput" name="isbn" class="form-control" placeholder="ISBN"  />
             </div>
           </div>
           <div class="row align-items-center">
@@ -291,6 +291,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           success: function(response){
             $("#spinner").hide();     // Spinner anzeigen
             var res = $.parseJSON(response);
+            $('#bookImage').attr('src', res.book.image);
             $('#image_url_input').val(res.book.image);
             $('#titleInput').val(res.book.title);
             $('#publisherInput').val(res.book.publisher);
