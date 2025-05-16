@@ -277,7 +277,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   <script>
     $(document).ready(function() {
-        $(ajax)({
+        $.ajax({
           url:"../api/search_book_on_isbn_db.php",
           method:"GET",
           dataType:"json",
