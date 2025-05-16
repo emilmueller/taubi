@@ -359,12 +359,14 @@
       $('#isbnInput').on('input', function() {
         if(!checkISBN($(this).val())){
           $(this).addClass('is-invalid');
+          $(this).removeClass('is-valid');
           $('#okButton').addClass('btn-secondary');
           $('#okButton').removeClass('btn-success');
           $('#okButton').prop('disabled', true);
 
         }else{
           $(this).removeClass('is-invalid');
+          $(this).addClass('is-valid');
           $('#okButton').removeClass('btn-secondary');
           $('#okButton').addClass('btn-success');
           $('#okButton').prop('disabled', false);
@@ -406,11 +408,13 @@
                   $('#isbnInput').val(result.text);
                   // window.open("getbook.php?isbn="+result.text);
                   $('#isbnInput').removeClass('is-invalid');
+                  $('#isbnInput').addClass('is-valid');
                   $('#okButton').removeClass('btn-secondary');
                   $('#okButton').addClass('btn-success');
                   $('#okButton').prop('disabled', false);
                 }else{
                   $('#isbnInput').addClass('is-invalid');
+                  $('#isbnInput').removeClass('is-valid');
                   $('#okButton').addClass('btn-secondary');
                   $('#okButton').removeClass('btn-success');
                   $('#okButton').prop('disabled', true);
@@ -434,11 +438,13 @@
                   $('#isbnInput').val(result.text);
                   // window.open("getbook.php?isbn="+result.text);
                   $('#isbnInput').removeClass('is-invalid');
+                  $('#isbnInput').addClass('is-valid');
                   $('#okButton').removeClass('btn-secondary');
                   $('#okButton').addClass('btn-success');
                   $('#okButton').prop('disabled', false);
                 }else{
                   $('#isbnInput').addClass('is-invalid');
+                  $('#isbnInput').removeClass('is-valid');
                   $('#okButton').addClass('btn-secondary');
                   $('#okButton').removeClass('btn-success');
                   $('#okButton').prop('disabled', true);
