@@ -133,18 +133,18 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         // Transform API data to match your book object structure
         const books = data.map(book => ({
-          title: book.title,
-          author: book.author,
+          title: escapeForHtmlAttr(book.title),
+          author: escapeForHtmlAttr(book.author),
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
           image_url: book.image_url,
           pages: book.pages,
-          book_condition: book.book_condition,
+          book_condition: escapeForHtmlAttr(book.book_condition),
           price: book.price,
           date_published: book.date_published,
           language: book.language,
           isbn: book.isbn,
           seller: book.sold_by || '0', // fallback if no seller
-          seller_name: book.seller_name, // if your API doesn't return seller name
+          seller_name: escapeForHtmlAttr(book.seller_name), // if your API doesn't return seller name
           tags: book.tags
         }));
 
@@ -153,6 +153,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       } catch (error) {
         console.error('Error loading books:', error);
       }
+    }
+
+    function escapeForHtmlAttr(str) {
+      return str.replace(/'/g, "&#39;");
     }
 
     // Function to render books
@@ -169,8 +173,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
 	      <p class="text-muted">Verkäufer: ${book.seller_name}</p>
-              <button class="btn btn-secondary" onclick="show_message_modal('`+JSON.stringify($(book.title))+`','`+JSON.stringify(book.seller_name)+`','${book.seller}');">Kontakt</button>
-	      <button class="btn btn-secondary" onclick="show_info_modal('`+JSON.stringify(book.title)+`','`+JSON.stringify(book.seller_name)+`','`+JSON.stringify(book.author)+`','${book.pages}','${book.language}','${book.date_published}','`+JSON.stringify(book.book_condition)+`','${book.price}','${book.image_url}');">Mehr Infos</button>
+              <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
+	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}+`','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
           </div>
         `;
