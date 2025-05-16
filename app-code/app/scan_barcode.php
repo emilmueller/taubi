@@ -352,7 +352,7 @@
       });
 
       $('#isbnInput').on('change', function() {
-        if(!checkISBN(this.val())){
+        if(!checkISBN($(this).val()){
           this.addClass('is-invalid');
         }else{
           this.removeClass('is-invalid');
