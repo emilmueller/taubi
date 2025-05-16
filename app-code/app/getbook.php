@@ -281,7 +281,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           url:"../api/search_book_on_isbn_db.php",
           method:"GET",
           data:{
-            'ibsn': <?php echo $_GET['isbn']; ?>;
+            'isbn': <?php echo $_GET['isbn']; ?>;
           },
           dataType:"json",
           beforeSend: function(){
