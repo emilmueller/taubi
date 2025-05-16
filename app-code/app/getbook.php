@@ -24,6 +24,17 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       transition: background-color 0.3s, color 0.3s;
     }
 
+    #spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5); /* halbtransparent schwarz */
+      z-index: 1050; /* über Navbar und Modal-Backdrop */
+      display: none; /* initial ausblenden */
+    }
+
     .ribbon {
       background-color: #007bff;
       color: white;
@@ -160,8 +171,13 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
   <!-- Spinner -->
-  <div id="spinner" class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Lade...</span>
+  <div id="spinner" class="d-flex justify-content-center align-items-center">
+    <div class="text-center text-white">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Lädt...</span>
+      </div>
+      <p class="mt-3">Bitte warten…</p>
+    </div>
   </div>
 
     <!-- Books Section -->
