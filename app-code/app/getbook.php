@@ -159,15 +159,16 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     ?> 
 
 
+  <!-- Spinner -->
+  <div id="spinner" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Lade...</span>
+  </div>
 
     <!-- Books Section -->
-  <div class="container">
+  <div id="bookDiv" class="container">
     <h2>Neues Buch</h2>
 
-     <!-- Spinner -->
-    <div id="spinner" class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Lade...</span>
-    </div>
+     
     
     <!-- Book Form  -->
     <form id="bookForm" method="post" action="save_book.php">
@@ -286,7 +287,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           dataType:"json",
           beforeSend: function(){
             $("#spinner").show();     // Spinner anzeigen
-            $("#bookForm").hide();      // Ergebnisbereich ausblenden
+            $("#bookDiv").hide();      // Ergebnisbereich ausblenden
           },
           success: function(response){
             $("#spinner").hide();     // Spinner anzeigen
@@ -313,7 +314,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // }
 
 
-            $("#bookForm").show();      // Ergebnisbereich ausblenden
+            $("#bookDiv").show();      // Ergebnisbereich ausblenden
             
           },
           error: function(){
