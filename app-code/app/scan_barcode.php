@@ -147,7 +147,7 @@
       left: 19%;
       width: 62%;
       height: 32%;
-      border: 1px solid white;
+      border: 1px dotted white;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.0); /* leichte Transparenz */
     }
