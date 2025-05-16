@@ -350,7 +350,9 @@
 
       $('#okButton').on('click', function(){
         let result = $('#isbnInput').val();
+        
         if(result){
+          result = result.replaceAll('-','');
           window.open("getbook.php?isbn="+result);
         }else{
           alert("Keine ISBN-Nummer eingegeben");
