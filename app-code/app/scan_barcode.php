@@ -299,7 +299,7 @@
         return s%11==0;
 
 
-      }elseif(n.length ==13){
+      }else if(n.length ==13){
         for (let i=0;i<n.length;i++){
           xi=n.charAt(i);
           s+=(1+(i%2)*2)*xi;
