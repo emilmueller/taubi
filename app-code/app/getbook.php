@@ -291,7 +291,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           success: function(response){
             $("#spinner").hide();     // Spinner anzeigen
             var res = $.parseJSON(response);
-            console.log(res.book.title);
+            $('#image_url_input').val(res.book.image);
+            $('#titleInput').val(res.book.title);
+            $('#publisherInput').val(res.book.publisher);
+            $('#languageInput').val(res.book.language);
+            $('#yearInput').val(res.book.date_published);
+            $('#isbnInput').val(res.book.isbn13);
 
 
             $("#bookForm").show();      // Ergebnisbereich ausblenden
