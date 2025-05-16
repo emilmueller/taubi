@@ -103,73 +103,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   </div>
 
 
-    <?php 
-    include "../config.php";
     
-
-    // $isbn = $_GET['isbn'];
-    // $url = 'https://api2.isbndb.com/book/'.$isbn;  
-    // $restKey = $isbnapikey; 
-
-    
-    // $headers = array(  
-    //   "Content-Type: application/json",  
-    //   "Authorization: " . $restKey  
-    // );  
-    
-    // $rest = curl_init();  
-    // curl_setopt($rest,CURLOPT_URL,$url);  
-    // curl_setopt($rest,CURLOPT_HTTPHEADER,$headers);  
-    // curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
-    
-    // $response = curl_exec($rest);  
-    // $book = json_decode($response,true);
-    // $book = $book['book'];
-
-    // // echo "<pre>";
-    // // echo json_encode($book, JSON_PRETTY_PRINT);
-    // // echo "</pre>";
-
-
-    
-    
-    
-
-    
-
-
-
-
-    
-      
-    // $title = $book['title'];
-    
-    // $pages = $book['pages'];
-    // $author = "";
-    // foreach($book['authors'] as $key => $value){
-    //   $author .= $value." / ";
-    // }
-    // $author =substr($author, 0, -3);
-    
-    // $publisher= $book['publisher'];
-
-    // $language = $book['language'];
-    // $image_url = $book['image'];
-    // $date_published =$book['date_published'];
-    // $isbn = $book['isbn13'];
-
-    
-
-
-
-
-    // curl_close($rest);
-
-    
-
-    ?> 
-
-
   <!-- Spinner -->
   <div id="spinner" class="d-flex justify-content-center align-items-center">
     <div class="text-center text-white">
@@ -324,10 +258,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             author = author.slice(0,-2);
             $('#authorInput').val(author);
             
-             // $author = "";
-    // foreach($book['authors'] as $key => $value){
-    //   $author .= $value." / ";
-    // }
+             
 
 
             $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
@@ -335,6 +266,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           },
           error: function(){
             $('#spinner').addClass('d-none');
+
+            //Buch nicht gefunden!
             
 
           }
