@@ -290,7 +290,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           },
           success: function(data){
             $("#spinner").hide();     // Spinner anzeigen
-            alert(data.title);
+            alert(data.book.title);
 
 
             $("#bookForm").show();      // Ergebnisbereich ausblenden
