@@ -353,9 +353,16 @@
 
       $('#isbnInput').on('change', function() {
         if(!checkISBN($(this).val())){
-          this.addClass('is-invalid');
+          $(this).addClass('is-invalid');
+          $('#okButton').addClass('btn-secondary');
+          $('#okButton').removeClass('btn-success');
+          $('#okButton').prop('disabled', true);
+
         }else{
           this.removeClass('is-invalid');
+          $('#okButton').removeClass('btn-secondary');
+          $('#okButton').addClass('btn-success');
+          $('#okButton').prop('disabled', false);
         }
         
 
@@ -393,11 +400,15 @@
                 if(checkISBN(result.text)){
                   $('#isbnInput').val(result.text);
                   // window.open("getbook.php?isbn="+result.text);
+                  $('#isbnInput').removeClass('is-invalid');
                   $('#okButton').removeClass('btn-secondary');
                   $('#okButton').addClass('btn-success');
                   $('#okButton').prop('disabled', false);
                 }else{
-                  alert('Die ISBN-Nummer ist nicht gültig.');
+                  $('#isbnInput').addClass('is-invalid');
+                  $('#okButton').addClass('btn-secondary');
+                  $('#okButton').removeClass('btn-success');
+                  $('#okButton').prop('disabled', true);
                 }
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
@@ -417,11 +428,15 @@
                 if(checkISBN(result.text)){
                   $('#isbnInput').val(result.text);
                   // window.open("getbook.php?isbn="+result.text);
+                  $('#isbnInput').removeClass('is-invalid');
                   $('#okButton').removeClass('btn-secondary');
                   $('#okButton').addClass('btn-success');
                   $('#okButton').prop('disabled', false);
                 }else{
-                  alert('Die ISBN-Nummer ist nicht gültig.');
+                  $('#isbnInput').addClass('is-invalid');
+                  $('#okButton').addClass('btn-secondary');
+                  $('#okButton').removeClass('btn-success');
+                  $('#okButton').prop('disabled', true);
                 }
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
