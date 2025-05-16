@@ -156,7 +156,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     }
 
     function escapeForHtmlAttr(str) {
-      console.log(str);
+      console.log(str.replace(/'/g, "&#39;"));
       return str.replace(/'/g, "&#39;");
     }
 
