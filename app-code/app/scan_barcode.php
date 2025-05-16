@@ -181,6 +181,7 @@
       </div>  
       <div class="col-lg-6 col-8">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
+          <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div>
       </div>
       <div class="col-lg-5 col-2">
         <button id="okButton" class="btn btn-secondary" disabled>OK</button>
@@ -351,7 +352,12 @@
       });
 
       $('#isbnInput').on('change', function() {
-
+        if(!checkISBN(this.val())){
+          this.addClass('is-invalid');
+        }else{
+          this.removeClass('is-invalid');
+        }
+        
 
 
 
