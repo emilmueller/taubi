@@ -96,28 +96,28 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     include "../config.php";
     
 
-    $isbn = $_GET['isbn'];
-    $url = 'https://api2.isbndb.com/book/'.$isbn;  
-    $restKey = $isbnapikey; 
+    // $isbn = $_GET['isbn'];
+    // $url = 'https://api2.isbndb.com/book/'.$isbn;  
+    // $restKey = $isbnapikey; 
 
     
-    $headers = array(  
-      "Content-Type: application/json",  
-      "Authorization: " . $restKey  
-    );  
+    // $headers = array(  
+    //   "Content-Type: application/json",  
+    //   "Authorization: " . $restKey  
+    // );  
     
-    $rest = curl_init();  
-    curl_setopt($rest,CURLOPT_URL,$url);  
-    curl_setopt($rest,CURLOPT_HTTPHEADER,$headers);  
-    curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
+    // $rest = curl_init();  
+    // curl_setopt($rest,CURLOPT_URL,$url);  
+    // curl_setopt($rest,CURLOPT_HTTPHEADER,$headers);  
+    // curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
-    $response = curl_exec($rest);  
-    $book = json_decode($response,true);
-    $book = $book['book'];
+    // $response = curl_exec($rest);  
+    // $book = json_decode($response,true);
+    // $book = $book['book'];
 
-    // echo "<pre>";
-    // echo json_encode($book, JSON_PRETTY_PRINT);
-    // echo "</pre>";
+    // // echo "<pre>";
+    // // echo json_encode($book, JSON_PRETTY_PRINT);
+    // // echo "</pre>";
 
 
     
@@ -131,28 +131,28 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     
       
-    $title = $book['title'];
+    // $title = $book['title'];
     
-    $pages = $book['pages'];
-    $author = "";
-    foreach($book['authors'] as $key => $value){
-      $author .= $value." / ";
-    }
-    $author =substr($author, 0, -3);
+    // $pages = $book['pages'];
+    // $author = "";
+    // foreach($book['authors'] as $key => $value){
+    //   $author .= $value." / ";
+    // }
+    // $author =substr($author, 0, -3);
     
-    $publisher= $book['publisher'];
+    // $publisher= $book['publisher'];
 
-    $language = $book['language'];
-    $image_url = $book['image'];
-    $date_published =$book['date_published'];
-    $isbn = $book['isbn13'];
+    // $language = $book['language'];
+    // $image_url = $book['image'];
+    // $date_published =$book['date_published'];
+    // $isbn = $book['isbn13'];
 
     
 
 
 
 
-    curl_close($rest);
+    // curl_close($rest);
 
     
 
@@ -164,7 +164,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <div class="container">
     <h2>Neues Buch</h2>
 
- 
+     <!-- Spinner -->
+    <div id="spinner" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Lade...</span>
+    </div>
     
     <!-- Book Form  -->
     <form id="bookForm" method="post" action="save_book.php">
@@ -274,6 +277,41 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   <script>
     $(document).ready(function() {
+        $(ajax)({
+          url:"../api/search_book_on_isbn_db.php",
+          method:"GET",
+          dataType:"json",
+          beforeSend: function(){
+            $("#spinner").show();     // Spinner anzeigen
+            $("#bookForm").hide();      // Ergebnisbereich ausblenden
+          },
+          success: function(data){
+            $("#spinner").hide();     // Spinner anzeigen
+            alert(data.title);
+
+
+            $("#bookForm").show();      // Ergebnisbereich ausblenden
+            
+          },
+          error: function(){
+            $('#spinner').hide();
+            $("#result").show().html("<p class='text-danger'>Fehler beim Laden der Daten.</p>");
+
+          }
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
         $('#addPicture').on('click', function () {
           $('#cameraInput').click();
         });
