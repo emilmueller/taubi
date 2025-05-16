@@ -133,7 +133,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         // Transform API data to match your book object structure
         const books = data.map(book => ({
-          title: escapeForHtmlAttr(book.title)+"SOSO",
+          title: escapeForHtmlAttr(book.title),
           author: escapeForHtmlAttr(book.author),
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
           image_url: book.image_url,
@@ -174,7 +174,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
 	      <p class="text-muted">Verkäufer: ${book.seller_name}</p>
-              <button class="btn btn-secondary" onclick="show_message_modal('${book.title}','${book.seller_name}','${book.seller}');">Kontakt</button>
+              <button class="btn btn-secondary" onclick="show_message_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.seller}');">Kontakt</button>
 	      <button class="btn btn-secondary" onclick="show_info_modal('${book.title}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
             </div>
           </div>
