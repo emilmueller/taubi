@@ -302,11 +302,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           },
           dataType:"json",
           beforeSend: function(){
-            $("#spinner").show();     // Spinner anzeigen
-            $("#bookDiv").hide();      // Ergebnisbereich ausblenden
+            $("#spinner").removeClass('d-none');     // Spinner anzeigen
+            $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
           },
           success: function(response){
-            $("#spinner").hide();     // Spinner anzeigen
+            $("#spinner").addClass('d-none');     // Spinner anzeigen
             var res = $.parseJSON(response);
             $('#bookImage').attr('src', res.book.image);
             $('#image_url_input').val(res.book.image);
@@ -330,12 +330,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // }
 
 
-            $("#bookDiv").show();      // Ergebnisbereich ausblenden
+            $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
             
           },
           error: function(){
-            $('#spinner').hide();
-            $("#result").show().html("<p class='text-danger'>Fehler beim Laden der Daten.</p>");
+            $('#spinner').addClass('d-none');
+            
 
           }
 
