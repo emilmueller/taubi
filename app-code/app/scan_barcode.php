@@ -283,6 +283,7 @@
 
     
     function checkISBN(n){
+      alert(n);
       let s =0;
       let ci="";
       let xi=0;
