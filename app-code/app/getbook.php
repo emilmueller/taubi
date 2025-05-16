@@ -297,6 +297,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             $('#languageInput').val(res.book.language);
             $('#yearInput').val(res.book.date_published);
             $('#isbnInput').val(res.book.isbn13);
+            $('#pages').val(res.book.pages);
 
 
             $("#bookForm").show();      // Ergebnisbereich ausblenden
