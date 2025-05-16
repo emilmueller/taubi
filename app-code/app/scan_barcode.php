@@ -286,7 +286,7 @@
       let ci="";
       let xi=0;
       if(n.length == 10){
-        for (int i =0; i<n.length;i++){
+        for (let i =0; i<n.length;i++){
           ci=n.charAt(i);
           if(ci=="x" || ci=="X"){
             xi=10;
@@ -300,7 +300,7 @@
 
 
       }elseif(n.length ==13){
-        for (int i=0;i<n.length;i++){
+        for (let i=0;i<n.length;i++){
           xi=n.charAt(i);
           s+=(1+(i%2)*2)*xi;
 
