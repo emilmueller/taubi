@@ -105,7 +105,7 @@
     /* Der transparente Bereich (z. B. 40% in der Mitte) */
     .mask {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
     /* Oben */
