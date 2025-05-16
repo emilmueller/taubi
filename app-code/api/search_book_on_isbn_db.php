@@ -21,7 +21,7 @@
     $response = curl_exec($rest); 
     curl_close($rest);
     header('Content-Type: application/json');
-    echo json_encode($response);
+    echo json_encode($response, true);
     
     
 
