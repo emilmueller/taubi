@@ -32,7 +32,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.5); /* halbtransparent schwarz */
       z-index: 1050; /* über Navbar und Modal-Backdrop */
-      display: none; /* initial ausblenden */
+      
     }
 
     .ribbon {
