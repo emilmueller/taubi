@@ -283,13 +283,15 @@
 
     
     function checkISBN(n){
-      alert(n);
+      
       let s =0;
       let ci="";
       let xi=0;
-      if (n.length==0){
-        return true;
-      }else if(n.length == 10){
+      // if (n.length==0){
+      //   return true;
+      // }else 
+      
+      if(n.length == 10){
         for (let i =0; i<n.length;i++){
           ci=n.charAt(i);
           if(ci=="x" || ci=="X"){
