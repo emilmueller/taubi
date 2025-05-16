@@ -133,7 +133,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         // Transform API data to match your book object structure
         const books = data.map(book => ({
-          title: escapeForHtmlAttr(book.title),
+          title: escapeForHtmlAttr(book.title)+"SOSO",
           author: escapeForHtmlAttr(book.author),
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
           image_url: book.image_url,
