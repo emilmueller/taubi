@@ -299,6 +299,16 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             $('#yearInput').val(res.book.date_published);
             $('#isbnInput').val(res.book.isbn13);
             $('#pages').val(res.book.pages);
+            var author = "";
+            $.each(res.book.authors, function(i,item){
+              author+=item+", ";
+            });
+            $('#author').val(author);
+            
+             // $author = "";
+    // foreach($book['authors'] as $key => $value){
+    //   $author .= $value." / ";
+    // }
 
 
             $("#bookForm").show();      // Ergebnisbereich ausblenden
