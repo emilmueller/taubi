@@ -19,10 +19,10 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest); 
-    error_log(json_encode($book, JSON_PRETTY_PRINT));
+    curl_close($rest);
     echo json_decode($response,true);
     
-    curl_close($rest);
+    
 
     
 
