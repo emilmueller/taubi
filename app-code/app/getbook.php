@@ -301,6 +301,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             $('#pages').val(res.book.pages);
             var author = "";
             $.each(res.book.authors, function(i,item){
+              alert(item);
               author+=item+", ";
             });
             $('#author').val(author);
