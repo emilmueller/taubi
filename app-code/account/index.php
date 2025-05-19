@@ -147,7 +147,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           seller: book.sold_by || '0',
           seller_name: book.seller_name,
           tags: book.tags,
-	  id: book.id
+	        id: book.id
         }));
 
         return books;
@@ -172,6 +172,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
               <div class="position-absolute bottom-0 end-0 mb-1 mr-1">
+                <button class="btn btn-success" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
                 <button class="btn btn-danger" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
               </div>
             </div>
@@ -187,10 +188,18 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       renderBooks(loadedBooks);  // Render books after loading
     });
 
-    // Function to handle the "Edit" button (Placeholder for edit functionality)
+    // Function to handle the "Delete" button 
     function delete_book(book_id) {
-	fetch("/api/delete_book.php?id="+book_id); // delete
-	loadBooks().then(loadedBooks => {
+      fetch("/api/delete_book.php?id="+book_id); // delete
+      loadBooks().then(loadedBooks => {
+      		renderBooks(loadedBooks);  // Render books after loading
+    	});
+    }
+
+    // Function to handle the "Delete" button 
+    function edit_book(book_id) {
+      fetch("/api/delete_book.php?id="+book_id); // delete
+      loadBooks().then(loadedBooks => {
       		renderBooks(loadedBooks);  // Render books after loading
     	});
     }

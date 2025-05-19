@@ -229,47 +229,52 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     $(document).ready(function() {
         $.ajax({
-          url:"../api/search_book_on_isbn_db.php",
-          method:"GET",
-          data:{
-            'isbn': <?php echo $_GET['isbn']; ?>
-          },
-          dataType:"json",
-          beforeSend: function(){
-            $("#spinner").removeClass('d-none');     // Spinner anzeigen
-            $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
-          },
-          success: function(response){
-            $("#spinner").addClass('d-none');     // Spinner anzeigen
-            var res = $.parseJSON(response);
-            $('#bookImage').attr('src', res.book.image);
-            $('#image_url_input').val(res.book.image);
-            $('#titleInput').val(res.book.title);
-            $('#publisherInput').val(res.book.publisher);
-            $('#languageInput').val(res.book.language);
-            $('#yearInput').val(res.book.date_published);
-            $('#isbnInput').val(res.book.isbn13);
-            $('#pages').val(res.book.pages);
-            var author = "";
-            $.each(res.book.authors, function(i,item){
+          let action = <?php echo $_GET['action']; ?>;
+          alert(action);
+          if (action =="search_isbn"){
+
+            url:"../api/search_book_on_isbn_db.php",
+            method:"GET",
+            data:{
+              'isbn': <?php echo $_GET['isbn']; ?>
+            },
+            dataType:"json",
+            beforeSend: function(){
+              $("#spinner").removeClass('d-none');     // Spinner anzeigen
+              $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
+            },
+            success: function(response){
+              $("#spinner").addClass('d-none');     // Spinner anzeigen
+              var res = $.parseJSON(response);
+              $('#bookImage').attr('src', res.book.image);
+              $('#image_url_input').val(res.book.image);
+              $('#titleInput').val(res.book.title);
+              $('#publisherInput').val(res.book.publisher);
+              $('#languageInput').val(res.book.language);
+              $('#yearInput').val(res.book.date_published);
+              $('#isbnInput').val(res.book.isbn13);
+              $('#pages').val(res.book.pages);
+              var author = "";
+              $.each(res.book.authors, function(i,item){
+                
+                author+=item+", ";
+              });
+              author = author.slice(0,-2);
+              $('#authorInput').val(author);
               
-              author+=item+", ";
-            });
-            author = author.slice(0,-2);
-            $('#authorInput').val(author);
-            
-             
+              
 
 
-            $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
-            
-          },
-          error: function(){
-            $('#spinner').addClass('d-none');
+              $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
+              
+            },
+            error: function(){
+              $('#spinner').addClass('d-none');
 
-            //Buch nicht gefunden!
-            
+              //Buch nicht gefunden!
+              
 
+            }
           }
 
 
