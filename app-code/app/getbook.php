@@ -230,7 +230,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $(document).ready(function() {
         $.ajax({
           let action = "";
-          action = <?php echo $_GET['action']; ?>;
+          action = "<?php echo $_GET['action']; ?>";
           console.log(action);
           if (action =="isbn_search"){
 
