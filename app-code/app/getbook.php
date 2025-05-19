@@ -229,7 +229,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     $(document).ready(function() {
         $.ajax({
-          let action = <?php echo $_GET['action']; ?>;
+          let action = <?php echo json_encode($_GET['action']); ?>;
           alert(action);
           if (action =="search_isbn"){
 
