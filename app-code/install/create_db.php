@@ -62,7 +62,9 @@
 			    username VARCHAR(255) NOT NULL UNIQUE,
 			    role VARCHAR(255),
 			    email VARCHAR(255) NOT NULL UNIQUE,
-			    last_login VARCHAR(255)
+				password VARCHAR(255),
+			    last_login VARCHAR(255),
+				banned INT
 			);";
 
 
