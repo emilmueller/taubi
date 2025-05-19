@@ -230,12 +230,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $(document).ready(function() {
         let action = '<?php echo $_GET['action']; ?>';
 
-        $.ajax({
-         
-          
-          
-          if (action =="isbn_search"){
-
+        if (action =="isbn_search"){
+          $.ajax({
             url:"../api/search_book_on_isbn_db.php",
             method:"GET",
             data:{
@@ -278,12 +274,15 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               
 
             }
-          }
+          });
+        } else if (action == "db_search") {
+
+        }
 
 
 
 
-        });
+        
 
 
 

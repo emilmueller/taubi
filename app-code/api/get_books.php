@@ -13,17 +13,41 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php
 
 include "../config.php";
-$sql = "
-SELECT
-    b.*,
-    u.username AS seller_name,
-    JSON_ARRAYAGG(t.name) AS tags
-FROM books b
-LEFT JOIN users u ON b.sold_by = u.id
-LEFT JOIN book_tags bt ON b.id = bt.book_id
-LEFT JOIN tags t ON bt.tag_id = t.id
-GROUP BY b.id;
-";
+
+if (isset($_POST['bookid'])){
+    $bookid = $_POST['bookid'];
+
+}
+
+if (isset($bookid)){
+    $sql = "
+        SELECT
+            b.*,
+            u.username AS seller_name,
+            JSON_ARRAYAGG(t.name) AS tags
+        FROM books b
+        LEFT JOIN users u ON b.sold_by = u.id
+        LEFT JOIN book_tags bt ON b.id = bt.book_id
+        LEFT JOIN tags t ON bt.tag_id = t.id
+        WHERE b.id = '".$bookid."'
+        GROUP BY b.id;
+    ";
+
+}else {
+
+
+    $sql = "
+    SELECT
+        b.*,
+        u.username AS seller_name,
+        JSON_ARRAYAGG(t.name) AS tags
+    FROM books b
+    LEFT JOIN users u ON b.sold_by = u.id
+    LEFT JOIN book_tags bt ON b.id = bt.book_id
+    LEFT JOIN tags t ON bt.tag_id = t.id
+    GROUP BY b.id;
+    ";
+}
 
 $result = $conn->query($sql);
 
