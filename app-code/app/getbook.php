@@ -228,11 +228,13 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   <script>
     $(document).ready(function() {
+        let action = '<?php echo $_GET['action']; ?>';
+
         $.ajax({
-          let searchtype = '';
-          searchtype = '<?php echo $_GET['action']; ?>';
-          console.log(searchtype);
-          if (searchtype =="isbn_search"){
+         
+          
+          
+          if (action =="isbn_search"){
 
             url:"../api/search_book_on_isbn_db.php",
             method:"GET",
