@@ -229,6 +229,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     $(document).ready(function() {
         let action = '<?php echo $_GET['action']; ?>';
+        let bookid = '<?php echo $_GET['bookid']; ?>';
 
         if (action =="isbn_search"){
           $.ajax({
@@ -276,6 +277,50 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             }
           });
         } else if (action == "db_search") {
+          $.ajax({
+            url:"../api/get_books.php",
+            method:"POST",
+            data:{
+              'bookid': bookid
+            },
+            dataType:"json",
+            beforeSend: function(){
+              $("#spinner").removeClass('d-none');     // Spinner anzeigen
+              $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
+            },
+            success: function(response){
+              $("#spinner").addClass('d-none');     // Spinner anzeigen
+              var res = $.parseJSON(response);
+              $('#bookImage').attr('src', res.book.image);
+              $('#image_url_input').val(res.book.image);
+              $('#titleInput').val(res.book.title);
+              $('#publisherInput').val(res.book.publisher);
+              $('#languageInput').val(res.book.language);
+              $('#yearInput').val(res.book.date_published);
+              $('#isbnInput').val(res.book.isbn13);
+              $('#pages').val(res.book.pages);
+              var author = "";
+              $.each(res.book.authors, function(i,item){
+                
+                author+=item+", ";
+              });
+              author = author.slice(0,-2);
+              $('#authorInput').val(author);
+              
+              
+
+
+              $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
+              
+            },
+            error: function(){
+              $('#spinner').addClass('d-none');
+
+              //Buch nicht gefunden!
+              
+
+            }
+          });
 
         }
 
