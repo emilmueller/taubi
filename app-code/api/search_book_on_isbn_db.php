@@ -19,9 +19,9 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest); 
-    error_log($response);
+    
     $res = unserialize($response);
-
+    error_log($res);
     if(isset($res['errorMessage'])){
       error_log("NOT FOUND");
     }else{
