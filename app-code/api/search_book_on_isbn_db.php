@@ -19,9 +19,10 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest); 
+    $res = unserialize($response);
     
-    error_log($response);
-    if(!isset($response['book'])){
+    error_log($res);
+    if(!isset($res['book'])){
       error_log("NOT FOUND");
     }else{
       error_log("BOOOOOOOOOK FOUND");
