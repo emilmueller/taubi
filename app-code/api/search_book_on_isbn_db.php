@@ -19,9 +19,13 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest); 
-    curl_close($rest);
-    header('Content-Type: application/json');
+    error_log($response);
+   
+    
+    header('Content-Type: application/json'); 
     echo json_encode($response, JSON_PRETTY_PRINT);
+
+    curl_close($rest);
     
     
 
