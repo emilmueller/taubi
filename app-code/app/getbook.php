@@ -254,7 +254,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $('#languageInput').val(res.book.language);
               $('#yearInput').val(res.book.date_published);
               $('#isbnInput').val(res.book.isbn13);
-              $('#pages').val(res.book.pages);
+              $('#pagesInput').val(res.book.pages);
               var author = "";
               $.each(res.book.authors, function(i,item){
                 
@@ -293,21 +293,19 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $("#spinner").addClass('d-none');     // Spinner ausblenden
               console.log(response);
               var res = $.parseJSON(JSON.stringify(response));
-              $('#bookImage').attr('src', res.book.image);
-              $('#image_url_input').val(res.book.image);
+              $('#bookImage').attr('src', res.book.image_url);
+              $('#image_url_input').val(res.book.image_url);
               $('#titleInput').val(res.book.title);
               $('#publisherInput').val(res.book.publisher);
               $('#languageInput').val(res.book.language);
               $('#yearInput').val(res.book.date_published);
               $('#isbnInput').val(res.book.isbn13);
-              $('#pages').val(res.book.pages);
-              var author = "";
-              $.each(res.book.authors, function(i,item){
-                
-                author+=item+", ";
-              });
-              author = author.slice(0,-2);
-              $('#authorInput').val(author);
+              $('#pagesInput').val(res.book.pages);
+              $('#authorInput').val(res.book.author);
+              $('#zustandInput').val(res.book.book_condition);
+              $('#preisInput').val(res.book.price);
+              
+              
               
               
 
