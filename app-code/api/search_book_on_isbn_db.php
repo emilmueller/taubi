@@ -21,7 +21,7 @@
     $response = curl_exec($rest); 
     
     $res = json_decode($response, true);
-    error_log($res);
+    // error_log($res);
     if(!isset($res['book'])){
       error_log("NOT FOUND");
     }else{
