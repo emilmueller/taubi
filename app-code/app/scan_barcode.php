@@ -174,9 +174,7 @@
 
   <div class="container">
     <h1 class="title">Buch erfassen</h1>
-    <button id="backButton" class="btn btn-secondary" onclick="history.back();">
-      Zurück
-    </button>
+    
 
     <div class="row align-items-center">
       <div class="col-lg-1 col-2 mb-2">
@@ -187,9 +185,11 @@
           <!-- <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div> -->
       </div>
       <div class="col-lg-5 col-2">
-        <button id="okButton" class="btn btn-secondary" disabled>
-          <span id="spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
-          Suchen
+        <button id="okButton" class="btn btn-success" disabled>
+          <span class="bi bi-search" ></span>
+        </button>
+        <button id="backButton" class="btn btn-danger" onclick="history.back();">
+          <span class="bi bi-x-square" ></span>
         </button>
         
       
