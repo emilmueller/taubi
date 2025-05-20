@@ -66,7 +66,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     $stmt->execute();
 
-    header("Location:index.php");
+    header("Location:/account");
     
     
 
