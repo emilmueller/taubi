@@ -216,7 +216,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <div class="col-12">
                 
                 <button id="okButton" class="btn btn-secondary  float-end" >Abbrechen</button>
-                <button id="okButton" class="btn btn-secondary  float-end mr-1" onlick="submit()">Buch speichern</button>
+                <button id="okButton" class="btn btn-secondary  float-end me-1" onlick="submit()">Buch speichern</button>
             </div>
           </div>
           
