@@ -277,6 +277,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             error: function(response){
               $('#spinner').addClass('d-none');
               $('#title').text("Buch von Hand erfassen");
+              $('#bookImage').attr('src', '/bookcovers/image-not-found.png');
+              $('#image_url_input').val('/bookcovers/image-not-found.png');
               $('#isbnInput').val(bookid);
               $("#bookDiv").removeClass('d-none');
 
