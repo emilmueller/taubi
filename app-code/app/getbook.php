@@ -116,7 +116,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     <!-- Books Section -->
   <div id="bookDiv" class="container">
-    <h2>Neues Buch</h2>
+    <h2 id="title">Neues Buch</h2>
 
      
     
@@ -291,6 +291,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             },
             success: function(response){
               $("#spinner").addClass('d-none');     // Spinner ausblenden
+
+              $('#title').text("Buchdaten bearbeiten");
            
               var res = $.parseJSON(JSON.stringify(response));
               
