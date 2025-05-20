@@ -212,8 +212,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <input type="text" id="preisInput" name="price" class="form-control" placeholder="Preis" />
             </div>
           </div>
-          <div class="row float-right">
-            <div class="col-4">
+          <div class="row align-items-center">
+            <div class="col-4 float-end">
                 <button id="okButton" class="btn btn-secondary " onlick="submit()">Buch speichern</button>
             </div>
           </div>
