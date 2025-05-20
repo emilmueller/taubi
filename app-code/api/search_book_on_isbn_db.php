@@ -20,7 +20,7 @@
     
     $response = curl_exec($rest); 
     
-    
+    error_log($response);
     if(!isset($response['book'])){
       error_log("NOT FOUND");
     }else{
