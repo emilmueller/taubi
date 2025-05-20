@@ -294,6 +294,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               console.log(response);
               var res = $.parseJSON(JSON.stringify(response));
               $('#bookImage').attr('src', res.image_url);
+              console.log(res.image_url);
               $('#image_url_input').val(res.image_url);
               $('#titleInput').val(res.title);
               $('#publisherInput').val(res.publisher);
