@@ -19,8 +19,8 @@
     curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
     
     $response = curl_exec($rest); 
-    $res = unserialize($response);
     
+    $res = json_decode($response, true);
     error_log($res);
     if(!isset($res['book'])){
       error_log("NOT FOUND");
