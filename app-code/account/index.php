@@ -173,8 +173,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-success float-end" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
+              
               <button class="btn btn-danger float-end" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
+              <button class="btn btn-success float-end me-1" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
             </div>
           
           </div>
