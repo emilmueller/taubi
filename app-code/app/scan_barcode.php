@@ -185,10 +185,10 @@
           <!-- <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div> -->
       </div>
       <div class="col-lg-5 col-2">
-        <button id="okButton" class="btn btn-success" disabled>
+        <button id="okButton" class="btn btn-success" disabled title="Buch suchen">
           <span class="bi bi-search" ></span>
         </button>
-        <button id="backButton" class="btn btn-danger" onclick="history.back();">
+        <button id="backButton" class="btn btn-danger" onclick="history.back();" title="Zurück">
           <span class="bi bi-x-square" ></span>
         </button>
         
