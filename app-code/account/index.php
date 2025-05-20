@@ -198,10 +198,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     // Function to handle the "Delete" button 
     function edit_book(book_id) {
-      fetch("/app/getbook.php?id="+book_id+"&action=db_search"); // edit 
-      loadBooks().then(loadedBooks => {
-      		renderBooks(loadedBooks);  // Render books after loading
-    	});
+      window.open("/app/getbook.php?id="+book_id+"&action=db_search", "_self"); // edit 
+      
     }
 </script>
 </body>
