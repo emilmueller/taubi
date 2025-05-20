@@ -186,7 +186,10 @@
       <div class="col-lg-5 col-2">
         <button id="okButton" class="btn btn-secondary" disabled>
           <span id="spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
-          OK
+          Suchen
+        </button>
+        <button id="backButton" class="btn btn-secondary" onclick="history.back();">
+          Zurück
         </button>
       
       </div>
