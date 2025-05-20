@@ -307,7 +307,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $('#publisherInput').val(res[0].publisher);
               $('#languageInput').val(res[0].language);
               $('#yearInput').val(res[0].date_published);
-              $('#isbnInput').val(res[0].isbn13);
+              $('#isbnInput').val(res[0].isbn);
               $('#pagesInput').val(res[0].pages);
               $('#authorInput').val(res[0].author);
               $('#zustandInput').val(res[0].book_condition);
