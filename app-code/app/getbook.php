@@ -249,8 +249,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             },
             success: function(response){
               $("#spinner").addClass('d-none');     // Spinner ausblenden 
-              console.log(response);
+              
               var res = $.parseJSON(response);
+              console.log(res);
               $('#bookImage').attr('src', res.book.image);
               $('#image_url_input').val(res.book.image);
               $('#titleInput').val(res.book.title);
