@@ -93,8 +93,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <p id="user-email" class="text-muted">Loading Email...</p>
           </div>
         </div>
-        <div class="col-md-4">
-        <button class="btn btn-secondary" type="button" id="addBookButton">
+        <div class="col-12">
+        <button class="btn btn-secondary mt-2 " type="button" id="addBookButton">
         <i class="bi bi-book"></i>
         Buch hinzufügen
         </button>
