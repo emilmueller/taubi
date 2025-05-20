@@ -215,8 +215,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <div class="row align-items-center">
             <div class="col-12">
                 
-                <button type="button" id="backButton" class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
-                <button id="okButton" class="btn btn-secondary  float-end me-1" onclick="submit()">Buch speichern</button>
+                <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
+                <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Buch speichern</button>
+                <input type="hidden" name="action" value=<?php $_GET['action'] ?> />
+                <input type ="hidden" name="id" value = <?php $_GET['id'] ?> />
             </div>
           </div>
           
