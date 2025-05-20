@@ -356,7 +356,7 @@
         
         
         if(result){
-         location.href = "getbook.php?isbn="+result+"&action=isbn_search";
+         location.href = "getbook.php?id="+result+"&action=isbn_search";
 
          
         }else{
