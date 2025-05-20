@@ -229,9 +229,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     $(document).ready(function() {
         let action = '<?php echo $_GET['action']; ?>';
-        let bookid = '<?php echo $_GET['bookid']; ?>';
+        let bookid = '<?php echo $_GET['id']; ?>';
 
-        if (action =="isbn_search"){
+        if (action =="isbn_search"){  //Search Book on ISBN-DB
           $.ajax({
             url:"../api/search_book_on_isbn_db.php",
             method:"GET",
@@ -276,7 +276,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
             }
           });
-        } else if (action == "db_search") {
+        } else if (action == "db_search") {  //Search one single book in DB
           $.ajax({
             url:"../api/get_books.php",
             method:"POST",
