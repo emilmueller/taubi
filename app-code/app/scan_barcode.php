@@ -180,11 +180,11 @@
       <div class="col-lg-1 col-2 mb-2">
           <label for="isbnInput" class="col-form-label">ISBN:</label>
       </div>  
-      <div class="col-lg-6 col-8">
+      <div class="col-lg-6 col-6">
           <input type="text" id="isbnInput" class="form-control" placeholder="ISBN-Nummer"/>
           <!-- <div class="invalid-feedback">Keine gültige ISBN-Nummer!</div> -->
       </div>
-      <div class="col-lg-5 col-2">
+      <div class="col-lg-5 col-4">
         <button id="okButton" class="btn btn-success" disabled title="Buch suchen">
           <span class="bi bi-search" ></span>
         </button>
