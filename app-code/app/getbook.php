@@ -274,9 +274,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
               
             },
-            error: function(){
+            error: function(response){
               $('#spinner').addClass('d-none');
               $('#title').text("Buch von Hand erfassen");
+              $('#isbnInput').val(bookid);
               $("#bookDiv").removeClass('d-none');
 
               //Buch nicht gefunden!

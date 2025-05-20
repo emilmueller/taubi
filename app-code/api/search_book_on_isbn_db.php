@@ -24,7 +24,7 @@
     // error_log($res);
     if(!isset($res['book'])){
       error_log("NOT FOUND");
-      http_response_code(500);
+      // http_response_code(500);
       echo json_encode(['error' => "Buch mit ISBN-Nummer ". $isbn." nicht gefunden."]);
     }else{
       error_log("BOOOOOOOOOK FOUND");
