@@ -32,7 +32,7 @@ if (isset($bookid)){
         WHERE b.id = '".$bookid."'
         GROUP BY b.id;
     ";
-    console.log($sql);
+    //error_log($sql);
 
 }else {
 
