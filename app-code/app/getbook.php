@@ -293,9 +293,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $("#spinner").addClass('d-none');     // Spinner ausblenden
            
               var res = $.parseJSON(JSON.stringify(response));
-              console.log(res);
-              $('#bookImage').attr('src', res.image_url);
-              console.log(res[0].image_url);
+              
+              $('#bookImage').attr('src', res[0].image_url);
+              
               $('#image_url_input').val(res[0].image_url);
               $('#titleInput').val(res[0].title);
               $('#publisherInput').val(res[0].publisher);
