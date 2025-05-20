@@ -296,16 +296,16 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               console.log(res);
               $('#bookImage').attr('src', res.image_url);
               console.log(res[0].image_url);
-              $('#image_url_input').val(res.image_url);
-              $('#titleInput').val(res.title);
-              $('#publisherInput').val(res.publisher);
-              $('#languageInput').val(res.language);
-              $('#yearInput').val(res.date_published);
-              $('#isbnInput').val(res.isbn13);
-              $('#pagesInput').val(res.pages);
-              $('#authorInput').val(res.author);
-              $('#zustandInput').val(res.book_condition);
-              $('#preisInput').val(res.price);
+              $('#image_url_input').val(res[0].image_url);
+              $('#titleInput').val(res[0].title);
+              $('#publisherInput').val(res[0].publisher);
+              $('#languageInput').val(res[0].language);
+              $('#yearInput').val(res[0].date_published);
+              $('#isbnInput').val(res[0].isbn13);
+              $('#pagesInput').val(res[0].pages);
+              $('#authorInput').val(res[0].author);
+              $('#zustandInput').val(res[0].book_condition);
+              $('#preisInput').val(res[0].price);
               
               
               
