@@ -171,11 +171,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <!--<p class="card-text">${book.description}</p>-->
               <p class="text-muted">Autor: ${book.author}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
-              <div class="card-footer">
-                <button class="btn btn-success" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
-                <button class="btn btn-danger" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
-              </div>
             </div>
+            <div class="card-footer">
+              <button class="btn btn-success" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
+              <button class="btn btn-danger" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
+            </div>
+          
           </div>
         `;
         bookCardsContainer.appendChild(card);
