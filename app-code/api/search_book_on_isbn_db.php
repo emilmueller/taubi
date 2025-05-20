@@ -20,6 +20,13 @@
     
     $response = curl_exec($rest); 
     error_log($response);
+    $res = unserialize($response);
+
+    if(isset($res['errorMessage'])){
+      error_log("NOT FOUND");
+    }else{
+      error_log("BOOOOOOOOOK FOUND");
+    }
    
     
     header('Content-Type: application/json'); 
