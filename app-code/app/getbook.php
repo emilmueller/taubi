@@ -291,8 +291,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             },
             success: function(response){
               $("#spinner").addClass('d-none');     // Spinner ausblenden
-              console.log(response);
+           
               var res = $.parseJSON(JSON.stringify(response));
+              console.log(res);
               $('#bookImage').attr('src', res.image_url);
               console.log(res.image_url);
               $('#image_url_input').val(res.image_url);
