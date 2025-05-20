@@ -20,9 +20,8 @@
     
     $response = curl_exec($rest); 
     
-    $res = unserialize($response);
-    error_log($res);
-    if(isset($res['errorMessage'])){
+    
+    if(!isset($response['book'])){
       error_log("NOT FOUND");
     }else{
       error_log("BOOOOOOOOOK FOUND");
