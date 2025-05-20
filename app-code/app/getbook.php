@@ -293,7 +293,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               $("#spinner").addClass('d-none');     // Spinner ausblenden
               console.log(response);
               var res = $.parseJSON(JSON.stringify(response));
-              $('#bookImage').attr('src', res.book.image_url);
+              $('#bookImage').attr('src', res.image_url);
               $('#image_url_input').val(res.book.image_url);
               $('#titleInput').val(res.book.title);
               $('#publisherInput').val(res.book.publisher);
