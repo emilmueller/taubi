@@ -16,6 +16,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <style>
     body {
       transition: background-color 0.3s, color 0.3s;
@@ -92,6 +93,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <p id="user-email" class="text-muted">Loading Email...</p>
           </div>
         </div>
+        <div class="col-2">
+        <button class="btn btn-secondary" type="button" id="addBookButton">
+        <i class="bi bi-book"></i>
+        Buch hinzufügen
+        </button>
+      </div>
       </div>
     <div class="col-md-8">
 	<div class="container mt-4">
@@ -203,6 +210,17 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       window.open("/app/getbook.php?id="+book_id+"&action=db_search", "_self"); // edit 
       
     }
+
+
+    $(document).ready(function(){
+
+      $('#addBookButton').on('click', function(){
+        window.location = "scan_barcode.php";
+
+      });
+
+    });
+
 </script>
 </body>
 </html>
