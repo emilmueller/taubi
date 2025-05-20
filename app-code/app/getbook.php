@@ -294,16 +294,16 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               console.log(response);
               var res = $.parseJSON(JSON.stringify(response));
               $('#bookImage').attr('src', res.image_url);
-              $('#image_url_input').val(res.book.image_url);
-              $('#titleInput').val(res.book.title);
-              $('#publisherInput').val(res.book.publisher);
-              $('#languageInput').val(res.book.language);
-              $('#yearInput').val(res.book.date_published);
-              $('#isbnInput').val(res.book.isbn13);
-              $('#pagesInput').val(res.book.pages);
-              $('#authorInput').val(res.book.author);
-              $('#zustandInput').val(res.book.book_condition);
-              $('#preisInput').val(res.book.price);
+              $('#image_url_input').val(res.image_url);
+              $('#titleInput').val(res.title);
+              $('#publisherInput').val(res.publisher);
+              $('#languageInput').val(res.language);
+              $('#yearInput').val(res.date_published);
+              $('#isbnInput').val(res.isbn13);
+              $('#pagesInput').val(res.pages);
+              $('#authorInput').val(res.author);
+              $('#zustandInput').val(res.book_condition);
+              $('#preisInput').val(res.price);
               
               
               
