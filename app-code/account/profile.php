@@ -152,7 +152,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         })
         .then(user => {
           // Populate the fields with user data
-          $('#nameInput').textContent = user.username;
+          $('#nameInput').val(user.username);
           $('#user-email').textContent = user.email;
 
         })
