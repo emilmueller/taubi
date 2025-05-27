@@ -163,8 +163,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 success: function(response){
                   
                   console.log(response.user.username);
-                  $('nameInput').val(response.user.username);
-                  $('mailInput').val(response.user.email);
+                  $('#nameInput').val(response.user.username);
+                  $('#mailInput').val(response.user.email);
                   
               
 
