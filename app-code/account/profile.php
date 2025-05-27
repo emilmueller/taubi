@@ -151,11 +151,25 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           return response.json();
         })
         .then(user => {
-          // Populate the fields with user data
-          $('#nameInput').val(user.username);
-          $('#user-email').textContent = user.email;
+            $.ajax({
+                url: '/api/get_user.php',
+                method: 'POST',
+                data: {
+                    username: user.username, 
+                    mail: user.email
+                }
+                dataType: 'json',
+                sucess: function(response){
 
+
+                },
+                error: function(response){
+
+
+                }
+            }
         })
+            
         .catch(error => {
           console.error('Error:', error);
 		//TODO: show error
