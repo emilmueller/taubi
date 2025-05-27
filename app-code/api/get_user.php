@@ -13,13 +13,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php
 
 include "../config.php";
-$sql = "SELECT * from users WHERE username= :username AND email= :email;";
+$sql = "SELECT * from users WHERE username = :username AND email = :email;";
 
 $stmt = $conn->prepare($sql);
-
+$username = $_POST['username'];
+$email = $_POST['email'];
     
 
-$stmt->execute(['username' => $_POST['username'], 'email'=>$_POST['email'] ]);
+$stmt->execute(['username' => $username, 'email'=> $email]);
 
 // Result array
 $user = $stmt->fetch();
