@@ -157,7 +157,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 data: {
                     username: user.username, 
                     email: user.email
-                }
+                },
                 dataType: 'json',
                 sucess: function(response){
                   var res = $.parseJSON(response);
