@@ -22,7 +22,7 @@ $username = $_POST['username'];
 $email = $_POST['email'];
     
 
-$stmt->execute(['username' => $username, 'email'=> $email]);
+$stmt->execute();
 
 // Result array
 $result = $stmt->get_result();
