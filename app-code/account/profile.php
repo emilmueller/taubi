@@ -145,7 +145,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         // Fetch user data from the backend API
       fetch('/api/get_user_data.php')
         .then(response => {
-          if (!response.ok) {
+          if (!response.success) {
             throw new Error('Failed to fetch user data');
           }
           return response.json();
