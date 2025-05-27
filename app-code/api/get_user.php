@@ -28,11 +28,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+header('Content-Type: application/json');
 if ($user) {
     // Output JSON
-    header('Content-Type: application/json');
-    echo json_encode($user, JSON_PRETTY_PRINT);
     
+    echo json_encode(['success' => true, 'user'=> $user]);
+    
+}else{
+    echo json_encode(['success' => false, 'message' => 'Benutzer nicht gefunden']);
 }
 
 
