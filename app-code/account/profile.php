@@ -162,7 +162,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 dataType: 'json',
                 success: function(response){
                   
-                  alert("RES: "+res.success);
+                  console.log(response);
                   // $('nameInput').val(res.user.)
               
 
