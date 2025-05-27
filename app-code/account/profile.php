@@ -160,7 +160,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                     email: user.email
                 },
                 dataType: 'json',
-                sucess: function(response){
+                success: function(response){
                   
                   alert("RES: "+res.success);
                   // $('nameInput').val(res.user.)
