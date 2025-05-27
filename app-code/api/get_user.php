@@ -13,32 +13,24 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php
 
 include "../config.php";
-$sql = "
-SELECT * from users WHERE username=? AND email=?;";
+$sql = "SELECT * from users WHERE username= :username AND email= :email;";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('ss', $_POST['username'],$_POST['email']);
-
-
-
 
     
 
-$result = $stmt->execute();
+$stmt->execute(['username' => $_POST['username'], 'email'=>$_POST['email'] ]);
 
 // Result array
-$users = [];
+$user = $stmt->fetch();
 
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-               
-        $users[] = $row;
-    }
+if ($user) {
+    // Output JSON
+    header('Content-Type: application/json');
+    echo json_encode($user, JSON_PRETTY_PRINT);
+    
 }
 
-// Output JSON
-header('Content-Type: application/json');
-echo json_encode($users, JSON_PRETTY_PRINT);
 
 // Close connection
 $conn->close();
