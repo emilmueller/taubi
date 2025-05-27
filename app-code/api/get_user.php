@@ -14,10 +14,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 include "../config.php";
 $sql = "
-SELECT * from users where username=? and email=?;";
+SELECT * from users WHERE username=? AND email=?;";
 
 $stmt = $conn->prepare($sql);
-$stmt.bind_param('ss', $_POST['username'],$_POST['email']);
+$stmt->bind_param('ss', $_POST['username'],$_POST['email']);
 
 
 
