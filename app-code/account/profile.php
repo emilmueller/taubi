@@ -151,6 +151,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           return response.json();
         })
         .then(user => {
+          console.log("HOOOOO");
             $.ajax({
                 url: '/api/get_user.php',
                 method: 'POST',
