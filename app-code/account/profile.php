@@ -143,28 +143,41 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $(document).ready(function(){
 
         // Fetch user data from the backend API
-        $.ajax({
-          url: '/api/get_user.php',
-          method: 'POST',
-          data: {
-              username: user.username, 
-              email: user.email
-          },
-          dataType: 'json',
-          sucess: function(response){
-            var res = $.parseJSON(response);
-            alert("RES: "+res.success);
-            // $('nameInput').val(res.user.)
-        
-
-          },
-          error: function(response){
-            console.log("EEEERROR");
-
-
+      fetch('/api/get_user_data.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch user data');
           }
-      });
-        
+          return response.json();
+        })
+        .then(
+            $.ajax({
+                url: '/api/get_user.php',
+                method: 'POST',
+                data: {
+                    username: user.username, 
+                    email: user.email
+                },
+                dataType: 'json',
+                sucess: function(response){
+                  var res = $.parseJSON(response);
+                  alert("RES: "+res.success);
+                  // $('nameInput').val(res.user.)
+              
+
+                },
+                error: function(response){
+                  console.log("EEEERROR");
+
+
+                }
+            });
+        )
+            
+        .catch(error => {
+          console.error('Error:', error);
+		//TODO: show error
+        });
 
       // $('#addBookButton').on('click', function(){
       //   window.location = "/app/scan_barcode.php";
