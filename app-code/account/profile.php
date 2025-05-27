@@ -104,14 +104,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <input type="text" id="mailInput" name="mail" class="form-control" placeholder="Kontakt-Mail"  />
             </div>
           </div>
-          <div class="row align-items-center">
-            <div class="col-2 mb-2">
-                <label for="passwordInput" class="col-form-label">Passwort</label>
-            </div>  
-            <div class="col-10">
-                <input type="text" id="passwordInput" name="password" class="form-control" placeholder="Verlag" />
-            </div>
-          </div>
+          
           
           <div class="row align-items-center">
             <div class="col-12">
@@ -119,7 +112,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
                 <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Änderungen speichern</button>
                 <input type="hidden" name="action" value="save" />
-                <input type ="hidden" name="id"  />
+                <input type ="hidden" id="idInput" name="id"  />
             </div>
           </div>
           
@@ -165,6 +158,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                   console.log(response.user.username);
                   $('#nameInput').val(response.user.username);
                   $('#mailInput').val(response.user.email);
+                  $('#idInput').val(response.user.id);
                   
               
 
