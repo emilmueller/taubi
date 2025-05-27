@@ -150,7 +150,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           }
           return response.json();
         })
-        .then(
+        .then(user => {
             $.ajax({
                 url: '/api/get_user.php',
                 method: 'POST',
@@ -172,8 +172,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
                 }
             });
-        )
-            
+        }) 
         .catch(error => {
           console.error('Error:', error);
 		//TODO: show error
