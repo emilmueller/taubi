@@ -156,11 +156,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 method: 'POST',
                 data: {
                     username: user.username, 
-                    mail: user.email
+                    email: user.email
                 }
                 dataType: 'json',
                 sucess: function(response){
-
+                  var res = $.parseJSON(response);
+                  console.log(res);
+                  // $('nameInput').val(res.user.)
+              
 
                 },
                 error: function(response){
@@ -175,10 +178,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 		//TODO: show error
         });
 
-      $('#addBookButton').on('click', function(){
-        window.location = "/app/scan_barcode.php";
+      // $('#addBookButton').on('click', function(){
+      //   window.location = "/app/scan_barcode.php";
 
-      });
+      // });
 
     });
 
