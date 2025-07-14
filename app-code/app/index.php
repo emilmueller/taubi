@@ -283,13 +283,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   // Call this when your page loads
   document.addEventListener('DOMContentLoaded', loadTags);
 
-  $(document).ready(function(){
+  document.addEventListener('DOMContentLoaded', function () {
+    const addBookButton = document.getElementById('addBookButton');
 
-    $('#addBookButton').on('click', function(){
-      window.location = "scan_barcode.php";
-
-    });
-
+    if (addBookButton) {
+      addBookButton.addEventListener('click', function () {
+        window.location = 'scan_barcode.php';
+      });
+    }
   });
   
 

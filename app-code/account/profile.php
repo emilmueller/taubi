@@ -16,7 +16,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
   <style>
     body {
       transition: background-color 0.3s, color 0.3s;
@@ -122,65 +122,111 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       </form> 
 
 <script>
-    //load user data
-    document.addEventListener('DOMContentLoaded', () => {
-      
-	});
+   
 
-	
+   document.addEventListener('DOMContentLoaded', function () {
+  // Fetch user data from the backend API
+  fetch('/api/get_user_data.php')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+      return response.json();
+    })
+    .then(user => {
+      console.log("HOOOOO");
+
+      // Ersetze jQuery $.ajax mit native Fetch POST
+      fetch('/api/get_user.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          username: user.username,
+          email: user.email
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch user info');
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log(response.user.username);
+
+        // Fülle die Felder mit den Benutzerdaten
+        document.getElementById('nameInput').value = response.user.username;
+        document.getElementById('mailInput').value = response.user.email;
+        document.getElementById('idInput').value = response.user.id;
+      })
+      .catch(error => {
+        console.error('Fehler beim Abrufen der Benutzerdaten (POST):', error);
+      });
+    })
+    .catch(error => {
+      console.error('Fehler beim Abrufen der Userdaten (GET):', error);
+    });
+
+  // Beispiel für später: Click-Handler mit Vanilla JS
+  // document.getElementById('addBookButton').addEventListener('click', function () {
+  //   window.location = "/app/scan_barcode.php";
+  // });
+});
 
 
    
 
 
-    $(document).ready(function(){
+    // $(document).ready(function(){
 
-        // Fetch user data from the backend API
-      fetch('/api/get_user_data.php')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch user data');
-          }
-          return response.json();
-        })
-        .then(user => {
-          console.log("HOOOOO");
-            $.ajax({
-                url: '/api/get_user.php',
-                method: 'POST',
-                data: {
-                    username: user.username, 
-                    email: user.email
-                },
-                dataType: 'json',
-                success: function(response){
+    //     // Fetch user data from the backend API
+    //   fetch('/api/get_user_data.php')
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error('Failed to fetch user data');
+    //       }
+    //       return response.json();
+    //     })
+    //     .then(user => {
+    //       console.log("HOOOOO");
+    //         $.ajax({
+    //             url: '/api/get_user.php',
+    //             method: 'POST',
+    //             data: {
+    //                 username: user.username, 
+    //                 email: user.email
+    //             },
+    //             dataType: 'json',
+    //             success: function(response){
                   
-                  console.log(response.user.username);
-                  $('#nameInput').val(response.user.username);
-                  $('#mailInput').val(response.user.email);
-                  $('#idInput').val(response.user.id);
+    //               console.log(response.user.username);
+    //               $('#nameInput').val(response.user.username);
+    //               $('#mailInput').val(response.user.email);
+    //               $('#idInput').val(response.user.id);
                   
               
 
-                },
-                error: function(response){
-                  console.log(response.message);
+    //             },
+    //             error: function(response){
+    //               console.log(response.message);
 
 
-                }
-            });
-        }) 
-        .catch(error => {
-          console.error('Error:', error);
-		//TODO: show error
-        });
+    //             }
+    //         });
+    //     }) 
+    //     .catch(error => {
+    //       console.error('Error:', error);
+		
+    //     });
 
-      // $('#addBookButton').on('click', function(){
-      //   window.location = "/app/scan_barcode.php";
+    //   // $('#addBookButton').on('click', function(){
+    //   //   window.location = "/app/scan_barcode.php";
 
-      // });
+    //   // });
 
-    });
+    // });
 
 </script>
 </body>

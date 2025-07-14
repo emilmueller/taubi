@@ -329,166 +329,277 @@
     
 
     
+    document.addEventListener('DOMContentLoaded', function () {
+      let vgespiegelt = false;
+      let hgespiegelt = false;
+      let rotation = 0;
 
+      const video = document.getElementById('video');
+      const isbnInput = document.getElementById('isbnInput');
+      const okButton = document.getElementById('okButton');
+      const sourceSelectPanel = document.getElementById('sourceSelectPanel');
+      const sourceSelect = document.getElementById('sourceSelect');
 
-    
-
-    
-
-
-
-    $(document).ready(function(){
-      
-      $('#VFlipButton').on('click', function(){
+      document.getElementById('VFlipButton').addEventListener('click', function () {
         vgespiegelt = !vgespiegelt;
-        $('#video').css('transform',vgespiegelt ? "scaleY(-1)" : "scaleY(1)");
+        video.style.transform = vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
       });
 
-      $('#HFlipButton').on('click', function(){
+      document.getElementById('HFlipButton').addEventListener('click', function () {
         hgespiegelt = !hgespiegelt;
-        $('#video').css('transform',hgespiegelt ? "scaleX(-1)" : "scaleX(1)");
+        video.style.transform = hgespiegelt ? "scaleX(-1)" : "scaleX(1)";
       });
 
-      $('#RotateButton').on('click', function(){
-        rotation += 90;
-        rotation = rotation%360;
-        $('#video').css('transform','rotate('+rotation+'deg)');
+      document.getElementById('RotateButton').addEventListener('click', function () {
+        rotation = (rotation + 90) % 360;
+        video.style.transform = `rotate(${rotation}deg)`;
       });
 
-      $('#okButton').on('click', function(){
-        let result = $('#isbnInput').val();
-        
-        
-        if(result){
-         location.href = "getbook.php?id="+result+"&action=isbn_search";
-
-         
-        }else{
+      okButton.addEventListener('click', function () {
+        const result = isbnInput.value;
+        if (result) {
+          window.location.href = `getbook.php?id=${result}&action=isbn_search`;
+        } else {
           alert("Keine ISBN-Nummer eingegeben");
         }
       });
 
-      $('#isbnInput').on('input', function() {
-        if(!checkISBN($(this).val())){
-          $(this).addClass('is-invalid');
-          $(this).removeClass('is-valid');
-          $('#okButton').addClass('btn-secondary');
-          $('#okButton').removeClass('btn-success');
-          $('#okButton').prop('disabled', true);
-
-        }else{
-          $(this).removeClass('is-invalid');
-          $(this).addClass('is-valid');
-          $('#okButton').removeClass('btn-secondary');
-          $('#okButton').addClass('btn-success');
-          $('#okButton').prop('disabled', false);
+      isbnInput.addEventListener('input', function () {
+        const value = isbnInput.value;
+        if (!checkISBN(value)) {
+          isbnInput.classList.add('is-invalid');
+          isbnInput.classList.remove('is-valid');
+          okButton.classList.add('btn-secondary');
+          okButton.classList.remove('btn-success');
+          okButton.disabled = true;
+        } else {
+          isbnInput.classList.remove('is-invalid');
+          isbnInput.classList.add('is-valid');
+          okButton.classList.remove('btn-secondary');
+          okButton.classList.add('btn-success');
+          okButton.disabled = false;
         }
+      });
+    });
+
+    window.addEventListener('load', function () {
+      let selectedDeviceId;
+      const codeReader = new ZXing.BrowserMultiFormatReader();
+      console.log('ZXing code reader initialized');
+
+      codeReader.listVideoInputDevices()
+        .then((videoInputDevices) => {
+          selectedDeviceId = videoInputDevices[0]?.deviceId;
+
+          if (videoInputDevices.length >= 1) {
+            videoInputDevices.forEach((element) => {
+              const sourceOption = document.createElement('option');
+              sourceOption.text = element.label;
+              sourceOption.value = element.deviceId;
+              sourceSelect.appendChild(sourceOption);
+            });
+
+            const handleScanResult = (result, err) => {
+              if (result) {
+                console.log(result);
+                isbnInput.value = result.text;
+                if (checkISBN(result.text)) {
+                  isbnInput.classList.remove('is-invalid');
+                  isbnInput.classList.add('is-valid');
+                  okButton.classList.remove('btn-secondary');
+                  okButton.classList.add('btn-success');
+                  okButton.disabled = false;
+                } else {
+                  isbnInput.classList.add('is-invalid');
+                  isbnInput.classList.remove('is-valid');
+                  okButton.classList.add('btn-secondary');
+                  okButton.classList.remove('btn-success');
+                  okButton.disabled = true;
+                }
+              }
+              if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err);
+                isbnInput.value = err;
+              }
+            };
+
+            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', handleScanResult);
+
+            console.log(`Started continuous decode from camera with id ${selectedDeviceId}`);
+
+            sourceSelect.onchange = () => {
+              selectedDeviceId = sourceSelect.value;
+              codeReader.reset();
+              codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', handleScanResult);
+            };
+
+            sourceSelectPanel.style.display = 'block';
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+
+
+    
+
+    
+
+
+
+    // $(document).ready(function(){
+      
+    //   $('#VFlipButton').on('click', function(){
+    //     vgespiegelt = !vgespiegelt;
+    //     $('#video').css('transform',vgespiegelt ? "scaleY(-1)" : "scaleY(1)");
+    //   });
+
+    //   $('#HFlipButton').on('click', function(){
+    //     hgespiegelt = !hgespiegelt;
+    //     $('#video').css('transform',hgespiegelt ? "scaleX(-1)" : "scaleX(1)");
+    //   });
+
+    //   $('#RotateButton').on('click', function(){
+    //     rotation += 90;
+    //     rotation = rotation%360;
+    //     $('#video').css('transform','rotate('+rotation+'deg)');
+    //   });
+
+    //   $('#okButton').on('click', function(){
+    //     let result = $('#isbnInput').val();
+        
+        
+    //     if(result){
+    //      location.href = "getbook.php?id="+result+"&action=isbn_search";
+
+         
+    //     }else{
+    //       alert("Keine ISBN-Nummer eingegeben");
+    //     }
+    //   });
+
+    //   $('#isbnInput').on('input', function() {
+    //     if(!checkISBN($(this).val())){
+    //       $(this).addClass('is-invalid');
+    //       $(this).removeClass('is-valid');
+    //       $('#okButton').addClass('btn-secondary');
+    //       $('#okButton').removeClass('btn-success');
+    //       $('#okButton').prop('disabled', true);
+
+    //     }else{
+    //       $(this).removeClass('is-invalid');
+    //       $(this).addClass('is-valid');
+    //       $('#okButton').removeClass('btn-secondary');
+    //       $('#okButton').addClass('btn-success');
+    //       $('#okButton').prop('disabled', false);
+    //     }
         
 
 
 
-      });
+    //   });
 
 
       
 
 
 
-    });
+    // });
 
-    $(window).on('load', function() {
-      let selectedDeviceId;
-      const codeReader = new ZXing.BrowserMultiFormatReader()
-      console.log('ZXing code reader initialized')
-      codeReader.listVideoInputDevices()
-        .then((videoInputDevices) => {
-          const sourceSelect = document.getElementById('sourceSelect');
-          selectedDeviceId = videoInputDevices[0].deviceId
-          if (videoInputDevices.length >= 1) {
-            videoInputDevices.forEach((element) => {
-              const sourceOption = document.createElement('option')
-              sourceOption.text = element.label
-              sourceOption.value = element.deviceId
-              sourceSelect.appendChild(sourceOption)
-            })
-
-
-            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                if(checkISBN(result.text)){
-                  $('#isbnInput').val(result.text);
-                  $('#isbnInput').removeClass('is-invalid');
-                  $('#isbnInput').addClass('is-valid');
-                  $('#okButton').removeClass('btn-secondary');
-                  $('#okButton').addClass('btn-success');
-                  $('#okButton').prop('disabled', false);
-                }else{
-                  $('#isbnInput').addClass('is-invalid');
-                  $('#isbnInput').removeClass('is-valid');
-                  $('#okButton').addClass('btn-secondary');
-                  $('#okButton').removeClass('btn-success');
-                  $('#okButton').prop('disabled', true);
-                }
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                $('#isbnInput').val(err);
-              }
-            })
-            console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+    // $(window).on('load', function() {
+    //   let selectedDeviceId;
+    //   const codeReader = new ZXing.BrowserMultiFormatReader()
+    //   console.log('ZXing code reader initialized')
+    //   codeReader.listVideoInputDevices()
+    //     .then((videoInputDevices) => {
+    //       const sourceSelect = document.getElementById('sourceSelect');
+    //       selectedDeviceId = videoInputDevices[0].deviceId
+    //       if (videoInputDevices.length >= 1) {
+    //         videoInputDevices.forEach((element) => {
+    //           const sourceOption = document.createElement('option')
+    //           sourceOption.text = element.label
+    //           sourceOption.value = element.deviceId
+    //           sourceSelect.appendChild(sourceOption)
+    //         })
 
 
-            sourceSelect.onchange = () => {
-              selectedDeviceId = sourceSelect.value;
-              codeReader.reset()
-              codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                if(checkISBN(result.text)){
-                  $('#isbnInput').val(result.text);
-                  $('#isbnInput').removeClass('is-invalid');
-                  $('#isbnInput').addClass('is-valid');
-                  $('#okButton').removeClass('btn-secondary');
-                  $('#okButton').addClass('btn-success');
-                  $('#okButton').prop('disabled', false);
-                }else{
-                  $('#isbnInput').addClass('is-invalid');
-                  $('#isbnInput').removeClass('is-valid');
-                  $('#okButton').addClass('btn-secondary');
-                  $('#okButton').removeClass('btn-success');
-                  $('#okButton').prop('disabled', true);
-                }
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                $('#isbnInput').val(err);
-              }
-            })
+    //         codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+    //           if (result) {
+    //             console.log(result)
+    //             if(checkISBN(result.text)){
+    //               $('#isbnInput').val(result.text);
+    //               $('#isbnInput').removeClass('is-invalid');
+    //               $('#isbnInput').addClass('is-valid');
+    //               $('#okButton').removeClass('btn-secondary');
+    //               $('#okButton').addClass('btn-success');
+    //               $('#okButton').prop('disabled', false);
+    //             }else{
+    //               $('#isbnInput').addClass('is-invalid');
+    //               $('#isbnInput').removeClass('is-valid');
+    //               $('#okButton').addClass('btn-secondary');
+    //               $('#okButton').removeClass('btn-success');
+    //               $('#okButton').prop('disabled', true);
+    //             }
+    //           }
+    //           if (err && !(err instanceof ZXing.NotFoundException)) {
+    //             console.error(err)
+    //             $('#isbnInput').val(err);
+    //           }
+    //         })
+    //         console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
 
-            };
 
-            $('#sourceSelectPanel').css('display','block');
+    //         sourceSelect.onchange = () => {
+    //           selectedDeviceId = sourceSelect.value;
+    //           codeReader.reset()
+    //           codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+    //           if (result) {
+    //             console.log(result)
+    //             if(checkISBN(result.text)){
+    //               $('#isbnInput').val(result.text);
+    //               $('#isbnInput').removeClass('is-invalid');
+    //               $('#isbnInput').addClass('is-valid');
+    //               $('#okButton').removeClass('btn-secondary');
+    //               $('#okButton').addClass('btn-success');
+    //               $('#okButton').prop('disabled', false);
+    //             }else{
+    //               $('#isbnInput').addClass('is-invalid');
+    //               $('#isbnInput').removeClass('is-valid');
+    //               $('#okButton').addClass('btn-secondary');
+    //               $('#okButton').removeClass('btn-success');
+    //               $('#okButton').prop('disabled', true);
+    //             }
+    //           }
+    //           if (err && !(err instanceof ZXing.NotFoundException)) {
+    //             console.error(err)
+    //             $('#isbnInput').val(err);
+    //           }
+    //         })
+
+    //         };
+
+    //         $('#sourceSelectPanel').css('display','block');
             
-          }
+    //       }
 
           
 
-          // document.getElementById('resetButton').addEventListener('click', () => {
-          //   codeReader.reset()
-          //   document.getElementById('isbnInput').value = '';
-          //   console.log('Reset.')
-          // })
+    //       // document.getElementById('resetButton').addEventListener('click', () => {
+    //       //   codeReader.reset()
+    //       //   document.getElementById('isbnInput').value = '';
+    //       //   console.log('Reset.')
+    //       // })
 
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-
-
+    //     })
+    //     .catch((err) => {
+    //       console.error(err)
+    //     })
 
 
-    })
+
+
+    // })
   </script>
 
 </body>
