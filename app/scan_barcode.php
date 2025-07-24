@@ -276,11 +276,12 @@
   <script type="text/javascript">
 
     const sessionId = 'session-' + Math.random().toString(36).substring(2);
-    const scanUrl = `https://taubi.jakach.ch/app/scan_barcode.php?session=${sessionId}`;
+    const scanUrl = `https://taubi.code-camp.ch/app/scan_barcode.php?session=${sessionId}`;
 
     var qrcode = new QRCode(document.getElementById('qrcode'), {
       width:150,
-      height:150
+      height:150,
+      correctLevel : QRCode.CorrectLevel.H
     });
     qrcode.makeCode(scanUrl);
 

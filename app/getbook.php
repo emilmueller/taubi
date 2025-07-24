@@ -451,60 +451,60 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
 
-        $('#addPicture').on('click', function () {
-          $('#cameraInput').click();
-        });
+      //   $('#addPicture').on('click', function () {
+      //     $('#cameraInput').click();
+      //   });
 
 
-        $('#cameraInput').on('change', function() {
+      //   $('#cameraInput').on('change', function() {
             
             
-            const file = this.files[0];
+      //       const file = this.files[0];
 
-            if (!file) {
-                alert("Bitte zuerst ein Foto aufnehmen.");
-                return;
-            }
+      //       if (!file) {
+      //           alert("Bitte zuerst ein Foto aufnehmen.");
+      //           return;
+      //       }
 
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                const img = new Image();
-                img.onload = function () {
-                    const maxWidth = 400;
-                    const scale = maxWidth / img.width;
-                    const canvas = document.getElementById('canvas');
-                    canvas.width = maxWidth;
-                    canvas.height = img.height * scale;
-                    const ctx = canvas.getContext("2d");
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      //       const reader = new FileReader();
+      //       reader.onload = function (event) {
+      //           const img = new Image();
+      //           img.onload = function () {
+      //               const maxWidth = 400;
+      //               const scale = maxWidth / img.width;
+      //               const canvas = document.getElementById('canvas');
+      //               canvas.width = maxWidth;
+      //               canvas.height = img.height * scale;
+      //               const ctx = canvas.getContext("2d");
+      //               ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                    canvas.toBlob(function(blob) {
-                        const formData = new FormData();
-                        formData.append("photo", blob, "snapshot.jpg");
-                        $.ajax({
-                          url: '../api/fotoupload.php',
-                          type: 'POST',
-                          data: formData,
-                          processData: false,
-                          contentType: false,
-                          success: function(response) {
-                            //alert(response.filename);
-                            $('#bookImage').attr('src', response.filename);
-                            $('#image_url_input').attr('value', response.filename);
-                          },
-                          error: function(request, status, err) {
-                            alert('Fehler beim Upload: ' + request.responseText);
-                          }
-                        });
+      //               canvas.toBlob(function(blob) {
+      //                   const formData = new FormData();
+      //                   formData.append("photo", blob, "snapshot.jpg");
+      //                   $.ajax({
+      //                     url: '../api/fotoupload.php',
+      //                     type: 'POST',
+      //                     data: formData,
+      //                     processData: false,
+      //                     contentType: false,
+      //                     success: function(response) {
+      //                       //alert(response.filename);
+      //                       $('#bookImage').attr('src', response.filename);
+      //                       $('#image_url_input').attr('value', response.filename);
+      //                     },
+      //                     error: function(request, status, err) {
+      //                       alert('Fehler beim Upload: ' + request.responseText);
+      //                     }
+      //                   });
                         
-                    }, "image/jpeg", 0.85);
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
+      //               }, "image/jpeg", 0.85);
+      //           };
+      //           img.src = event.target.result;
+      //       };
+      //       reader.readAsDataURL(file);
            
-        });
-      });
+      //   });
+      // });
     </script>
   
  

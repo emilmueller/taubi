@@ -84,7 +84,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     </div>
   </div>
 
-  <form id="bookForm" method="post" action="save_user.php">
+  <form id="bookForm" method="post" action="api/save_user.php">
       
         
         <div class="col-lg-8">
@@ -93,7 +93,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <label for="nameInput" class="col-form-label">Name:</label>
             </div>  
             <div class="col-10">
-                <input type="text" id="nameInput" name="name" class="form-control" placeholder="Titel"  />
+                <input type="text" id="nameInput" name="name" class="form-control" placeholder="Name"  />
             </div>
           </div>
           <div class="row align-items-center">
