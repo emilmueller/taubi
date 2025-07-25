@@ -23,7 +23,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <body id="body">
 
  <!-- Navigation -->  
-<?php include 'nav.php'; ?>
+  <?php include 'nav.php'; ?>
 
   <form id="bookForm" method="post" action="api/save_user.php">
       

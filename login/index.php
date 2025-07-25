@@ -168,9 +168,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
     } elseif(strlen(trim($_POST["password"])) < 6){
         $err = "Password must have atleast 6 characters.";
     }
-    else if(strlen(trim($_POST["new_password"])) > 96)
+    else if(strlen(trim($_POST["new_password"])) > 64)
         {
-            $login_err = "Password cannot have more than 96 characters.";
+            $login_err = "Password cannot have more than 64 characters.";
         } else{
         $password = trim($_POST["password"]);
     }
@@ -198,10 +198,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             $banned=1;
-	    //$banned=0; //put this to disable email verification enforcment
-	    $banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
-		$tel=0;
-		$mail=1;
+			//$banned=0; //put this to disable email verification enforcment
+			$banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
+			$tel=0;
+			$mail=1;
             mysqli_stmt_bind_param($stmt, "ssssi", $param_username,$param_username, $param_password, $role,$banned);
             
             // Set parameters
@@ -209,31 +209,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $role="00000000000";
             $banned=1;
-		$tel=0;
-		$mail=1;
-	    $banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
-	    //create session token, which has account creation token inisde it.
-	    $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
-	    $token=$_SESSION["creation_token"];
-	    $_SESSION["verify"]=$username;
-	    $_SESSION["email"]=$username;
-	    //send the mail:
-	    $mail=<<<EOF
+			$tel=0;
+			$mail=1;
+			$banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
+			// Attempt to execute the prepared statement
+			if(mysqli_stmt_execute($stmt)){
+				// Redirect to login page
+				//create session token, which has account creation token inisde it.
+				$_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
+				$token=$_SESSION["creation_token"];
+				$_SESSION["verify"]=$username;
+				$_SESSION["email"]=$username;
+				//send the mail:
+//sendMail($useremail, $subject,$body,$successMessage,$errorMessage,$sendCopyToAdmin=false){
 
-curl --request POST \
-  --url https://api.sendgrid.com/v3/mail/send \
-  --header "Authorization: Bearer $SENDGRID_API_KEY" \
-  --header 'Content-Type: application/json' \
-  --data '{"personalizations": [{"to": [{"email": "$username"}]}],"from": {"email": "$SENDGRID_EMAIL"},"subject": "Taubi Account Validation","content": [{"type": "text/html", "value": "Hallo $username<br>Hier ist dein Taubi Account verifikations Link. Bitte klicke drauf. Sollte dies nicht funktionieren, kopiere bitte den Link und öffne Ihn in deinem Browser.<br><a href='https://app.ksw3d.ch/login/verify_account.php?token=$token'>https://app.ksw3d.ch/login/verify_account.php?token=$token</a><br>Achtung: der Link funktioniert nur in dem gleichen Browser und Gerät, auf dem du deinen Account erstellt hast.<br><br>Vielen dank für dein Vertrauen in uns!<br><a href=\"https://www.jakach.ch\">Jakach.ch</a><br>"}]}'
+				
+				$mailText = "Hallo $username<br>Hier ist dein Taubi Account verifikations Link. Bitte klicke drauf. Sollte dies nicht funktionieren, kopiere bitte den Link und öffne Ihn in deinem Browser.<br><a href='https://taubi.code-camp.ch/login/verify_account.php?token=$token'>https://taubi.code-camp.ch/login/verify_account.php?token=$token</a><br>Achtung: der Link funktioniert nur in dem gleichen Browser und Gerät, auf dem du deinen Account erstellt hast.<br>";
 
-EOF;
+				$res = sendMail($username,"Aktivierung Deines Taubi-Kontos",$mailText,"Mail wurde erfolgreich gesendet","Fehler beim Mailversand.",$sendCopyToAdmin=false);
 
-	    exec($mail);
 
-                header("location: ?mail_sent1");
+				if ($res){
+
+					header("location: ?mail_sent1");		
+				}else{
+					header("location: ?mail_sent3");	
+
+				}
+
+				
+
+                
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -244,7 +250,10 @@ EOF;
 		
 
         }
-    }
+    }else{
+
+
+	}
     
     // Close connection
     mysqli_close($link);
@@ -260,7 +269,7 @@ curl --request POST \
   --url https://api.sendgrid.com/v3/mail/send \
   --header "Authorization: Bearer $SENDGRID_API_KEY" \
   --header 'Content-Type: application/json' \
-  --data '{"personalizations": [{"to": [{"email": "$email"}]}],"from": {"email": "$SENDGRID_EMAIL"},"subject": "System0 Password reset","content": [{"type": "text/html", "value": "Hallo $email<br>Hier ist dein System0 Passwort Zurücksetzungs Link. Bitte klicke drauf. Sollte dies nicht funktionieren, kopiere bitte den Link und öffne Ihn in deinem Browser.<br><a href='https://app.ksw3d.ch/login/reset_pw.php?token=$token'>https://app.ksw3d.ch/login/reset_pw.php?token=$token</a><br>Achtung: der Link funktioniert nur in dem gleichen Browser und Gerät, auf dem du deinen Account erstellt hast.<br><br>Vielen dank für dein Vertrauen in uns!<br><a href=\"https://www.jakach.ch\">Jakach.ch</a><br>"}]}'
+  --data '{"personalizations": [{"to": [{"email": "$email"}]}],"from": {"email": "$SENDGRID_EMAIL"},"subject": "System0 Password reset","content": [{"type": "text/html", "value": "Hallo $email<br>Hier ist dein System0 Passwort Zurücksetzungs Link. Bitte klicke drauf. Sollte dies nicht funktionieren, kopiere bitte den Link und öffne Ihn in deinem Browser.<br><a href='https://app.ksw3d.ch/login/reset_pw.php?token=$token'>https://app.ksw3d.ch/login/reset_pw.php?token=$token</a><br>Achtung: der Link funktioniert nur in dem gleichen Browser und Gerät, auf dem du deinen Account erstellt hast.<br><br>Vielen dank für dein Vertrauen in uns!<br>"}]}'
 EOF;
 
 	    exec($mail);
@@ -271,15 +280,16 @@ EOF;
 <html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="../css/taubi.css" rel="stylesheet">
     <title>Taubi Login</title>
 </head>
 <body>
 
-	<div class="d-flex align-items-center justify-content-left bg-dark" style="height:8vh;">
-		<img src="/assets/images/ksw_logo.png" alt="Logo" class="img-fluid p-2" style="height:40px; width:auto;">
+	<div class="d-flex align-items-center justify-content-left ribbon" style="height:8vh;">
+		<img src="../Taubi_Logo.png" alt="Logo" class="img-fluid p-2" style="height:40px; width:auto;">
 	</div>
 	<div class="d-flex align-items-center justify-content-center" style="height:92vh;">
 			<div class="container">
@@ -312,6 +322,9 @@ EOF;
 							<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#reset_pw" id="lnk_2">Passwort vergessen?</button>
 						</div>
 						<?php 
+							if(!empty($err)){
+							echo '<div class="alert alert-danger">' . $err . '</div>';
+							}
 							if(!empty($login_err)){
 							echo '<div class="alert alert-danger">' . $login_err . '</div>';
 							}   
@@ -322,7 +335,7 @@ EOF;
 							if(isset($_GET["acc_verify_ok"]))
 								echo '<div class="alert alert-success">Email erfolgreich Verifiziert.</div>';
 							if(isset($_GET["mail_sent3"]))
-								echo '<div class="alert alert-danger">Eine Mail mit einem Passwort zurücksetzungslink konnte nich gesendet werden. Bitte melde dich beim Support <a href="mailto:info@jakach.ch">hier.</a></div>';
+								echo '<div class="alert alert-danger">Eine Mail mit einem Passwort zurücksetzungslink konnte nich gesendet werden. Bitte melde dich beim Support <a href="mailto:admin@code-camp.ch">hier.</a></div>';
 						?>
 					</div>
 				</div>
@@ -399,7 +412,7 @@ EOF;
 				</form>
 			</div>
 		</div>
-<?php
+	<?php
 		if(!empty($err)){
 			echo("<script>");
 				echo('const a=document.getElementById("lnk_1");');
@@ -413,7 +426,11 @@ EOF;
 			echo("</script>");
 		}
 
-		?>
+	?>
+
+		<!-- Bootstrap 5.3 JS and required Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>
