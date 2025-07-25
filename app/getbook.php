@@ -19,68 +19,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <style>
-    body {
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #spinner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.5); /* halbtransparent schwarz */
-      z-index: 1050; /* über Navbar und Modal-Backdrop */
-      
-    }
-
-    .ribbon {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-    }
-
-    .ribbon a {
-      color: white;
-      margin-right: 20px;
-      text-decoration: none;
-    }
-
-    .card-deck .card {
-      margin-bottom: 20px;
-    }
-
-    .book-form {
-      margin: 20px 0;
-    }
-
-    #notification {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9999;
-      background-color: #333;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 6px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-    }
-
-    #notification.show {
-      opacity: 1;
-    }
-
-    #notification.success {
-      background-color: #28a745;
-    }
-
-    #notification.error {
-      background-color: #dc3545;
-    }
-  </style>
+  <link href="../css/taubi.css" rel="stylesheet">
+  
 
 
  
@@ -89,18 +29,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 </head>
 <body id="body">
 
-  <!-- Ribbon at the top -->
-  <div class="ribbon d-flex justify-content-between align-items-center">
-    <div>
-      <a href="/" class="btn btn-link">Bibliothek</a>
-      <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
-    </div>
-    <div class="d-flex align-items-center">
-      <a href="/account" class="btn btn-link">
-        <i class="bi bi-person-circle"></i> Konto
-      </a>
-    </div>
-  </div>
+<!-- Navigation -->  
+<?php include 'nav.php'; ?>
 
 
     
