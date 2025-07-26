@@ -11,8 +11,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 }
 ?>
 <?php
-// Start the session
-session_start();
+
 
 // Check if the session variables 'email' and 'username' are set
 if (isset($_SESSION['email']) && isset($_SESSION['username'])) {

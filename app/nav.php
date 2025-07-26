@@ -4,9 +4,23 @@
     <a href="/" class="btn btn-link">Bibliothek</a>
     <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
 </div>
-<div class="d-flex align-items-center">
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+     <i class="bi bi-person-circle"></i> Konto
+    </button>
+
+    <!-- Dropdown-Inhalt -->
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li><a class="dropdown-item" href="/account/profile.php"><i class="bi bi-person-gear"></i> Profil</a></li>
+      <li><a class="dropdown-item" href="/login/logout.php"><i class="bi bi-box-arrow-right"></i> Ausloggen</a></li>
+      
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<!-- <div class="d-flex align-items-center">
     <a href="/account" class="btn btn-link">
-    <i class="bi bi-person-circle"></i> Konto
+    
     </a>
-</div>
+</div> -->
 </div>

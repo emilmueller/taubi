@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
-    header("LOCATION:/login/login.php");
+    header("LOCATION:/login");
     exit();
 }
 ?>
@@ -23,44 +23,54 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <body id="body">
 
  <!-- Navigation -->  
-  <?php include 'nav.php'; ?>
+  <?php include '../app/nav.php'; ?>
 
-  <form id="bookForm" method="post" action="api/save_user.php">
-      
-        
-        <div class="col-lg-8">
-          <div class="row align-items-center">
-            <div class="col-2 mb-2">
-                <label for="nameInput" class="col-form-label">Name:</label>
-            </div>  
-            <div class="col-10">
-                <input type="text" id="nameInput" name="name" class="form-control" placeholder="Name"  />
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col-2 mb-2">
-                <label for="mailInput" class="col-form-label">Kontakt-Mail</label>
-            </div>  
-            <div class="col-10">
-                <input type="text" id="mailInput" name="mail" class="form-control" placeholder="Kontakt-Mail"  />
-            </div>
-          </div>
-          
-          
-          <div class="row align-items-center">
-            <div class="col-12">
-                
-                <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
-                <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Änderungen speichern</button>
-                <input type="hidden" name="action" value="save" />
-                <input type ="hidden" id="idInput" name="id"  />
-            </div>
-          </div>
-          
-        </div>
-      </div>
+  <div class="d-flex align-items-center justify-content-center" style="height:92vh;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+        <h3 class="text-center">Meine Daten</h3>
+
+        <form id="bookForm" method="post" action="/api/save_user.php">        
     
-      </form> 
+      
+          <div class="col-lg-8">
+            <div class="row align-items-center">
+              <div class="col-2 mb-2">
+                  <label for="nameInput" class="col-form-label">Benutzername:</label>
+              </div>  
+              <div class="col-10">
+                  <input type="text" id="nameInput" name="username" class="form-control" placeholder="Name" readonly />
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-2 mb-2">
+                  <label for="mailInput" class="col-form-label">Kontakt-Mail</label>
+              </div>  
+              <div class="col-10">
+                  <input type="text" id="mailInput" name="email" class="form-control" placeholder="Kontakt-Mail"  />
+              </div>
+            </div>
+            
+            
+            <div class="row align-items-center">
+              <div class="col-12">
+                  
+                  <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
+                  <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Änderungen speichern</button>
+                  <input type="hidden" name="action" value="save" />
+                  <input type ="hidden" id="idInput" name="id"  />
+                  
+              </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+      
 
 <script>
    
@@ -75,7 +85,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       return response.json();
     })
     .then(user => {
-      console.log("HOOOOO");
+      // console.log("from Session: "+user.email+" - "+user.username);
 
       // Ersetze jQuery $.ajax mit native Fetch POST
       fetch('/api/get_user.php', {
@@ -95,7 +105,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         return response.json();
       })
       .then(response => {
-        console.log(response.user.username);
+        // console.log("From DB: "+response.user);
 
         // Fülle die Felder mit den Benutzerdaten
         document.getElementById('nameInput').value = response.user.username;

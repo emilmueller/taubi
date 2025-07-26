@@ -13,6 +13,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php
 
 include "../config.php";
+
 $sql = "SELECT * from users WHERE username = ? AND email = ?;";
 
 $stmt = $conn->prepare($sql);
@@ -20,6 +21,8 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('ss', $username,$email);
 $username = $_POST['username'];
 $email = $_POST['email'];
+
+ error_log($username." -----------".$email);
     
 
 $stmt->execute();
@@ -35,7 +38,7 @@ if ($user) {
     echo json_encode(['success' => true, 'user'=> $user]);
     
 }else{
-    echo json_encode(['success' => false, 'message' => 'Benutzer nicht gefunden']);
+    echo json_encode(['error' => false, 'message' => 'Benutzer nicht gefunden']);
 }
 
 
