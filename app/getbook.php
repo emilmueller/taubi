@@ -148,7 +148,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
                 <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Buch speichern</button>
                 <input type="hidden" name="action" value="<?php echo $_GET['action'] ?>" />
-                <input type ="hidden" name="id" value = "<?php echo $_GET['id'] ?>" />
+                <input type="hidden" name="sold_by" value="<?php echo $_SESSION['id']?>" />
+                <input type ="hidden" name="book_id" value = "<?php echo $_GET['book_id'] ?>" />
             </div>
           </div>
           
@@ -163,7 +164,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const action = '<?php echo $_GET['action']; ?>';
-      const bookid = '<?php echo $_GET['id']; ?>';
+      const bookid = '<?php echo $_GET['book_id']; ?>';
 
       const spinner = document.getElementById('spinner');
       const bookDiv = document.getElementById('bookDiv');
@@ -261,180 +262,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 
 
-    // $(document).ready(function() {
-    //     let action = '<?php echo $_GET['action']; ?>';
-    //     let bookid = '<?php echo $_GET['id']; ?>';
-
-    //     if (action =="isbn_search"){  //Search Book on ISBN-DB
-    //       $.ajax({
-    //         url:"../api/search_book_on_isbn_db.php",
-    //         method:"GET",
-    //         data:{
-    //           'isbn': bookid
-    //         },
-    //         dataType:"json",
-    //         beforeSend: function(){
-    //           $("#spinner").removeClass('d-none');     // Spinner anzeigen
-    //           $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
-    //         },
-    //         success: function(response){
-    //           $("#spinner").addClass('d-none');     // Spinner ausblenden 
-              
-    //           var res = $.parseJSON(response);
-    //           console.log(res);
-    //           $('#bookImage').attr('src', res.book.image);
-    //           $('#image_url_input').val(res.book.image);
-    //           $('#titleInput').val(res.book.title);
-    //           $('#publisherInput').val(res.book.publisher);
-    //           $('#languageInput').val(res.book.language);
-    //           $('#yearInput').val(res.book.date_published);
-    //           $('#isbnInput').val(res.book.isbn13);
-    //           $('#pagesInput').val(res.book.pages);
-    //           var author = "";
-    //           $.each(res.book.authors, function(i,item){
-                
-    //             author+=item+", ";
-    //           });
-    //           author = author.slice(0,-2);
-    //           $('#authorInput').val(author);
-              
-              
-
-
-    //           $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
-              
-    //         },
-    //         error: function(response){
-    //           $('#spinner').addClass('d-none');
-    //           $('#title').text("Buch von Hand erfassen");
-    //           $('#bookImage').attr('src', '/bookcovers/image-not-found.png');
-    //           $('#image_url_input').val('/bookcovers/image-not-found.png');
-    //           $('#isbnInput').val(bookid);
-    //           $("#bookDiv").removeClass('d-none');
-
-    //           //Buch nicht gefunden!
-              
-
-    //         }
-    //       });
-    //     } else if (action == "db_search") {  //Search one single book in DB
-    //       $.ajax({
-    //         url:"../api/get_books.php",
-    //         method:"POST",
-    //         data:{
-    //           'bookid': bookid
-    //         },
-    //         dataType:"json",
-    //         beforeSend: function(){
-    //           $("#spinner").removeClass('d-none');     // Spinner anzeigen
-    //           $("#bookDiv").addClass('d-none');      // Ergebnisbereich ausblenden
-    //         },
-    //         success: function(response){
-    //           $("#spinner").addClass('d-none');     // Spinner ausblenden
-
-    //           $('#title').text("Buchdaten bearbeiten");
-           
-    //           var res = $.parseJSON(JSON.stringify(response));
-              
-    //           $('#bookImage').attr('src', res[0].image_url);
-              
-    //           $('#image_url_input').val(res[0].image_url);
-    //           $('#titleInput').val(res[0].title);
-    //           $('#publisherInput').val(res[0].publisher);
-    //           $('#languageInput').val(res[0].language);
-    //           $('#yearInput').val(res[0].date_published);
-    //           $('#isbnInput').val(res[0].isbn);
-    //           $('#pagesInput').val(res[0].pages);
-    //           $('#authorInput').val(res[0].author);
-    //           $('#zustandInput').val(res[0].book_condition);
-    //           $('#preisInput').val(res[0].price);
-              
-              
-              
-              
-
-
-    //           $("#bookDiv").removeClass('d-none');      // Ergebnisbereich ausblenden
-              
-    //         },
-    //         error: function(){
-    //           $('#spinner').addClass('d-none');
-
-    //           //Buch nicht gefunden!
-              
-
-    //         }
-    //       });
-
-    //     }
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-      //   $('#addPicture').on('click', function () {
-      //     $('#cameraInput').click();
-      //   });
-
-
-      //   $('#cameraInput').on('change', function() {
-            
-            
-      //       const file = this.files[0];
-
-      //       if (!file) {
-      //           alert("Bitte zuerst ein Foto aufnehmen.");
-      //           return;
-      //       }
-
-      //       const reader = new FileReader();
-      //       reader.onload = function (event) {
-      //           const img = new Image();
-      //           img.onload = function () {
-      //               const maxWidth = 400;
-      //               const scale = maxWidth / img.width;
-      //               const canvas = document.getElementById('canvas');
-      //               canvas.width = maxWidth;
-      //               canvas.height = img.height * scale;
-      //               const ctx = canvas.getContext("2d");
-      //               ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      //               canvas.toBlob(function(blob) {
-      //                   const formData = new FormData();
-      //                   formData.append("photo", blob, "snapshot.jpg");
-      //                   $.ajax({
-      //                     url: '../api/fotoupload.php',
-      //                     type: 'POST',
-      //                     data: formData,
-      //                     processData: false,
-      //                     contentType: false,
-      //                     success: function(response) {
-      //                       //alert(response.filename);
-      //                       $('#bookImage').attr('src', response.filename);
-      //                       $('#image_url_input').attr('value', response.filename);
-      //                     },
-      //                     error: function(request, status, err) {
-      //                       alert('Fehler beim Upload: ' + request.responseText);
-      //                     }
-      //                   });
-                        
-      //               }, "image/jpeg", 0.85);
-      //           };
-      //           img.src = event.target.result;
-      //       };
-      //       reader.readAsDataURL(file);
-           
-      //   });
-      // });
+    
     </script>
   
  

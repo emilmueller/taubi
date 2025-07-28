@@ -1,17 +1,3 @@
-<!-- <?php
-
-    
-            ob_start();
-            include '../api/get_users.php';
-            $res = json_decode(ob_get_clean(),true);
-
-            print_r($res[0]['id']);
-
-
-    
-?> -->
-
-
 <script>
 
 
@@ -179,11 +165,6 @@
 
         
         `;
-
-
-
-
-
         editUserForm.innerHTML=formHTML;
         // Modal anzeigen
         const modal = new bootstrap.Modal(document.getElementById("editUserModal"));
@@ -245,26 +226,6 @@
                 renderUsers(users);  // Render users after loading
                  });
         });
-
-
-
-
-
-
-        // fetch('../api/get_roles.php?type=rolelist')
-        //     .then(response => {
-        //         if(!response.ok){
-        //             throw new Error("Fehler beim Laden der Rollen.");
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(data => {
-        //         const roles = data.roles;
-        //         saveUser_with_Roles(roles);
-        //     })
-        //     .catch(error => {
-        //         console.error("Fehler: ", error);
-        //     });
     }
 
    

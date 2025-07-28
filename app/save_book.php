@@ -34,9 +34,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         $price = $_POST['price'];
 
     }else if ($_POST['action']=='db_search'){ //Edit Book
-        $id = $_POST['id'];
-
-    
+        $id = $_POST['book_id'];
 
         $sql = "UPDATE books SET title=?, pages=?, author=?, publisher=?, language=?,  image_url=?, date_published=?, isbn=?, book_condition=?, price=?, sold_by=? WHERE id=$id";
         $stmt = $conn->prepare($sql);

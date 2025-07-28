@@ -106,9 +106,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     // Function to render books
     function renderBooks(filteredBooks) {
+      
       bookCardsContainer.innerHTML = '';
       filteredBooks.forEach(book => {
-	if(book.seller==1){ //TODO: add actuall user id here e.g. from $_SESSIOn
+	    if(book.seller==<?php echo $_SESSION['id'] ?>){ 
         const card = document.createElement('div');
         card.classList.add('col');
         card.innerHTML = `
@@ -148,7 +149,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     // Function to handle the "Delete" button 
     function edit_book(book_id) {
-      window.open("/app/getbook.php?id="+book_id+"&action=db_search", "_self"); // edit 
+      window.open("/app/getbook.php?book_id="+book_id+"&action=db_search", "_self"); // edit 
       
     }
 
