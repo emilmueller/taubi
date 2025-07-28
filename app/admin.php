@@ -74,7 +74,37 @@
         ?>
 
         
-
+        <div class="container mt-5">
+            <h2>Admin</h2>
+            <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">Users</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                <button class="nav-link" id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" type="button" role="tab">Rollen</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab">Tags</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab">Settings</button>
+                </li>
+            </ul>
+            <div class="tab-content mt-3" id="adminTabsContent">
+                <div class="tab-pane fade show active" id="users" role="tabpanel">
+                    <?php include '../api/admin_users.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="roles" role="tabpanel">
+                    <?php include '../api/admin_roles.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="tags" role="tabpanel">
+                    <?php include '../api/admin_tags.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="settings" role="tabpanel">
+                    <?php include '../api/admin_settings.php'; ?>
+                </div>
+            </div>
+        </div>  
 
 
 
