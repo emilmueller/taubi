@@ -44,9 +44,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <input type="text" id="searchInput" class="form-control" placeholder="Suche nach Titel, ISBN, Autor oder Beschreibung...">
       </div>
       <div class="col-md-3 mb-2">
-	<select id="fachFilter" class="form-select">
-	  <option value="">Alle Fächer</option>
-	</select>
+        <select id="fachFilter" class="form-select">
+          <option value="">Alle Fächer</option>
+        </select>
 
       </div>
     </div>
@@ -86,7 +86,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           tags: book.tags
         }));
 
-        console.log(books);
+        //console.log(books);
         return books;
       } catch (error) {
         console.error('Error loading books:', error);
@@ -94,7 +94,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     }
 
     function escapeForHtmlAttr(str) {
-      console.log(str.replace(/'/g, ""));
+      //console.log(str.replace(/'/g, ""));
       return str.replace(/'/g, "");
     }
 

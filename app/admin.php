@@ -28,7 +28,7 @@
         <link href="../css/taubi.css" rel="stylesheet">
     
         <script>
-            // Blockiert Seitenaufbau, bis Berechtigung geprüft ist
+            // Check Admin
             document.addEventListener("DOMContentLoaded", function () {
             fetch("../api/is_admin.php")
                 .then(response => response.json())
@@ -46,7 +46,7 @@
                 })
                 .catch(error => {
                 console.error("Fehler beim Abrufen von is_admin.php:", error);
-                document.body.innerHTML = "<h1>Fehler beim Berechtigungscheck</h1>";
+                window.location.href = 'index.php';
                 });
             });
 
@@ -63,15 +63,7 @@
         <!-- Navigation -->  
         <?php include '../app/nav.php'; ?>
 
-        <?php
-            ob_start();
-            include '../api/get_users.php';
-            $res = ob_get_clean();
-
-            echo $res;
-
-
-        ?>
+        
 
         
         <div class="container mt-5">

@@ -3,6 +3,7 @@ session_start();
 
 include "../config.php";
 
+error_log($_POST['id']);
 $sql = "UPDATE users Set username = ?, email=? WHERE id = ?;";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('ssi', $_POST['username'], $_POST['email'], $_POST['id']);

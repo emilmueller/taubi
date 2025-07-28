@@ -132,20 +132,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
 							}elseif(is_null($token))
 							{
 								// Password is correct, so start a new session
-								mysqli_stmt_close($stmt);
-								session_start();
+								$sql = "UPDATE users SET last_login=now() WHERE id=?";
+								$stmt = mysqli_prepare($link, $sql);
+								mysqli_stmt_bind_param($stmt, "i", $id);
+								if(mysqli_stmt_execute($stmt)){
+									mysqli_stmt_close($stmt);
+									$stmt = null;
+									session_start();
 
-								// Store data in session variables
-								$_SESSION["logged_in"] = true;
-								$_SESSION["id"] = $id;
-								$_SESSION["username"] = $username;
-								$_SESSION['email']=$email;
-								$_SESSION["role"] = $role;
-								$_SESSION["token"]=bin2hex(random_bytes(32));
-								// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
+									// Store data in session variables
+									$_SESSION["logged_in"] = true;
+									$_SESSION["id"] = $id;
+									$_SESSION["username"] = $username;
+									$_SESSION['email']=$email;
+									$_SESSION["role"] = $role;
+									$_SESSION["token"]=bin2hex(random_bytes(32));
+									// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
 
-								// Redirect user to welcome page
-								header("location:/app/");
+									// Redirect user to welcome page
+									header("location:/app/");
+
+
+								}
+
+								
+								
+								
 							}
 							else
 							{
@@ -167,7 +179,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
             }
 
             // Close statement
-            mysqli_stmt_close($stmt);
+			if($stmt!=null){
+				mysqli_stmt_close($stmt);
+			}
+            
         }
     }
 

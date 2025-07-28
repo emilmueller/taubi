@@ -36,7 +36,7 @@
                 //console.log("✅ Zugriff erlaubt.");
                 const nav = document.getElementById("navbar")
                 const link = document.createElement("a");
-                link.href = "/app/user_admin.php";
+                link.href = "/app/admin.php";
                 link.textContent = "Admin";
                 link.className = "btn btn-link"; // z. B. für Bootstrap-Styling
 

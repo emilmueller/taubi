@@ -14,7 +14,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     require_once "../config.php";
 
-    $sql = "SELECT role from users WHERE username = ? AND email = ?;";
+    $sql = "SELECT username, role from users WHERE username = ? AND email = ?;";
 
     $stmt = $conn->prepare($sql);
 
@@ -31,7 +31,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
-    error_log("ADMMIN: ".$user['role'][0]);
+    error_log("CHECK ADMIN: ".$user['username']." ----> ".$user['role'][0]);
 
     header('Content-Type: application/json');
     if ($user['role'][0]==1) {
