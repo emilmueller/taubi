@@ -7,7 +7,7 @@ $username_err = $password_err = $confirm_password_err = "";
 $err="";
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){
-	header("location: /app");
+	header("location: /login/logout.php");
     exit;
 }
 require_once "../config.php";
@@ -32,7 +32,7 @@ if(isset($_GET["resend_acc_verify"])){
 			// Bind variables to the prepared statement as parameters
 		mysqli_stmt_bind_param($stmt, "s", $param_username);
 		// Set parameters
-		$username=$_SESSION["verify"];
+		$username=$_SESSION["username"];
 		$param_username = htmlspecialchars($username);
 
 		// Attempt to execute the prepared statement
@@ -64,6 +64,9 @@ if(isset($_GET["resend_acc_verify"])){
 							header("location: ?mail_sent3");	
 
 						}
+					}else{
+						$err = "Dein Account wurde bereits aktiviert. Du kannst Dich normal einloggen.";
+						
 					}
 
 				}
@@ -105,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password, role,banned,email FROM users WHERE username = ?";
+        $sql = "SELECT id, username, password, role,token, banned,email FROM users WHERE username = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -121,32 +124,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $role,$banned,$email);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $role,$token, $banned,$email);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
-		                if($banned!=1)
-		                {
-		                    // Password is correct, so start a new session
-		                    mysqli_stmt_close($stmt);
-		                    session_start();
+							if($banned!=0){
+								$login_err = "Dein Account wurde vom Admin gesperrt. Bitte wende Dich an <a href='mailto:admin@code-camp.ch'>admin@code-camp.ch</a>";
+							}elseif(is_null($token))
+							{
+								// Password is correct, so start a new session
+								mysqli_stmt_close($stmt);
+								session_start();
 
-		                    // Store data in session variables
-		                    $_SESSION["logged_in"] = true;
-		                    $_SESSION["id"] = $id;
-		                    $_SESSION["username"] = $username;
-							$_SESSION['email']=$email;
-		                    $_SESSION["role"] = $role;
-		                    $_SESSION["token"]=bin2hex(random_bytes(32));
-				    		// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
+								// Store data in session variables
+								$_SESSION["logged_in"] = true;
+								$_SESSION["id"] = $id;
+								$_SESSION["username"] = $username;
+								$_SESSION['email']=$email;
+								$_SESSION["role"] = $role;
+								$_SESSION["token"]=bin2hex(random_bytes(32));
+								// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
 
-		                    // Redirect user to welcome page
-		                    header("location:/app/");
-		                }
-		                else
-		                {
-		                	$_SESSION["verify"]=$username;
-		                	$login_err = "Dein Account wurde noch nicht aktiviert. <a href='?resend_acc_verify'>Neuen aktivierungslink anfordern</a>";
-		                }
+								// Redirect user to welcome page
+								header("location:/app/");
+							}
+							else
+							{
+								
+								$login_err = "Dein Account wurde noch nicht aktiviert. <a href='?resend_acc_verify'>Neuen aktivierungslink anfordern</a>";
+								
+							}
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -238,9 +244,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            $banned=1;
+            $banned=0;
 			$token = urlencode(bin2hex(random_bytes(24/2)));
-			//$banned=0; //put this to disable email verification enforcment
+			
 			$banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
 			$tel=0;
 			$mail=1;
@@ -249,8 +255,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            $role="00000000000";
-            $banned=1;
+            $role="00000001";
+            $banned=0;
 			$tel=0;
 			$mail=1;
 			$banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
@@ -259,7 +265,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
 				// Redirect to login page
 				
 			
-				$_SESSION["verify"]=$username;
+				
 				$_SESSION["email"]=$username;
 				//send the mail:
 				$id = mysqli_insert_id($link);
@@ -297,10 +303,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
 		
 
         }
-    }else{
-
-
-	}
+    }
     
     // Close connection
     mysqli_close($link);
@@ -308,9 +311,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
 if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="reset_pw"){
 	$email=htmlspecialchars($_POST["username"]);
 	$_SESSION["email"]=$email;
-	$_SESSION["pw_reset_token"]= urlencode(bin2hex(random_bytes(24 / 2)));
-	$token=$_SESSION["pw_reset_token"];
-	$_SESSION["verify"]=$email;
+	$token= urlencode(bin2hex(random_bytes(24 / 2)));
+	$_SESSION["pw_reset_token"] = $token;
+	
 
 	$mailText = "Hallo $email<br>
 	<br><br>Mit dem folgenden Link kannst Du das Passwort für Deinen Taubi-Account zurücksetzen: <a href='https://taubi.code-camp.ch/login/reset_pw.php?email=$email&token=$token'>https://taubi.code-camp.ch/reset_pw.php?email=$email&token=$token</a>
@@ -326,12 +329,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="reset_pw"){
 
 	$res = sendMail($email,"Aktivierung Deines Taubi-Kontos",$mailText,"Mail wurde erfolgreich gesendet","Fehler beim Mailversand.",$sendCopyToAdmin=false);
 
-
+	//error_log("MAIL: ".$res);
 	if ($res){
 
-		header("location: ?mail_sent2");		
+		header("location: ?mail_sent2&address=".$email);
+		exit;		
 	}else{
-		header("location: ?mail_sent3");	
+		header("location: ?mail_sent3");
+		exit;
 
 	}
 
@@ -398,19 +403,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="reset_pw"){
 						</div>
 						<?php 
 							if(!empty($err)){
-							echo '<div class="alert alert-danger">' . $err . '</div>';
+								echo '<div class="alert alert-danger">' . $err . '</div>';
 							}
 							if(!empty($login_err)){
-							echo '<div class="alert alert-danger">' . $login_err . '</div>';
+								echo '<div class="alert alert-danger">' . $login_err . '</div>';
 							}   
 							if(isset($_GET["mail_sent1"]))
 								echo '<div class="alert alert-success">Eine Mail mit einem Aktivierungslink wurde an deine Mailadresse gesendet.</div>';
 							if(isset($_GET["mail_sent2"]))
-								echo '<div class="alert alert-success">Eine Mail mit einem Passwort zurücksetzungslink wurde an deine Mailadresse gesendet.</div>';
+								echo '<div class="alert alert-success">Eine Mail mit einem Link zur Rücksetzung des Passworts wurde an deine Mailadresse ('.$_GET['address'].') gesendet.</div>';
 							if(isset($_GET["acc_verify_ok"]))
 								echo '<div class="alert alert-success">Email erfolgreich Verifiziert.</div>';
+							if(isset($_GET["acc_verify_already_ok"]))
+								echo '<div class="alert alert-success">Dein Account wurde bereits erfolgreich Verifiziert.</div>';
 							if(isset($_GET["mail_sent3"]))
-								echo '<div class="alert alert-danger">Eine Mail mit einem Passwort zurücksetzungslink konnte nich gesendet werden. Bitte melde dich beim Support <a href="mailto:admin@code-camp.ch">hier.</a></div>';
+								echo '<div class="alert alert-danger">Eine Mail mit einem Link zur Rücksetzung des Passworts konnte nich gesendet werden. Bitte melde dich beim Support <a href="mailto:admin@code-camp.ch">hier.</a></div>';
 							if(isset($_GET["mail_sent4"]))
 								echo '<div class="alert alert-danger">Das Rücksetzen des Passworts hat nicht funktioniert. Bitte versuch es noch einmal.</div>';
 							if(isset($_GET["activation_failed"]))

@@ -18,6 +18,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
    <link href="../css/taubi.css" rel="stylesheet">
+<style>
+
+
+</style>
   
 </head>
 <body id="body">
@@ -34,37 +38,28 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <form id="bookForm" method="post" action="/api/save_user.php">        
     
       
-          <div class="col-lg-8">
-            <div class="row align-items-center">
-              <div class="col-2 mb-2">
-                  <label for="nameInput" class="col-form-label">Benutzername:</label>
-              </div>  
-              <div class="col-10">
-                  <input type="text" id="nameInput" name="username" class="form-control" placeholder="Name" readonly />
-              </div>
-            </div>
-            <div class="row align-items-center">
-              <div class="col-2 mb-2">
-                  <label for="mailInput" class="col-form-label">Kontakt-Mail</label>
-              </div>  
-              <div class="col-10">
-                  <input type="text" id="mailInput" name="email" class="form-control" placeholder="Kontakt-Mail"  />
-              </div>
-            </div>
-            
-            
-            <div class="row align-items-center">
-              <div class="col-12">
-                  
-                  <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
-                  <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Änderungen speichern</button>
-                  <input type="hidden" name="action" value="save" />
-                  <input type ="hidden" id="idInput" name="id"  />
-                  
-              </div>
-            </div>
-            
+          
+          <div class="mb-3">
+              <label for="nameInput" class="form-label">Benutzername (kann nicht geändert werden):</label>
+         
+              <input type="text" id="nameInput" name="username" class="form-control-plaintext" placeholder="Name" readonly />
           </div>
+        
+          <div class="mb-3">
+              <label for="mailInput" class="form-label">Kontakt-Mail</label>
+          
+              <input type="text" id="mailInput" name="email" class="form-control" placeholder="Kontakt-Mail"  />
+          </div>
+        
+          <div class="col-12">
+              
+              <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
+              <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Änderungen speichern</button>
+              <input type="hidden" name="action" value="save" />
+              <input type ="hidden" id="idInput" name="id"  />
+              
+          </div>
+         
         </form>
       </div>
     </div>

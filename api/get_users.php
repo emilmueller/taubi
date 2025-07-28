@@ -12,9 +12,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 ?>
 <?php
 
-include "../config.php";
-$sql = "
-SELECT * from users;";
+require_once "../config.php";
+$sql = "SELECT * from users;";
     
 
 $result = $conn->query($sql);

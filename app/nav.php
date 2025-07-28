@@ -1,6 +1,8 @@
+
+
 <!-- Ribbon at the top -->
 <div class="ribbon d-flex justify-content-between align-items-center">
-<div>
+<div id="navbar">
     <a href="/" class="btn btn-link">Bibliothek</a>
     <a href="/account?my_books" class="btn btn-link">Meine Bücher</a>
 </div>
@@ -24,3 +26,30 @@
     </a>
 </div> -->
 </div>
+<script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    fetch("../api/is_admin.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                //console.log("✅ Zugriff erlaubt.");
+                const nav = document.getElementById("navbar")
+                const link = document.createElement("a");
+                link.href = "/app/user_admin.php";
+                link.textContent = "Admin";
+                link.className = "btn btn-link"; // z. B. für Bootstrap-Styling
+
+                // Link anhängen
+                nav.appendChild(link);
+                
+            } 
+        })
+        .catch(error => {
+        console.error("Fehler beim Abrufen von is_admin.php:", error);
+        document.body.innerHTML = "<h1>Fehler beim Berechtigungscheck</h1>";
+        });
+    });
+
+
+</script>

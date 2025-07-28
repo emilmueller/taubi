@@ -12,6 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="reset_pw" and $_SE
     
     
     header("location: /login/index.php?mail_sent4");
+    exit;
     
 }
 
@@ -54,9 +55,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="update_pw"){
 
                 unset($_SESSION['pw_reset_token']);
                 header("location: /login/index.php?pw_updated");
+                exit;
 
              }else{
                 header("location: /login/index.php?mail_sent4");
+                exit;
 
              }
 
