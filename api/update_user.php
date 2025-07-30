@@ -10,8 +10,10 @@ $types = "";
 
 $bindParams = [];
 
+//error_log(print_r($_POST,true));
+
 foreach($_POST as $key => $value){
-    if($key !== 'id'){
+    if($key !== 'id' and $key!='role'){
         $updateFields[]= "$key = ?";
         $types .= $db_col_types[$key];        
     }
@@ -21,7 +23,7 @@ $types.="i";
 $bindParams[]=&$types;
 
 foreach($_POST as $key => $value){
-    if($key !== 'id'){
+    if($key !== 'id' and $key!='role'){
         if($db_col_types[$key]=="i"){
             $bindParams[] = (int)$_POST[$key];
         }else{
@@ -60,6 +62,32 @@ if($stmt->execute()){
     echo json_encode(['error' => false, 'message' => 'Daten konnten nicht gespeichert werden. ']);
 
 }
+
+
+//Handle Roles
+$roles = isset($_POST['role']) ? $_POST['role'] :[] ;
+$user_id = $_POST['id'];
+
+//Delete all user_roles for user_id
+$sql = "DELETE FROM user_roles WHERE user_id=?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i",$user_id);
+$stmt->execute();
+
+if(!empty($roles)){
+    $sql = "INSERT into user_roles (user_id, role_id) VALUES (?,?);";
+    $stmt = $conn->prepare($sql);
+    foreach($roles as $key => $value){
+        if(is_numeric($value)){
+            $stmt->execute([$user_id, (int)$value]);
+        }
+}
+}
+
+
+
+
 
 // Close connection
 $conn->close();

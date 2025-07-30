@@ -8,7 +8,7 @@
 </div>
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-     <i class="bi bi-person-circle"></i> Konto
+     <i class="bi bi-person-circle"></i> <?php echo $_SESSION['username'] ?>
     </button>
 
     <!-- Dropdown-Inhalt -->
@@ -16,10 +16,12 @@
       <li><a class="dropdown-item" href="/account/profile.php"><i class="bi bi-person-gear"></i> Profil</a></li>
       <li><a class="dropdown-item" href="/login/logout.php"><i class="bi bi-box-arrow-right"></i> Ausloggen</a></li>
       
+      
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="../js/taubi.js"></script>
 <!-- <div class="d-flex align-items-center">
     <a href="/account" class="btn btn-link">
     
@@ -29,10 +31,11 @@
 <script>
     
     document.addEventListener("DOMContentLoaded", function () {
-    fetch("../api/is_admin.php")
+    fetch("../api/get_permissions.php?type=has_only_user_permission&user_id=<?php echo $_SESSION['id'] ?> ")
         .then(response => response.json())
         .then(data => {
-            if (data.success === true) {
+            
+            if (data == false) {
                 //console.log("✅ Zugriff erlaubt.");
                 const nav = document.getElementById("navbar")
                 const link = document.createElement("a");
@@ -50,6 +53,12 @@
         document.body.innerHTML = "<h1>Fehler beim Berechtigungscheck</h1>";
         });
     });
+
+    function hasPermission(type){
+        const permissions = <?php echo json_encode($_SESSION['permissions']); ?>;
+        //console.log(permissions);
+        return permissions.includes(type);
+    }
 
 
 </script>

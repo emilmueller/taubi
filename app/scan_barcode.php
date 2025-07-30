@@ -292,7 +292,7 @@
       okButton.addEventListener('click', function () {
         const result = isbnInput.value;
         if (result) {
-          window.location.href = `getbook.php?id=${result}&action=isbn_search`;
+          window.location.href = `getbook.php?book_id=${result}&action=isbn_search`;
         } else {
           alert("Keine ISBN-Nummer eingegeben");
         }

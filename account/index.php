@@ -114,7 +114,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         card.classList.add('col');
         card.innerHTML = `
           <div class="card h-100">
-            <img src="${book.image_url}" class="card-img-top" alt="Buchbild">
+            <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
             <div class="card-body">
               <h5 class="card-title">${book.title}</h5>
               <!--<p class="card-text">${book.description}</p>-->

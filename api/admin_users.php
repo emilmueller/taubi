@@ -2,13 +2,15 @@
 
 
 
-     // Function to load books
+     // Function to load users
     async function loadUsers() {
       try {
+        
         const userlist = await fetch('../api/get_users.php');
         const data = await userlist.json();
         const users = await Promise.all(data.map(async user => {
             const roles = await getRoles(user);
+            //const permissions = await getPermissions(user);
             return{
                 id: user.id,
                 username: user.username,
@@ -16,14 +18,15 @@
                 role: roles,  
                 banned: user.banned,
                 ban_message: user.ban_message,
-                last_login: user.last_login
+                last_login: user.last_login,
+                //permissions: permissions
 
             }
         
         
         }));
 
-        console.log(JSON.stringify(users, null, 2));
+        //console.log(JSON.stringify(users, null, 2));
         return users;
 
 
@@ -36,23 +39,28 @@
 
     async function getRoles(user){
         //console.log(user);
-        const response = await fetch('/api/get_roles.php?roles='+encodeURIComponent(user.role));
+        const response = await fetch('/api/get_roles.php?type=roles&user_id='+encodeURIComponent(user.id));
         const answer = await response.json();
             
         return answer.roles; 
     }
 
-     // Function to render books
+    
+
+     // Function to render users
     function renderUsers(filteredUsers) {
+        
         const table = document.getElementById("userTable");
         table.innerHTML = "";
         const headers = Object.keys(filteredUsers[0]);
         const tableHeader = table.createTHead();
         const headerRow = tableHeader.insertRow();
         headers.forEach(key => {
+          
             const th = document.createElement("th");
             th.textContent = key.charAt(0).toUpperCase()+key.slice(1);
             headerRow.appendChild(th);
+          
 
         });
         th = document.createElement("th");
@@ -63,25 +71,62 @@
         filteredUsers.forEach(user => {
             const row = tbody.insertRow();
             headers.forEach(key => {
+              
                 const cell = row.insertCell();
                 cell.textContent = user[key];
+              
             });
             const actionCell = row.insertCell();
+            const actionDiv = document.createElement("div");
+
+            actionDiv.className ='d-flex gap-3 h-100 align-items-center';
             const editButton = document.createElement("button");
+            editButton.title = "Nutzer:in bearbeiten!";
+            
             editButton.innerHTML = '<i class="bi bi-pencil"></i>';
-            editButton.className= "btn btn-sm btn-success me-1";
+            editButton.className= "btn btn-sm btn-success";
             editButton.addEventListener("click", ()=> {
                 editUser(user);
-            })
-            actionCell.appendChild(editButton);
+            });
+            if(!hasPermission("edit_users")){
+              editButton.disabled = true;
+            } 
 
             const deleteButton = document.createElement("button");
+            deleteButton.title = "Nutzer:in löschen!";
             deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
-            deleteButton.className= "btn btn-sm btn-danger me-1";
+            deleteButton.className= "btn btn-sm btn-danger";
             deleteButton.addEventListener("click", ()=> {
                 deleteUser(user);
-            })
-            actionCell.appendChild(deleteButton);
+            });
+
+            if(!hasPermission("delete_user")){
+              deleteButton.disabled = true;
+            }
+
+            const banButton = document.createElement("button");
+            banButton.title = "Nutzer:in sperren! HOPP hopp";
+            if (user.banned === '0'){
+              banButton.innerHTML = '<i class="bi bi-ban"></i>';
+              banButton.className= "btn btn-sm btn-danger";
+
+            }else{
+              banButton.innerHTML = '<i class="bi bi-ban"></i>';
+              banButton.className= "btn btn-sm btn-success";
+
+            }
+            
+            banButton.addEventListener("click", ()=> {
+                banUser(user);
+            });
+
+            if(!hasPermission("ban_users")){
+              banButton.disabled = true;
+            }
+            
+            
+            actionDiv.append(editButton, deleteButton, banButton);
+            actionCell.appendChild(actionDiv);
             
             // actionCell.innerHTML = `
             //     <button class="btn btn-sm btn-success me-1" onclick="editUser(${user})"><i class="bi bi-pencil"></i></button>
@@ -100,14 +145,10 @@
     function editUser(user){
         
         fetch('../api/get_roles.php?type=rolelist')
-            .then(response => {
-                if(!response.ok){
-                    throw new Error("Fehler beim Laden der Rollen.");
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                const roles = data.roles;
+                //console.log(data);
+                const roles = data;
                 buildUserModal(user, roles);
             })
             .catch(error => {
@@ -119,8 +160,7 @@
 
     function  buildUserModal(user, roles){   
 
-        // console.log(roles);
-
+        
         const editUserForm = document.getElementById("editUserForm");
         const formHTML =`
             <div class="row mb-3 align-items-center">
@@ -128,24 +168,47 @@
                     <label class="form-label" for="id">ID</label>
                 </div>
                 <div class="col-8">
-                    <input type="text" class="form-control" id="id" name="id" value="${user.id}" readonly>
+                    <input type="text" class="form-control input-readonly" id="id" name="id" value="${user.id}" readonly>
                 </div>
             </div>
             ${Object.keys(user).filter(key => key!=="id").map(key => {
                 const label = key.charAt(0).toUpperCase()+key.slice(1);
-                
-                const inputField = key === "role"
-                  ? `
+                let inputField;                              
+                if(key==='role'){
+                  inputField = `
                     <select class="form-select" multiple size=8 id="${key}" name="${key}[]">
                       ${roles.map(role => `
-                        <option value="${role}" ${user[key].includes(role) ? "selected" : ""}>${role}</option>
+                        <option value="${role.id}" ${user[key].includes(role.name) ? "selected" : ""}>${role.name}</option>
                       `).join("")}
                     </select>
-                  `
-                  : `
-                    <input type="text" class="form-control" id="${key}" name="${key}" value="${user[key]}">
                   `;
 
+                }else if (key === 'banned'){
+                    
+                    if(hasPermission("ban_users")){
+                      inputField =  `<input type="text" class="form-control" id="${key}" name="${key}" value="${user[key]}">`;
+                    }else{
+                      inputField =  `<input type="text" class="form-control input-readonly" id="${key}" name="${key}" value="${user[key]}" readonly>`;
+                    }                   
+                }else{
+                  
+                  inputField = `<input type="text" class="form-control" id="${key}" name="${key}" value="${user[key]}">`;
+                }
+                
+                // const inputField = key === "role"
+                //   ? `
+                //     <select class="form-select" multiple size=8 id="${key}" name="${key}[]">
+                //       ${roles.map(role => `
+                //         <option value="${role}" ${user[key].includes(role) ? "selected" : ""}>${role}</option>
+                //       `).join("")}
+                //     </select>
+                //   `
+                //   : `
+                //     <input type="text" class="form-control" id="${key}" name="${key}" value="${user[key]}">
+                //   `;
+                
+                    
+                //console.log(inputField);
                 return `
                   <div class="row mb-3 align-items-center">
                     <div class="col-4 text-end fw-semibold">
@@ -156,6 +219,7 @@
                     </div>
                   </div>
                   `;
+               
 
 
 
@@ -177,21 +241,21 @@
 
     function saveUser(){
         const form = document.getElementById("editUserForm");
-        let roleString = "";
-        const formRoles = document.getElementById("role");
-        Array.from(formRoles.options).forEach(option => {
-            if(option.selected){
-                roleString+="1";
-            }else{
-                roleString+="0";
-            }
+        // let roleString = "";
+        // const formRoles = document.getElementById("role");
+        // Array.from(formRoles.options).forEach(option => {
+        //     if(option.selected){
+        //         roleString+="1";
+        //     }else{
+        //         roleString+="0";
+        //     }
 
-        });
+        // });
 
         
 
         const formData = new FormData(form);
-        formData.set("role", roleString);
+        // formData.set("role", roleString);
         // console.log(roleString);
 
         fetch("../api/update_user.php", {

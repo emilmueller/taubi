@@ -47,3 +47,17 @@ body {
 #notification.error {
     background-color: #dc3545;
 }
+
+.book_image {
+    width:100%;
+    aspect-ratio: 2 / 3;
+    object-fit:cover;
+
+}
+
+.input-readonly {
+    background-color: #5b5b5cc5; /* hellgrau wie disabled */
+    color: #93a0aa;            /* dunkleres Grau */
+    cursor: not-allowed;       /* zeigt, dass man nicht klicken soll */
+}
+

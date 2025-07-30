@@ -261,6 +261,120 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     });
 
 
+    //Foto-Funktionen
+    document.getElementById('addPicture').addEventListener('click', function () {      
+      if(!isMobileDevice()){
+        alert("Ein eigenes Foto kann nur mit dem Handy aufgenommen werden!");
+        return;
+      }
+      document.getElementById('cameraInput').click();
+    });
+
+    document.getElementById('cameraInput').addEventListener('change', function () {
+      const file = this.files[0];
+      
+
+      if (!file) {
+        alert("Bitte zuerst ein Foto aufnehmen.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+          const maxWidth = 400;
+          const scale = maxWidth / img.width;
+          const canvas = document.getElementById('canvas');
+          canvas.width = maxWidth;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob(function (blob) {
+            const formData = new FormData();
+            formData.append("photo", blob, "snapshot.jpg");
+
+            fetch('../api/fotoupload.php', {
+              method: 'POST',
+              body: formData
+            })
+              .then(response => response.json())
+              .then(data => {
+                // Wenn deine API einen response.filename zurückgibt
+                document.getElementById('bookImage').src = data.filename;
+                document.getElementById('image_url_input').value = data.filename;
+              })
+              .catch(error => {
+                alert('Fehler beim Upload: ' + error.message);
+              });
+          }, "image/jpeg", 0.85);
+        };
+        img.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    function isMobileDevice() {
+      return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    }
+
+    // $('#addPicture').on('click', function () {
+    //       $('#cameraInput').click();
+    //     });
+
+
+    //     $('#cameraInput').on('change', function() {
+            
+            
+    //         const file = this.files[0];
+
+    //         if (!file) {
+    //             alert("Bitte zuerst ein Foto aufnehmen.");
+    //             return;
+    //         }
+
+    //         const reader = new FileReader();
+    //         reader.onload = function (event) {
+    //             const img = new Image();
+    //             img.onload = function () {
+    //                 const maxWidth = 400;
+    //                 const scale = maxWidth / img.width;
+    //                 const canvas = document.getElementById('canvas');
+    //                 canvas.width = maxWidth;
+    //                 canvas.height = img.height * scale;
+    //                 const ctx = canvas.getContext("2d");
+    //                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    //                 canvas.toBlob(function(blob) {
+    //                     const formData = new FormData();
+    //                     formData.append("photo", blob, "snapshot.jpg");
+    //                     $.ajax({
+    //                       url: '../api/fotoupload.php',
+    //                       type: 'POST',
+    //                       data: formData,
+    //                       processData: false,
+    //                       contentType: false,
+    //                       success: function(response) {
+    //                         //alert(response.filename);
+    //                         $('#bookImage').attr('src', response.filename);
+    //                         $('#image_url_input').attr('value', response.filename);
+    //                       },
+    //                       error: function(request, status, err) {
+    //                         alert('Fehler beim Upload: ' + request.responseText);
+    //                       }
+    //                     });
+                        
+    //                 }, "image/jpeg", 0.85);
+    //             };
+    //             img.src = event.target.result;
+    //         };
+    //         reader.readAsDataURL(file);
+           
+    //     });
+
+
 
     
     </script>

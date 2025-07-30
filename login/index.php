@@ -131,11 +131,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
 								$login_err = "Dein Account wurde vom Admin gesperrt. Grund: $ban_message </br>Bitte wende Dich an <a href='mailto:admin@code-camp.ch'>admin@code-camp.ch</a>";
 							}elseif(is_null($token))
 							{
-								// Password is correct, so start a new session
+								//fetch permissions
+								$sql = "SELECT p.type as permission from user_roles ur
+									JOIN role_permissions rp ON ur.role_id = rp.role_id
+									JOIN permissions p ON rp.permission_id = p.id
+									where ur.user_id = ?
+									
+									;";
+
+								$stmt = $conn->prepare($sql);
+								$stmt->bind_param('i', $id);
+								$permissions = [];         
+								if($stmt->execute()){
+									$result = $stmt->get_result();
+									while($row = $result->fetch_assoc()){
+										$permissions[]=$row['permission'];
+									}
+									$stmt->close();
+								}
+								
+								
+								
+								
+								// Password is correct, so start a new session								
 								$sql = "UPDATE users SET last_login=now() WHERE id=?";
 								$stmt = mysqli_prepare($link, $sql);
 								mysqli_stmt_bind_param($stmt, "i", $id);
 								if(mysqli_stmt_execute($stmt)){
+									
 									mysqli_stmt_close($stmt);
 									$stmt = null;
 									session_start();
@@ -147,6 +170,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
 									$_SESSION['email']=$email;
 									$_SESSION["role"] = $role;
 									$_SESSION["token"]=bin2hex(random_bytes(32));
+									$_SESSION['permissions']=$permissions;
 									// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
 
 									// Redirect user to welcome page
