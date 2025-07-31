@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "../config.php";
+require_once "../config.php";
 
 
 $updateFields = [];
@@ -65,24 +65,26 @@ if($stmt->execute()){
 
 
 //Handle Roles
-$roles = isset($_POST['role']) ? $_POST['role'] :[] ;
+$roles = $_POST['role'];
 $user_id = $_POST['id'];
 
-//Delete all user_roles for user_id
-$sql = "DELETE FROM user_roles WHERE user_id=?";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i",$user_id);
-$stmt->execute();
+error_log("ISSET: ".isset($roles));
+if(isset($roles)){
+    error_log(print_r($roles,true));
+    //Delete all user_roles for user_id
+    $sql = "DELETE FROM user_roles WHERE user_id=?";
 
-if(!empty($roles)){
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i",$user_id);
+    $stmt->execute();
     $sql = "INSERT into user_roles (user_id, role_id) VALUES (?,?);";
     $stmt = $conn->prepare($sql);
     foreach($roles as $key => $value){
         if(is_numeric($value)){
             $stmt->execute([$user_id, (int)$value]);
         }
-}
+    }
 }
 
 

@@ -139,16 +139,27 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       renderBooks(loadedBooks);  // Render books after loading
     });
 
+    
     // Function to handle the "Delete" button 
     function delete_book(book_id) {
-      fetch("/api/delete_book.php?id="+book_id); // delete
-      loadBooks().then(loadedBooks => {
-      		renderBooks(loadedBooks);  // Render books after loading
-    	});
+        fetch("/api/delete_book.php?id="+book_id)
+        .then(response => response.json())
+        .then(result => {
+            if(result.success){
+                loadBooks().then(loadedBooks => {
+                    renderBooks(loadedBooks);  // Render books after loading
+                });
+
+            }
+
+        });
+            
     }
 
-    // Function to handle the "Delete" button 
+    // Function to handle the "Edit" button 
     function edit_book(book_id) {
+      sessionStorage.setItem('lastTab', "");
+      sessionStorage.setItem('lastSite','../account/index.php');
       window.open("/app/getbook.php?book_id="+book_id+"&action=db_search", "_self"); // edit 
       
     }

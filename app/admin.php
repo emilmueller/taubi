@@ -18,19 +18,26 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Benutzerverwaltung</title>
+        <title>Verwaltung</title>
         <!-- Bootstrap 5.3 CSS -->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+        
+        
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+
+        <!-- Choices.js laden -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
         <link href="../css/taubi.css" rel="stylesheet">
         <script src="../js/taubi.js"></script>
-    
+        
+
         <script>
-            // Check Admin
-           fetch("../api/get_permissions.php?type=has_only_user_permission&user_id=<?php echo $_SESSION['id'] ?> ")
+       // Check Admin
+        fetch("../api/get_permissions.php?type=has_only_user_permission&user_id=<?php echo $_SESSION['id'] ?> ")
             .then(response => response.json())
             .then(data => {
                 
@@ -47,39 +54,14 @@
             
             })
             .catch(error => {
-            console.error("Fehler beim Abrufen von is_admin.php:", error);
-            window.location.href = 'index.php';
+                console.error("Fehler beim Abrufen von is_admin.php:", error);
+                window.location.href = '/app';
             });
-            
-
-            fetch('../api/get_permissions.php?type=permission_types&user_id=<?php echo $_SESSION['id'] ?>')
-                .then(res => res.json())
-                .then(userPermissions => {
-                    //console.log(userPermissions);
-                    document.querySelectorAll('#adminTabs [data-permission]').forEach(tab => {
-                        const required = tab.dataset.permission.split(" ");
-                        let hasPermission = false;
-                        required.forEach(permission => {
-                            if (userPermissions.permissions.includes(permission)) {                       
-                                hasPermission = true;
-                            }
-
-
-                        });
-                        if(!hasPermission){
-                            tab.style.display = 'none';
-                        }
-                    
-                    
-                    });
-                })
-                .catch(err => {
-                    console.error('Fehler beim Laden der Berechtigungen:', err);
-                });
-
 
 
         </script>
+    
+        
 
     
     
@@ -97,7 +79,7 @@
             <h2>Admin</h2>
             <ul class="nav nav-tabs" id="adminTabs" role="tablist">
                 <li data-permission="edit_users delete_users ban_users" class="nav-item" role="presentation">
-                <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">Users</button>
+                <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">Users</button>
                 </li>
                 <li data-permission="edit_books delete_books" class="nav-item" role="presentation">
                 <button class="nav-link" id="books-tab" data-bs-toggle="tab" data-bs-target="#books" type="button" role="tab">Bücher</button>
@@ -113,27 +95,28 @@
                 </li>
             </ul>
             <div class="tab-content mt-3" id="adminTabsContent">
-                <div data-permission="edit_users delete_users ban_users" class="tab-pane fade show active" id="users" role="tabpanel">
-                    <?php include '../api/admin_users.php'; ?>
+                <div class="tab-pane fade" id="users" role="tabpanel">
+                    Wird geladen...
                 </div>
-                <div data-permission="edit_books delete_books" class="tab-pane fade show active" id="books" role="tabpanel">
-                    <?php include '../api/admin_books.php'; ?>
+                <div class="tab-pane fade" id="books" role="tabpanel">
+                    Wird geladen...
                 </div>
-                <div data-permission="admin" class="tab-pane fade" id="roles" role="tabpanel">
-                    <?php include '../api/admin_roles.php'; ?>
+                <div class="tab-pane fade" id="roles" role="tabpanel">
+                    Wird geladen...
                 </div>
-                <div data-permission="edit_tags" class="tab-pane fade" id="tags" role="tabpanel">
-                    <?php include '../api/admin_tags.php'; ?>
+                <div class="tab-pane fade" id="tags" role="tabpanel">
+                    Wird geladen...
                 </div>
-                <div data-permission="admin" class="tab-pane fade" id="settings" role="tabpanel">
-                    <?php include '../api/admin_settings.php'; ?>
+                <div class="tab-pane fade" id="settings" role="tabpanel">
+                    Wird geladen...
                 </div>
             </div>
         </div>  
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type='module' src="../js/admin.js"></script>
 
     </body>
 </html>

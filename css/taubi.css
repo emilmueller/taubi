@@ -55,9 +55,51 @@ body {
 
 }
 
+.small_image {
+    width:40%;
+    aspect-ratio: 2 / 3;
+    object-fit:cover;
+
+}
+
 .input-readonly {
     background-color: #5b5b5cc5; /* hellgrau wie disabled */
     color: #93a0aa;            /* dunkleres Grau */
     cursor: not-allowed;       /* zeigt, dass man nicht klicken soll */
 }
+
+
+.choices {
+    background-color: #343a40; /* Bootstrap dark */
+    color: #fff;
+    
+}
+.choices__inner {
+    background-color: #343a40; /* Bootstrap dark */
+    color: #fff;
+    border-color: #495057;
+}
+
+.choices__input {
+    background-color: #343a40; /* Bootstrap dark */
+    color: #fff;
+    border-color: #495057;
+}
+
+.choices__list--dropdown {
+    background-color: #343a40;
+    color: white;
+}
+
+.choices__item--selectable.is-highlighted {
+    background-color: #343a40;
+    color: #2a2a2b;
+
+}
+
+.choices__item--selectable {
+    background-color: #4f5255;
+    color: white;
+}
+
 

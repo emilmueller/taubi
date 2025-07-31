@@ -15,7 +15,7 @@ User
 
 */
    
-    include '../config.php';
+    require_once '../config.php';
 
     $roles = ["Admin", "Superuser", "Biblio", "Tag Manager", "Book Manager", "User Manager","Supervisor", "User"];
 
@@ -46,6 +46,16 @@ User
     //Rollen (Namen) für die Übersicht
     if($_GET['type']=="roles" and isset($_GET['user_id'])){
         $user_id = $_GET['user_id'];
+        $stmt = $conn->prepare("SELECT value from settings WHERE type='default_role' LIMIT 1;");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_row();
+        //error_log(print_r($row,true));
+        $default_user = $row['0'];
+        //error_log("DEFAULT: ".$default_user);
+        
+
+
         $sql = "SELECT r.name as role from user_roles ur
             JOIN users u ON ur.user_id = u.id
             JOIN roles r ON r.id = ur.role_id
@@ -55,12 +65,22 @@ User
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $user_id);
-        $roles = [];         
+        $roles = [];
+        $default_set = false;         
         if($stmt->execute()){
             $result = $stmt->get_result();
             while($row = $result->fetch_assoc()){
+                if($row['role']===$default_user){
+                    $default_set=true;
+                }
                 $roles[]=$row['role'];
             }
+            if(!$default_set){
+                $roles[]=$default_user;
+            }
+
+
+            
             $stmt->close();
         }
         header('Content-Type: application/json');

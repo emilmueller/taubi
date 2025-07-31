@@ -24,7 +24,8 @@ if (isset($bookid)){
         SELECT
             b.*,
             u.username AS seller_name,
-            JSON_ARRAYAGG(t.name) AS tags
+            JSON_ARRAYAGG(t.name) AS tags,
+            JSON_ARRAYAGG(t.id) AS tag_ids
         FROM books b
         LEFT JOIN users u ON b.sold_by = u.id
         LEFT JOIN book_tags bt ON b.id = bt.book_id
@@ -41,7 +42,8 @@ if (isset($bookid)){
     SELECT
         b.*,
         u.username AS seller_name,
-        JSON_ARRAYAGG(t.name) AS tags
+        JSON_ARRAYAGG(t.name) AS tags,
+        JSON_ARRAYAGG(t.id) AS tag_ids
     FROM books b
     LEFT JOIN users u ON b.sold_by = u.id
     LEFT JOIN book_tags bt ON b.id = bt.book_id

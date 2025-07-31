@@ -10,16 +10,20 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit();
 }
 
-require_once "../config.php";
-$delete_id=$_GET["id"];
-$sql="DELETE FROM books WHERE id = ?";
+include "../config.php";
+$tag_id=$_GET["id"];
+$sql="DELETE FROM tags WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $delete_id);
+$stmt->bind_param('i', $tag_id);
+
 if($stmt->execute()){
-	header('Content-Type: application/json');
-    echo json_encode(['success' => true, 'message' => "Buch gelöscht"]);
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true, 'message' => "Tag gelöscht"]);
     exit;
 }
 
+
+
+$stmt->close();
 
 ?>

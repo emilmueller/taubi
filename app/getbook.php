@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
-    header("LOCATION:/login/login.php");
+    header("LOCATION:/login");
     exit();
 }
 ?>
@@ -19,6 +19,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+
+  <!-- Choices.js laden -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
   <link href="../css/taubi.css" rel="stylesheet">
   
 
@@ -51,7 +56,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
      
     
     <!-- Book Form  -->
-    <form id="bookForm" method="post" action="save_book.php">
+    <form id="bookForm" method="post" action="save_book.php?redirect=<?php echo $_GET['redirect']??'/account'; ?>">
       <div class="row">
         <div class="col-lg-4 align-items-center d-flex justify-content-center">
           <div class="row">
@@ -143,12 +148,33 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             </div>
           </div>
           <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="sellerInput" class="col-form-label">Anbieter:in</label>
+            </div>  
+            <div class="col-10">
+                <input type="text" id="sellerInput" name="seller" class="form-control" placeholder="Anbieter:in" />
+                <input type="hidden" id="sold_byInput" name="sold_by" />
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-2 mb-2">
+                <label for="tagInput" class="col-form-label">Fach</label>
+            </div>  
+            <div class="col-10">
+              <select id="tagInput" name="tag[]" multiple>
+                <option></option>
+              </select>
+                
+                
+            </div>
+          </div>
+          <div class="row align-items-center">
             <div class="col-12">
                 
-                <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="window.open('/account', '_self');">Abbrechen</button>
+                <button id="backButton" type="button"  class="btn btn-secondary  float-end" onclick="goBack();">Abbrechen</button>
                 <button id="okButton" type="button" class="btn btn-secondary  float-end me-1" onclick="submit()">Buch speichern</button>
                 <input type="hidden" name="action" value="<?php echo $_GET['action'] ?>" />
-                <input type="hidden" name="sold_by" value="<?php echo $_SESSION['id']?>" />
+                <!-- <input type="hidden" name="sold_by" value="<?php echo $_SESSION['id']?>" /> -->
                 <input type ="hidden" name="book_id" value = "<?php echo $_GET['book_id'] ?>" />
             </div>
           </div>
@@ -162,6 +188,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
   </div>
 
   <script>
+
+
+
     document.addEventListener('DOMContentLoaded', function () {
       const action = '<?php echo $_GET['action']; ?>';
       const bookid = '<?php echo $_GET['book_id']; ?>';
@@ -169,7 +198,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       const spinner = document.getElementById('spinner');
       const bookDiv = document.getElementById('bookDiv');
 
-      if (action === "isbn_search") {
+      if (action === "isbn_search") { //NEW Book
         // Spinner anzeigen, Ergebnis ausblenden
         spinner.classList.remove('d-none');
         bookDiv.classList.add('d-none');
@@ -195,9 +224,13 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           document.getElementById('yearInput').value = res.book.date_published;
           document.getElementById('isbnInput').value = res.book.isbn13;
           document.getElementById('pagesInput').value = res.book.pages;
+          //Anbieter:in ausblenden bei einem neuen Buch. Es wird die Session-ID übernommen
+          document.getElementById('sellerInput').parentElement.parentElement.classList.add("d-none");
 
           const authors = res.book.authors.join(', ');
           document.getElementById('authorInput').value = authors;
+
+          loadTags(null);
 
           bookDiv.classList.remove('d-none');
         })
@@ -214,7 +247,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           console.error('Fehler:', error);
         });
 
-      } else if (action === "db_search") {
+      } else if (action === "db_search") { //UPDATE BOOK
         // Spinner anzeigen, Ergebnis ausblenden
         spinner.classList.remove('d-none');
         bookDiv.classList.add('d-none');
@@ -238,6 +271,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           document.getElementById('title').textContent = "Buchdaten bearbeiten";
 
           const res = JSON.parse(JSON.stringify(response)); // wie jQuerys "trick"
+          //error.log(res);
 
           document.getElementById('bookImage').src = res[0].image_url;
           document.getElementById('image_url_input').value = res[0].image_url;
@@ -250,6 +284,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           document.getElementById('authorInput').value = res[0].author;
           document.getElementById('zustandInput').value = res[0].book_condition;
           document.getElementById('preisInput').value = res[0].price;
+          const seller = document.getElementById('sellerInput')
+          seller.value = res[0].seller_name;
+          seller.classList.add('input-readonly');
+          seller.readonly = true;
+          const sold_by = document.getElementById('sold_byInput');
+          sold_by.value = res[0].sold_by;
+
+          loadTags(res[0]);
 
           bookDiv.classList.remove('d-none');
         })
@@ -320,64 +362,65 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
     }
 
-    // $('#addPicture').on('click', function () {
-    //       $('#cameraInput').click();
-    //     });
+    function goBack(){
+      const lastTab = sessionStorage.getItem('lastTab') || '';
+      if(lastTab != ''){
+        window.location.href =sessionStorage.getItem('lastSite')+'?tab='+lastTab;
+      }else{
+        window.location.href = sessionStorage.getItem('lastSite');
+      }
+      
+    }
 
+    
 
-    //     $('#cameraInput').on('change', function() {
-            
-            
-    //         const file = this.files[0];
+    async function loadTags(book) {
+      //console.log(book);
+      try {
+        const response = await fetch('/api/get_tags.php');
+        const data = await response.json();
 
-    //         if (!file) {
-    //             alert("Bitte zuerst ein Foto aufnehmen.");
-    //             return;
-    //         }
+        const fachFilter = document.getElementById('tagInput');
 
-    //         const reader = new FileReader();
-    //         reader.onload = function (event) {
-    //             const img = new Image();
-    //             img.onload = function () {
-    //                 const maxWidth = 400;
-    //                 const scale = maxWidth / img.width;
-    //                 const canvas = document.getElementById('canvas');
-    //                 canvas.width = maxWidth;
-    //                 canvas.height = img.height * scale;
-    //                 const ctx = canvas.getContext("2d");
-    //                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        data.tags.forEach(tag => {
+          const option = document.createElement('option');
+          option.value = tag.id;
+          option.textContent = tag.name;
+          if(book!=null && book.tag_ids.includes(tag.id)){
+            option.selected = true;
+          }
+          fachFilter.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Fehler beim Laden der Tags:', error);
+      }
 
-    //                 canvas.toBlob(function(blob) {
-    //                     const formData = new FormData();
-    //                     formData.append("photo", blob, "snapshot.jpg");
-    //                     $.ajax({
-    //                       url: '../api/fotoupload.php',
-    //                       type: 'POST',
-    //                       data: formData,
-    //                       processData: false,
-    //                       contentType: false,
-    //                       success: function(response) {
-    //                         //alert(response.filename);
-    //                         $('#bookImage').attr('src', response.filename);
-    //                         $('#image_url_input').attr('value', response.filename);
-    //                       },
-    //                       error: function(request, status, err) {
-    //                         alert('Fehler beim Upload: ' + request.responseText);
-    //                       }
-    //                     });
-                        
-    //                 }, "image/jpeg", 0.85);
-    //             };
-    //             img.src = event.target.result;
-    //         };
-    //         reader.readAsDataURL(file);
-           
-    //     });
+      const choices = new Choices('#tagInput' ,{
+          removeItemButton: true,
+          searchEnabled: true
+
+        });
+
+        // Zugriff auf das geöffnete Dropdown-Element
+        const dropdown = document.querySelector('.choices__list--dropdown');
+
+        // Eventlistener: Wenn Maus das Dropdown verlässt → Dropdown schließen
+        dropdown.addEventListener('mouseleave', () => {
+          choices.hideDropdown(); // API von Choices.js
+        });
+      
+      
+    }
+
+    // // Call this when your page loads
+    // document.addEventListener('DOMContentLoaded', loadTags);
 
 
 
     
     </script>
+
+
   
  
 

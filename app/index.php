@@ -6,6 +6,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     header("LOCATION:/login");
     exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="de">
@@ -83,10 +84,11 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           isbn: book.isbn,
           seller: book.sold_by || '0', // fallback if no seller
           seller_name: book.seller_name, // if your API doesn't return seller name
-          tags: book.tags
+          tags: book.tags,
+          tag_ids: book.tag_ids
         }));
 
-        //console.log(books);
+        console.log(books);
         return books;
       } catch (error) {
         console.error('Error loading books:', error);
@@ -114,6 +116,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted">Zustand: ${book.book_condition}</p>
               <p class="text-muted">Preis: ${book.price}</p>
 	            <p class="text-muted">Verkäufer: ${book.seller_name}</p>
+              <p class="text-muted">Fächer: ${book.tags}</p>
               
             </div>
             <div class="card-footer">
@@ -128,16 +131,19 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     // Function to filter books based on search input and selected Fach
     function filterBooks() {
-      const query = searchInput.value.toLowerCase();
+      const query = searchInput.value.trim().toLowerCase();
       const selectedFach = fachFilter.value;
+      
 
       const filtered = books.filter(book => {
         const matchesQuery = book.title.toLowerCase().includes(query)
           || book.author.toLowerCase().includes(query)
           || book.isbn.toLowerCase().includes(query)
-          || book.description.toLowerCase().includes(query);
+          || book.description.toLowerCase().includes(query)
+          || (Array.isArray(book.tags) && book.tags.length>0 && book.tags.some(tag => typeof tag === 'string' && tag.includes(query)));
+          
 
-        const matchesFach = !selectedFach || (book.tags && book.tags.includes(selectedFach));
+        const matchesFach = !selectedFach || (book.tag_ids && book.tag_ids.includes(selectedFach));
         return matchesQuery && matchesFach;
       });
 
@@ -214,8 +220,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
       data.tags.forEach(tag => {
         const option = document.createElement('option');
-        option.value = tag;
-        option.textContent = tag;
+        option.value = tag.id;
+        option.textContent = tag.name;
         fachFilter.appendChild(option);
       });
     } catch (error) {

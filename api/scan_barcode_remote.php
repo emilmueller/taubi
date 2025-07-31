@@ -1,11 +1,21 @@
 <?php
 session_start();
 
+require_once '../api/check_temp_token.php';
+
+
+
+if(!check_temp_token($_GET['token'])){
+    header('Location: ../app/error_page.php?message=Scan mit dem Handy ist nicht möglich&redirect=../app');
+}
+
 // Check if the user is logged in
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     header("LOCATION:/app");
     exit();
 }
+
+
 
 ?>
 <!doctype html>
@@ -28,7 +38,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script type="text/javascript" src="/js/qrcode.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <link href="../css/taubi.css" rel="stylesheet">
 
     <style>
@@ -135,8 +146,18 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           <span class="bi bi-x-square" ></span>
         </button>
         
+        
       
       </div>
+    </div>
+    <div class="toast">
+        <div class="toast-header">
+            <strong class="me-auto">ISBN-Nummer gesendet</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            <p>Fahre am Computer weiter!</p>
+        </div>
     </div>
 
     
@@ -186,15 +207,6 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               </button>
             </div>
           </div>
-          <div class="row pt-5 d-none d-md-block">
-            <div class="col">
-              Wechsle aufs Handy
-            </div>
-            <div class="col">
-              <div id="qrcode"></div>
-            </div>
-        
-          </div>
         </div>
       </div>
     </div>
@@ -217,58 +229,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script type="text/javascript">
-    let token;
-    fetch('../api/set_temp_token.php')
-      .then(response => response.json())
-      .then(result =>{
-        if(result.success){
-          const scanUrl = `https://taubi.code-camp.ch/api/scan_barcode_remote.php?token=${result.token}`;
-          token = result.token;
 
-          //Wieder wegmachen im Prod
-          console.log(scanUrl);
-          var qrcode = new QRCode(document.getElementById('qrcode'), {
-          width:150,
-          height:150,
-          correctLevel : QRCode.CorrectLevel.H
-        });
-        qrcode.makeCode(scanUrl);
-
-        }
-      })
-
-
-      setInterval(() =>{
-        fetch('../api/get_scan.php', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                token: token
-            })
-        })
-        .then(response => response.json())
-        .then(res => {
-            if (res.success){
-              //console.log(res.isbn);
-              fetch('../api/delete_temp_token.php?token='+token)
-              .then(response => response.json())
-              .then(answer => {
-                if(answer.success){
-                  window.location.href = `getbook.php?book_id=${res.isbn}&action=isbn_search`;
-                }else{
-                  window.location.href = `../app/error_page.php?message=Das Scannen hat nicht funktioniert. Versuch es noch einmal.&redirect=/app`;
-                }
-              })
-              
-            }     
-        })
-      }, 2000);
-
-    
-
-    
+      
 
     
     function checkISBN(n){
@@ -312,6 +274,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     
     document.addEventListener('DOMContentLoaded', function () {
+
+      
+
       let vgespiegelt = false;
       let hgespiegelt = false;
       let rotation = 0;
@@ -340,7 +305,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
       okButton.addEventListener('click', function () {
         const result = isbnInput.value;
         if (result) {
-          window.location.href = `getbook.php?book_id=${result}&action=isbn_search`;
+          handleScan(result, <?php echo json_encode($_GET['token']) ?>);
         } else {
           alert("Keine ISBN-Nummer eingegeben");
         }
@@ -422,6 +387,35 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           console.error(err);
         });
     });
+
+    function handleScan(result, token){
+        console.log(result+"  -- "+ token);
+        fetch('../api/submit_scan.php' , {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                isbn_scan: result,
+                token: token
+            })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Fehler beim Übertragen der ISBN-Nummer");
+            console.log(response);
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function(toastEl) {
+                return new bootstrap.Toast(toastEl)
+            })
+            toastList.forEach(toast => toast.show())
+            setTimeout(() => {
+                window.location.href = '/app';
+            }, 1000);
+            
+        })
+    }
+           
+       
 
 
     

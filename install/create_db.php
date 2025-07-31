@@ -128,6 +128,29 @@
                                 </div>';
                         }
 
+			// Create settings table
+                        $sql="CREATE TABLE IF NOT EXISTS settings (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(255) NOT NULL UNIQUE,
+							type VARCHAR(255) NOT NULL UNIQUE,
+							value VARCHAR(255),
+							table_name VARCHAR(255),
+							col_name VARCHAR(255),
+							description VARCHAR(255)
+                        );";
+
+
+                        if ($conn->query($sql) === TRUE) {
+                                echo '<br><div class="alert alert-success" role="alert">
+                                                Table settings created successfully!
+                                </div>';
+                        } else {
+                                $success=0;
+                                echo '<br><div class="alert alert-danger" role="alert">
+                                                Error creating table settings: ' . $conn->error .'
+                                </div>';
+                        }
+
 			// Create book_tags table
 						$sql="CREATE TABLE IF NOT EXISTS book_tags (
 							id INT AUTO_INCREMENT PRIMARY KEY,
@@ -208,6 +231,28 @@
 							PRIMARY KEY (role_id, permission_id),
 							FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
 							FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
+						);";
+
+						 if ($conn->query($sql) === TRUE) {
+                                echo '<br><div class="alert alert-success" role="alert">
+                                                Table role_permission created successfully!
+                                </div>';
+                        } else {
+                                $success=0;
+                                echo '<br><div class="alert alert-danger" role="alert">
+                                                Error creating table role_permission: ' . $conn->error .'
+                                </div>';
+                        }
+
+				//Create temp_tokens table
+						$sql = "CREATE TABLE temp_tokens (
+							token VARCHAR(255) PRIMARY KEY,
+							user_id INT NOT NULL,
+							expires_at TIMESTAMP NOT NULL,
+							isbn_scan VARCHAR(255)
+							
+							
+							
 						);";
 
 						 if ($conn->query($sql) === TRUE) {
