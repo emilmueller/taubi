@@ -6,13 +6,13 @@
 
 
 
-    document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab');
-        if(tab){
-            activateTab(tab);
-        }
-    });
+    // document.addEventListener("DOMContentLoaded", () => {
+    // const params = new URLSearchParams(window.location.search);
+    // const tab = params.get('tab');
+    //     if(tab){
+    //         activateTab(tab);
+    //     }
+    // });
 
     function activateTab(tabId) {
         document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('show','active'));
@@ -69,13 +69,13 @@
                             const html = await res.text();
                             tabPane.innerHTML = html;
                             
-                            const module = await import(`../js/admin_${tabId}.js`);
-                            const initFn = module(`initTab`);
+                            const module = await import(`/js/admin_${tabId}.js`);
+                            const initFn = module[`initTab`];
                             if(typeof initFn === 'function') initFn();
                             loadedTabs[tabId] = true;
 
                         } catch(err) {
-                             tabPane.innerHTML = '<div class="text-danger">Fehler beim Laden.</div>';
+                             tabPane.innerHTML = '<div class="text-danger">Fehler beim Laden.'+err+'</div>';
                         }
                            
                     }
@@ -84,7 +84,7 @@
                 
         })
         .catch(err => {
-        console.error("Berechtigungen konnten nicht geladen werden", err);
+            console.error("Berechtigungen konnten nicht geladen werden", err);
         });
 
         // Aktiven Tab sofort laden
