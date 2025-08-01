@@ -7,8 +7,11 @@ $username_err = $password_err = $confirm_password_err = "";
 $err="";
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){
-	header("location: /login/logout.php");
-    exit;
+	
+		header("location: /login/logout.php");
+		exit;
+	
+	
 }
 require_once "../config.php";
 $link=$conn;

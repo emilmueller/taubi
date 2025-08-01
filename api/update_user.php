@@ -10,6 +10,8 @@ $types = "";
 
 $bindParams = [];
 
+$db_col_types = ['id'=>'i','username'=>'s', 'email'=>'s', 'banned'=>'i', 'ban_message'=>'s'];
+
 //error_log(print_r($_POST,true));
 
 foreach($_POST as $key => $value){
@@ -37,7 +39,7 @@ $bindParams[]=(int)$_POST['id'];
 // error_log(print_r($bindParams,true));
 
 
-// error_log(print_r($params));
+//error_log("PARAMS: ".print_r($bindParams,true)); 
 
 $sql = "UPDATE users SET ".implode(", ",$updateFields)." WHERE id = ?;";
 // error_log($sql." ---> ".$types);

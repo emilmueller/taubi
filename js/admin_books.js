@@ -1,5 +1,6 @@
-
-    function initTab(){
+    let bookCardsContainer;
+     
+    export function initTab(){
         
         // Call the function to load books and then render them
         loadBooks().then(loadedBooks => {
@@ -15,7 +16,7 @@
         });
         }
 
-        const bookCardsContainer = document.getElementById('bookCards');
+        bookCardsContainer = document.getElementById('bookCards');
         const searchInput = document.getElementById('searchInput');
         const fachFilter = document.getElementById('fachFilter');
         // Filter on input or dropdown change
@@ -84,13 +85,22 @@
             </div>
             <div class="card-footer">
               
-              <button class="btn btn-danger float-end" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
-              <button class="btn btn-success float-end me-1" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
+              <button id="deleteBtn" class="btn btn-danger float-end" ><span class="bi bi-trash"></span></button> <!-- delete Button -->
+              <button id="editBtn" class="btn btn-success float-end me-1" ><span class="bi bi-pencil"></span></button> <!-- edit Button -->
             </div>
           
           </div>
         `;
         bookCardsContainer.appendChild(card);
+
+        document.getElementById('editBtn').addEventListener('click', () =>{
+                  edit_booooook(book.id);
+                });
+
+        document.getElementById('deleteBtn').addEventListener('click', () =>{
+                  delete_book(book.id);
+                });
+        
       });
     }
 

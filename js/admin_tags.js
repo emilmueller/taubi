@@ -1,5 +1,6 @@
  // Call the function to load tags and then render them
- function initTab(){
+ export function initTab(){
+    //console.log("load Tag Tab");
     loadTags().then(loadedTags => {
       tags = loadedTags; // Store the loaded tags
       renderTags(tags);  // Render tags after loading

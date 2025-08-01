@@ -117,7 +117,7 @@ require_once '../config.php';
         $stmt->bind_param('i', $user_id);
         $stmt->execute();
         
-        error_log("USER-PERMISSIONS: ".$user_id);
+        //error_log("USER-PERMISSIONS: ".$user_id);
         $result = $stmt->get_result();
         //error_log("----------".$result->num_rows);
         $found = $result->num_rows == 0;

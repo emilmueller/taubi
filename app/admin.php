@@ -2,13 +2,7 @@
     session_start();
     require_once "../config.php";
 
-    header("Content-Type: text/html; charset=UTF-8");
-
-    // Check if the user is logged in
-    if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
-        header("LOCATION:/login/login.php");
-        exit();
-    }
+   include '../api/login_check.php';
 
     
 
@@ -32,7 +26,7 @@
         <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
         <link href="../css/taubi.css" rel="stylesheet">
-        <script src="../js/taubi.js"></script>
+        <!-- <script src="../js/taubi.js"></script> -->
         
 
         <script>
@@ -115,7 +109,7 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script type='module' src="../js/admin.js"></script>
 
     </body>

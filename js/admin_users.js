@@ -1,5 +1,9 @@
 
-function initTab(){
+import { hasPermission } from '../js/admin.js';
+
+let users;
+
+export function initTab(){
     loadUsers().then(loadedUsers => {
       users = loadedUsers; // Store the loaded users
       renderUsers(users);  // Render users after loading
@@ -68,7 +72,7 @@ function initTab(){
           
 
         });
-        th = document.createElement("th");
+        const th = document.createElement("th");
         th.textContent = "Actions";
         headerRow.appendChild(th);
 
@@ -205,8 +209,8 @@ function initTab(){
                   `;
             }).join("")}
         `;
-        editUserForm.innerHTML=formHTML;
-        const choices = new Choices('#role' ,{
+          editUserForm.innerHTML=formHTML;
+          const choices = new Choices('#role' ,{
           removeItemButton: true,
           searchEnabled: true
 
@@ -218,6 +222,10 @@ function initTab(){
         // Eventlistener: Wenn Maus das Dropdown verlässt → Dropdown schließen
         dropdown.addEventListener('mouseleave', () => {
           choices.hideDropdown(); // API von Choices.js
+        });
+
+        document.getElementById('saveUserBtn').addEventListener('click', () =>{
+          saveUser("editUser");
         });
 
         
@@ -259,6 +267,10 @@ function initTab(){
       `;
 
       banUserForm.innerHTML = formHTML;
+
+      document.getElementById('banUserBtn').addEventListener('click', () =>{
+          saveUser("banUser");
+        });
       // Modal anzeigen
       const modal = new bootstrap.Modal(document.getElementById("banUserModal"));
       modal.show();
@@ -298,6 +310,7 @@ function initTab(){
     }
 
     function unbanUser(user){
+      
       fetch("../api/update_user.php", {
             method: "POST",
             headers: {
@@ -323,7 +336,8 @@ function initTab(){
         })
         .catch(error => {
             console.error("Fehler beim Senden:", error);
-            alert("Ein Fehler ist aufgetreten.");loadUsers().then(loadedUsers => {
+            alert("Ein Fehler ist aufgetreten.");
+            loadUsers().then(loadedUsers => {
                 users = loadedUsers; // Store the loaded users
                 renderUsers(users);  // Render users after loading
                  });
@@ -332,7 +346,7 @@ function initTab(){
 
     }
 
-    function saveUser(action){
+    export function saveUser(action){
         const form = document.getElementById(action+'Form');
         const formData = new FormData(form);
         // formData.set("role", roleString);

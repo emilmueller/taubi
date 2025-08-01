@@ -19,7 +19,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
-        <button type="button" class="btn btn-primary" onclick="saveUser('editUser')">Speichern</button>
+        <button id="saveUserBtn" type="button" class="btn btn-primary" >Speichern</button>
       </div>
       
     </div>
@@ -43,7 +43,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
-        <button type="button" class="btn btn-primary" onclick="saveUser('banUser')">Speichern</button>
+        <button id="banUserBtn" type="button" class="btn btn-primary" >Speichern</button>
       </div>
       
     </div>
