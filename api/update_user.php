@@ -10,7 +10,8 @@ $types = "";
 
 $bindParams = [];
 
-$db_col_types = ['id'=>'i','username'=>'s', 'email'=>'s', 'banned'=>'i', 'ban_message'=>'s'];
+$db_col_types = getBindParamTypes('user');
+error_log(print_r($db_col_types,true));
 
 //error_log(print_r($_POST,true));
 
