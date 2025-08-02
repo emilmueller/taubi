@@ -3,10 +3,8 @@
     require_once "../config.php";
 
    include '../api/login_check.php';
-
-    
-
 ?>
+
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="de">
     <head>
@@ -36,7 +34,7 @@
             .then(data => {
                 
                 if (data == false) {
-                    console.log("✅ Zugriff erlaubt.");
+                    console.log("✅ Zugriff erlaubt für "+ "<?php echo $_SESSION['username'] ?>");
                     // Optional: zeige Seite oder führe Setup aus
                 } else {
                     console.warn("⛔ Kein Zugriff. Weiterleitung...");
@@ -51,6 +49,11 @@
                 console.error("Fehler beim Abrufen von is_admin.php:", error);
                 window.location.href = '/app';
             });
+
+        
+        
+        
+        
 
 
         </script>

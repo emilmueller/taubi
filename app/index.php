@@ -85,7 +85,7 @@ include '../api/login_check.php';
           tag_ids: book.tag_ids
         }));
 
-        console.log(books);
+        //console.log(books);
         return books;
       } catch (error) {
         console.error('Error loading books:', error);

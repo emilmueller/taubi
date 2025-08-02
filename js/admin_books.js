@@ -1,4 +1,5 @@
     let bookCardsContainer;
+    let books;
      
     export function initTab(){
         
@@ -30,12 +31,12 @@
     // Function to load books
     async function loadBooks() {
       try {
-        const response = await fetch('/api/get_books.php');
+        const response = await fetch('../api/get_books.php');
         const data = await response.json();
 
         // Transform API data to match your book object structure
         const books = data.map(book => ({
-            id: book.id,
+          id: book.id,
           title: book.title,
           author: book.author,
           description: `${book.publisher}, ${book.book_condition}, ${book.language}, ${book.pages} pages`, // or customize this
@@ -68,38 +69,64 @@
     function renderBooks(filteredBooks) {
       bookCardsContainer.innerHTML = '';
       filteredBooks.forEach(book => {
+        const col = document.createElement('div');
+        col.classList.add('col');
         const card = document.createElement('div');
-        card.classList.add('col');
-        card.innerHTML = `
-          <div class="card h-100">
-            <img src="${book.image_url}" class="card-img-top small_image" alt="Buchbild">
-            <div class="card-body">
-                <h5 class="card-title">${book.title}</h5>
-                <!--<p class="card-text">${book.description}</p>-->
-                <p class="text-muted">Autor: ${book.author}</p>
-                <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
-                <p class="text-muted">Zustand: ${book.book_condition}</p>
-                <p class="text-muted">Preis: ${book.price}</p>
-                <p class="text-muted">Anbieter:in: ${book.seller_name}</p>
-                <p class="text-muted">Fächer: ${book.tags}</p>
-            </div>
-            <div class="card-footer">
-              
-              <button id="deleteBtn" class="btn btn-danger float-end" ><span class="bi bi-trash"></span></button> <!-- delete Button -->
-              <button id="editBtn" class="btn btn-success float-end me-1" ><span class="bi bi-pencil"></span></button> <!-- edit Button -->
-            </div>
-          
-          </div>
-        `;
-        bookCardsContainer.appendChild(card);
+        card.className = 'card h-100';
+        col.appendChild(card);
+        const img = document.createElement('img');
+        img.src = book.image_url;
+        img.className = 'card-img-top small_image';
+        img.alt = 'Buchbild';
+        card.appendChild(img);
+        const card_body = document.createElement('div');
+        card_body.className = 'card-body';
+        card.appendChild(card_body);
+        const card_title = document.createElement('h5');
+        card_title.className='card-title';
+        card_title.innerHTML = book.title;
+        card_body.appendChild(card_title);
+        
+        const zeilen = {
+          'Autor:in:': [book.author, true],
+          'ISBN:': [book.isbn, false],
+          'Zustand:': [book.book_condition, true],
+          'Preis:': [book.price, true],
+          'Anbieter:in:': [book.seller_name, true],
+          'Fächer:': [book.tags, true]
+        };
 
-        document.getElementById('editBtn').addEventListener('click', () =>{
-                  edit_booooook(book.id);
-                });
+        Object.entries(zeilen).forEach(([label, value]) => {
+          const p = document.createElement('p');
+          p.className = 'text-muted';
+          p.innerHTML = label+" "+value[0];
+          if(!value[1]){
+            p.style = 'display:none';
+          }
+          card_body.appendChild(p);
+        });
 
-        document.getElementById('deleteBtn').addEventListener('click', () =>{
+        const footer = document.createElement('div');
+        footer.className = 'card-footer';
+        card.appendChild(footer);
+
+        const deletBtn = document.createElement('button');
+        deletBtn.className = 'btn btn-danger float-end';
+        deletBtn.innerHTML = '<span class="bi bi-trash"></span>';
+        deletBtn.addEventListener('click', () =>{
                   delete_book(book.id);
                 });
+        footer.appendChild(deletBtn);
+
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn btn-success float-end me-1';
+        editBtn.innerHTML = '<span class="bi bi-pencil"></span>';
+        editBtn.addEventListener('click', () =>{
+                  edit_book(book.id);
+                });
+        footer.appendChild(editBtn);
+        bookCardsContainer.appendChild(col);
+
         
       });
     }
@@ -175,7 +202,7 @@
     function edit_book(book_id) {
         sessionStorage.setItem('lastTab', 'books');
         sessionStorage.setItem('lastSite','../app/admin.php');
-        window.open("/app/getbook.php?book_id="+book_id+"&action=db_search&redirect=../app/admin.php?tab=books", "_self"); // edit 
+        window.open("../app/getbook.php?book_id="+book_id+"&action=db_search&redirect=../app/admin.php?tab=books", "_self"); // edit 
         
     }
   

@@ -10,8 +10,8 @@ $types = "";
 
 $bindParams = [];
 
-$db_col_types = getBindParamTypes('user');
-error_log(print_r($db_col_types,true));
+$db_col_types = getBindParamTypes('users');
+
 
 //error_log(print_r($_POST,true));
 

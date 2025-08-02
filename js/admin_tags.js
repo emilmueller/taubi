@@ -1,12 +1,14 @@
- // Call the function to load tags and then render them
- export function initTab(){
-    //console.log("load Tag Tab");
-    loadTags().then(loadedTags => {
-      tags = loadedTags; // Store the loaded tags
-      renderTags(tags);  // Render tags after loading
-      addPlusButton(tags);
-    });
- }
+    let tags; 
+    
+    // Call the function to load tags and then render them
+    export function initTab(){
+        //console.log("load Tag Tab");
+        loadTags().then(loadedTags => {
+        tags = loadedTags; // Store the loaded tags
+        renderTags(tags);  // Render tags after loading
+        addPlusButton(tags);
+        });
+    }
     
      // Function to load tags
     async function loadTags() {
@@ -22,7 +24,7 @@
             }
          }));
 
-        //console.log(JSON.stringify(users, null, 2));
+       
         return tags;
 
 

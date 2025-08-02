@@ -1,21 +1,22 @@
-    const loadedTabs = {};
+    let loadedTabs = {};
     let userPermissionList = {};
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const desiredTabId = urlParams.get('tab'); // z. B. "users"
+    let desiredTabFound = null;
+
     
-    //console.log("load Admin "+user_id);
+    
+    
    
 
 
-
-
-    // document.addEventListener("DOMContentLoaded", () => {
-    // const params = new URLSearchParams(window.location.search);
-    // const tab = params.get('tab');
-    //     if(tab){
-    //         activateTab(tab);
-    //     }
-    // });
+    
+    
+    
 
     function activateTab(tabId) {
+        console.log("ACTIVATE: "+tabId);
         document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('show','active'));
         document.querySelector(`#${tabId}`).classList.add('show','active');
         document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
@@ -40,11 +41,11 @@
         
 
         const tabs = document.querySelectorAll('#adminTabs [data-permission]');
-        for( const tab of tabs){
+        for(const tab of tabs){
             const required = tab.dataset.permission.split(" ");
             
             let hasPermission = false;
-            //console.log(required);
+            //console.log(tab);
             for (const permission of required){
                 if (userPermissions.permissions.includes(permission)) {                       
                     hasPermission = true;
@@ -54,17 +55,27 @@
             //console.log(tab.children[0].id+" -> "+ hasPermission);
             if (!hasPermission) {   
                                     
-                tab.parentElement.style.display = 'none';
+                tab.style.display = 'none';
             }else{
                 firstAllowedTab ??= tab;
+                // prüfen, ob dieser Tab der gewünschte ist
+                const link = tab.querySelector('.nav-link');
+                const tabTarget = link?.getAttribute('data-bs-target')?.replace('#', '');
+                if (desiredTabId && tabTarget === desiredTabId) {
+                    desiredTabFound = link;
+                }
             }
 
         }
-        //console.log(firstAllowedTab);
-        if (firstAllowedTab) {
-            const bsTab = new bootstrap.Tab(firstAllowedTab);
-            bsTab.show();
-        }
+
+        
+        // //console.log(firstAllowedTab);
+        // if (firstAllowedTab) {
+        //     const bsTab = new bootstrap.Tab(firstAllowedTab);
+        //     bsTab.show();
+        // }
+
+        //console.log(loadedTabs);
         document.querySelectorAll('.nav-link[data-bs-toggle="tab"]').forEach(btn => {
             btn.addEventListener('shown.bs.tab', async e => {
                 const tabId = btn.getAttribute('data-bs-target').replace('#', '');
@@ -82,8 +93,8 @@
                         const initFn = module[`initTab`];
                         //console.log(initFn);
                         if(typeof initFn === 'function'){
-                            console.log(`../js/admin_${tabId}.js`);
-                                initFn();
+                            //console.log(`../js/admin_${tabId}.js`);
+                            initFn();
 
                         } 
                         loadedTabs[tabId] = true;
@@ -99,10 +110,12 @@
         // Wenn kein Tab aktiv ist, einen erlaubten aktivieren
         const active = document.querySelector('.nav-link.active');
 
-        if (!active && firstAllowedTab) {
-            const tabLink = firstAllowedTab.querySelector('.nav-link');
-            if (tabLink) {
-                const bsTab = new bootstrap.Tab(tabLink);
+        if (!active) {
+            
+            //const tabLink = firstAllowedTab.querySelector('.nav-link');
+            const tabToActivate = desiredTabFound ?? firstAllowedTab?.querySelector('.nav-link');
+            if (tabToActivate) {
+                const bsTab = new bootstrap.Tab(tabToActivate);
                 bsTab.show();
             }
         }
@@ -112,9 +125,13 @@
         console.error("Berechtigungen konnten nicht geladen werden", err);
     });
 
+
+    
+
     // Aktiven Tab sofort laden
     const active = document.querySelector('.nav-link.active');
     if (active) {
+        console.log("SHOW: "+active);
         active.dispatchEvent(new Event('shown.bs.tab'));
     } 
 
@@ -123,6 +140,8 @@
         return userPermissionList.includes(permission);
 
     }
+
+    
 
     
 
