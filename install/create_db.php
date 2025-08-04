@@ -95,6 +95,7 @@
 			    author VARCHAR(255),
 			    isbn VARCHAR(255),
 			    sold_by INT,
+				sold BOOLEAN,
 			    price VARCHAR(255)
                         );";
 
@@ -190,7 +191,9 @@
 				//Create permissions table
 						$sql = "CREATE TABLE permissions (
 							id INT AUTO_INCREMENT PRIMARY KEY,
-							name VARCHAR(50) -- z. B. 'edit_post', 'delete_user', etc.
+							name VARCHAR(50), -- z. B. 'Ban Users', 'Edit Books', etc.
+							type VARCHAR(20), -- z. B. 'ban_users', 'edit_books' -> für Nutzung in PHP
+							description VARCHAR(255)
 						);";
 
 						 if ($conn->query($sql) === TRUE) {

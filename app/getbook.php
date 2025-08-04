@@ -3,6 +3,8 @@ session_start();
 
 include '../api/login_check.php';
 
+
+
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="de">
@@ -223,6 +225,8 @@ include '../api/login_check.php';
           document.getElementById('pagesInput').value = res.book.pages;
           //Anbieter:in ausblenden bei einem neuen Buch. Es wird die Session-ID übernommen
           document.getElementById('sellerInput').parentElement.parentElement.classList.add("d-none");
+          
+
 
           const authors = res.book.authors.join(', ');
           document.getElementById('authorInput').value = authors;

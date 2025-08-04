@@ -363,6 +363,7 @@ include '../api/login_check.php';
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader();
+      const video = document.getElementById('video');
       console.log('ZXing code reader initialized');
 
       codeReader.listVideoInputDevices()
@@ -387,6 +388,11 @@ include '../api/login_check.php';
                   okButton.classList.remove('btn-secondary');
                   okButton.classList.add('btn-success');
                   okButton.disabled = false;
+
+                  //kamera deaktivieren, Canvas grau machen.
+                  codeReader.reset();
+                  //video.classList.add('inactive');
+
                 } else {
                   isbnInput.classList.add('is-invalid');
                   isbnInput.classList.remove('is-valid');

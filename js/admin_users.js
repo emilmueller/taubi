@@ -152,6 +152,7 @@ export function initTab(){
     
 
     function  buildUserModal(user, roles){   
+        //console.log(roles);
 
         
         const editUserForm = document.getElementById("editUserForm");
@@ -282,13 +283,29 @@ export function initTab(){
         fetch('../api/get_roles.php?type=rolelist')
             .then(response => response.json())
             .then(data => {
-                //console.log(data);
-                const roles = data;
+              if(data.success){
+                //console.log(data.roles);
+                const roles = data.roles; 
                 buildUserModal(user, roles);
+              }else{
+                console.log("PROBLEM");
+              }
+                
             })
             .catch(error => {
                 console.error("Fehler: ", error);
             })
+
+        // fetch('../api/get_roles.php?type=rolelist')
+        //     .then(response => response.text())
+        //     .then(text => {
+        //         console.log("öö "+text);
+        //         // const roles = data.roles;
+        //         // buildUserModal(user, roles);
+        //     })
+        //     .catch(error => {
+        //         console.error("Fehler: ", error);
+        //     })
 
         
     }

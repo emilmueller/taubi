@@ -1,46 +1,48 @@
-<?php
-/*
-..............Ban Usesrs..Edit Tags..Edit Books..Delete Books..Edit Users..Delete Users..Set Admin
-Admin             *          *           *            *             *           *           *
-Superuser         *          *           *                          *
-Biblio            *                      *            *             
-Tag Manager                  *
-Book Manager                             *            *
-User Manager      *                                                 *           *
-Supervisor        *
-User
-
-
-
-
-*/
-   
-    require_once '../config.php';
-
-    $roles = ["Admin", "Superuser", "Biblio", "Tag Manager", "Book Manager", "User Manager","Supervisor", "User"];
+<?php   
+    include_once '../config.php';
+    error_log(print_r($_GET,true));
 
      if($_GET['type']=="rolelist"){
-        $sql = "SELECT name,id from roles;";
+        $result = $conn->query('SELECT * from roles;');
 
-        $result = $conn->query($sql);
+        
         $roles = [];
-
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                // Decode tags JSON array to actual array (optional)
-                //$row['name'] = json_decode($row['name']);
-                $roles[] = $row;
-            }
-            $result->free();
+        while ($row = $result->fetch_assoc()) {
+            $roles[] = $row;
         }
-
-         // Close connection
-        $conn->close();
-        //error_log(print_r($roles));
         // Output JSON
-        header('Content-Type: application/json');
-        echo json_encode($roles);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['success' => true, 'roles' => $roles]);
         exit;
+    }
+
+    if($_GET['type']=="role" and isset($_GET['id'])){
+        $role_id = $_GET['id'];
+        $sql = "SELECT * from roles WHERE id = ? LIMIT 1;";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param('i', $role_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        if($row = $result->fetch_assoc()){
+            // Output JSON
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['success' => true, 'role' => $row]);
+            exit;
+        }else{
+            // Output JSON
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['success' => false, 'message' => "Rolle in der DB nicht gefunden"]);
+            exit;
+
+        }
+            
+            
+            
+        
+       
     }
     
     //Rollen (Namen) für die Übersicht
@@ -87,5 +89,8 @@ User
         echo json_encode(['success' => true, 'roles'=> $roles]);
         exit;
     }
+
+    
+
     
 ?>

@@ -80,7 +80,8 @@ include '../api/login_check.php';
           language: book.language,
           isbn: book.isbn,
           seller: book.sold_by || '0', // fallback if no seller
-          seller_name: book.seller_name, // if your API doesn't return seller name
+          seller_name: book.seller_name.split('@')[0], // if your API doesn't return seller name
+          sold: book.sold,
           tags: book.tags,
           tag_ids: book.tag_ids
         }));
@@ -101,28 +102,30 @@ include '../api/login_check.php';
     function renderBooks(filteredBooks) {
       bookCardsContainer.innerHTML = '';
       filteredBooks.forEach(book => {
-        const card = document.createElement('div');
-        card.classList.add('col');
-        card.innerHTML = `
-          <div class="card h-100">
-            <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
-            <div class="card-body">
-              <h5 class="card-title">${book.title}</h5>
-              <p class="text-muted">Autor: ${book.author}</p>
-              <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
-              <p class="text-muted">Zustand: ${book.book_condition}</p>
-              <p class="text-muted">Preis: ${book.price}</p>
-	            <p class="text-muted">Verkäufer: ${book.seller_name}</p>
-              <p class="text-muted">Fächer: ${book.tags}</p>
-              
+        if(book.sold == 0){
+          const card = document.createElement('div');
+          card.classList.add('col');
+          card.innerHTML = `
+            <div class="card h-100">
+              <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
+              <div class="card-body">
+                <h5 class="card-title">${book.title}</h5>
+                <p class="text-muted">Autor: ${book.author}</p>
+                <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
+                <p class="text-muted">Zustand: ${book.book_condition}</p>
+                <p class="text-muted">Preis: ${book.price}</p>
+                <p class="text-muted">Verkäufer: ${book.seller_name}</p>
+                <p class="text-muted">Fächer: ${book.tags}</p>
+                
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-secondary" onclick="show_message_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.seller}');">Kontakt</button>
+                <button class="btn btn-secondary" onclick="show_info_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
+              </div>
             </div>
-            <div class="card-footer">
-              <button class="btn btn-secondary" onclick="show_message_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.seller}');">Kontakt</button>
-	            <button class="btn btn-secondary" onclick="show_info_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
-            </div>
-          </div>
-        `;
-        bookCardsContainer.appendChild(card);
+          `;
+          bookCardsContainer.appendChild(card);
+        }
       });
     }
 

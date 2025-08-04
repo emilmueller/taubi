@@ -68,6 +68,13 @@ body {
     cursor: not-allowed;       /* zeigt, dass man nicht klicken soll */
 }
 
+.vertical-btn {
+  writing-mode: vertical-lr; /* vertikaler Text von unten nach oben */
+  text-orientation: mixed;
+  padding: 0.75rem 0.4rem;
+  line-height: 1;
+}
+
 
 .choices {
     background-color: #343a40; /* Bootstrap dark */

@@ -93,7 +93,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
           image_url: book.image_url,
           isbn: book.isbn,
           seller: book.sold_by || '0',
-          seller_name: book.seller_name,
+          seller_name: book.seller_name.split('@')[0],
+          sold: book.sold,
           tags: book.tags,
 	        id: book.id
         }));
@@ -115,16 +116,21 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         card.innerHTML = `
           <div class="card h-100">
             <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
+            ${book.sold == 1 ? '<img src="../verkauft.png" class="position-absolute top-0 start-0 w-100" >' :''}
             <div class="card-body">
               <h5 class="card-title">${book.title}</h5>
               <!--<p class="card-text">${book.description}</p>-->
               <p class="text-muted">Autor: ${book.author}</p>
+              <p class="text-muted">Vekauft: ${book.sold}</p>
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex">
+              <button class="btn ${book.sold == 1 ? 'btn-danger' : 'btn-info'}" onclick="sold_book(${book.id})"><span class="bi bi-${book.sold == 1 ? 'cart-check' : 'cart-x'}" title = "${book.sold == 1 ? 'Verkauft!' : 'Als verkauft markieren'}"></span></button> <!-- sold Button -->
+              <div class="ms-auto d-flex gap-2">
+                <button class="btn btn-danger" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
+                <button class="btn btn-success me-1" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
+              </div>
               
-              <button class="btn btn-danger float-end" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
-              <button class="btn btn-success float-end me-1" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
             </div>
           
           </div>
@@ -143,6 +149,22 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Function to handle the "Delete" button 
     function delete_book(book_id) {
         fetch("/api/delete_book.php?id="+book_id)
+        .then(response => response.json())
+        .then(result => {
+            if(result.success){
+                loadBooks().then(loadedBooks => {
+                    renderBooks(loadedBooks);  // Render books after loading
+                });
+
+            }
+
+        });
+            
+    }
+
+    // Function to handle the "Delete" button 
+    function sold_book(book_id) {
+        fetch("/api/sold_book.php?id="+book_id)
         .then(response => response.json())
         .then(result => {
             if(result.success){

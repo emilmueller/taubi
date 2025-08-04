@@ -3,7 +3,7 @@
 </div>
 
 <!-- Modal User Edit-->
-<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -27,7 +27,7 @@
 </div>
 
 <!-- Modal Ban User -->
-<div class="modal fade" id="banUserModal" tabindex="-1" aria-labelledby="banUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="banUserModal" tabindex="-1" aria-labelledby="banUserModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

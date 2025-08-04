@@ -86,7 +86,7 @@
                        // console.log(`../api/admin_${tabId}.php`);
                         const res = await fetch(`../api/admin_${tabId}.php`);
                         const html = await res.text();
-                        // console.log(html);
+                        //console.log(html);
                         tabPane.innerHTML = html;
                         
                         const module = await import(`../js/admin_${tabId}.js`);
@@ -140,6 +140,7 @@
         return userPermissionList.includes(permission);
 
     }
+
 
     
 
