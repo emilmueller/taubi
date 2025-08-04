@@ -49,7 +49,7 @@ include '../api/login_check.php';
       </div>
     </div>
 
-    <div class="row row-cols-2 row-cols-md-4 g-4" id="bookCards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="bookCards">
       <!-- Cards will be added dynamically here -->
     </div>
   </div>
@@ -106,16 +106,17 @@ include '../api/login_check.php';
           const card = document.createElement('div');
           card.classList.add('col');
           card.innerHTML = `
-            <div class="card h-100">
+          <!-- DESKTOP ANSICHT -->
+            <div class="card d-none d-md-flex h-100 d-flex flex-column">
               <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
-              <div class="card-body">
+              <div class="card-body flex-grow-1">                
                 <h5 class="card-title">${book.title}</h5>
-                <p class="text-muted">Autor: ${book.author}</p>
-                <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
-                <p class="text-muted">Zustand: ${book.book_condition}</p>
-                <p class="text-muted">Preis: ${book.price}</p>
-                <p class="text-muted">Verkäufer: ${book.seller_name}</p>
-                <p class="text-muted">Fächer: ${book.tags}</p>
+                <p class="text-muted">Autor:in: <br>${book.author}</p>
+                <p class="text-muted" style="display:none">ISBN: <br>${book.isbn}</p>
+                <p class="text-muted">Zustand: <br>${book.book_condition}</p>
+                <p class="text-muted">Preis: <br>${book.price}</p>
+                <p class="text-muted">Anbieter:in: <br>${book.seller_name}</p>
+                <p class="text-muted">Fächer: <br>${book.tags}</p>
                 
               </div>
               <div class="card-footer">
@@ -123,6 +124,33 @@ include '../api/login_check.php';
                 <button class="btn btn-secondary" onclick="show_info_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
               </div>
             </div>
+
+            <!-- SMARTPHONE ANSICHT -->
+            <div class="card col-12 d-flex d-md-none h-100">
+              <div class='row g-0 align-items-start'>
+                <div class='col-3'>
+
+                  <img src="${book.image_url}" class="card-img-top book_image" alt="Buchbild">
+                </div>
+                <div class='col-9'>
+                  <div class="card-body">
+                    <h5 class="card-title">${book.title}</h5>
+                    <p class="text-muted">Autor: ${book.author}</p>
+                    <p class="text-muted">Preis: ${book.price}</p>
+                    <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
+                    <p class="text-muted">Zustand: ${book.book_condition}</p>                    
+                    <p class="text-muted">Verkäufer: ${book.seller_name}</p>
+                    <p class="text-muted">Fächer: ${book.tags}</p>
+                    
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-secondary" onclick="show_message_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.seller}');">Kontakt</button>
+                  <button class="btn btn-secondary" onclick="show_info_modal('${escapeForHtmlAttr(book.title)}','${book.seller_name}','${book.author}','${book.pages}','${book.language}','${book.date_published}','${book.book_condition}','${book.price}','${book.image_url}');">Mehr Infos</button>
+                </div>
+              </div>
+            </div>
+
           `;
           bookCardsContainer.appendChild(card);
         }
@@ -261,7 +289,7 @@ include '../api/login_check.php';
           Gib eine Kurze Nachricht für den/die Verkäufer*in des Buches an.
           <textarea class="form-control mt-3" id="message_text" rows="4" placeholder="Deine Nachricht..."></textarea>
           <input type="text" style="display:none" id="message_seller_id">
-	</div>
+	      </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="send_message()">Absenden</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>

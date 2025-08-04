@@ -125,7 +125,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
             </div>
             <div class="card-footer d-flex">
-              <button class="btn ${book.sold == 1 ? 'btn-danger' : 'btn-info'}" onclick="sold_book(${book.id})"><span class="bi bi-${book.sold == 1 ? 'cart-check' : 'cart-x'}" title = "${book.sold == 1 ? 'Verkauft!' : 'Als verkauft markieren'}"></span></button> <!-- sold Button -->
+              <button class="btn ${book.sold == 1 ? 'btn-success' : 'btn-secondary'}" onclick="sold_book(${book.id}, ${book.sold == 1 ? '0' : '1'})"><span class="bi bi-${book.sold == 1 ? 'check2-circle' : 'dash-circle'}" title = "${book.sold == 1 ? 'Verkauft!' : 'Als verkauft markieren'}"></span></button> <!-- sold Button -->
               <div class="ms-auto d-flex gap-2">
                 <button class="btn btn-danger" onclick="delete_book(${book.id})"><span class="bi bi-trash"></span></button> <!-- delete Button -->
                 <button class="btn btn-success me-1" onclick="edit_book(${book.id})"><span class="bi bi-pencil"></span></button> <!-- edit Button -->
@@ -148,6 +148,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     
     // Function to handle the "Delete" button 
     function delete_book(book_id) {
+      
         fetch("/api/delete_book.php?id="+book_id)
         .then(response => response.json())
         .then(result => {
@@ -162,9 +163,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             
     }
 
-    // Function to handle the "Delete" button 
-    function sold_book(book_id) {
-        fetch("/api/sold_book.php?id="+book_id)
+    // Function to handle the "Sold" button 
+    function sold_book(book_id,sold) {
+        fetch("/api/sold_book.php?id="+book_id+"&sold="+sold)
         .then(response => response.json())
         .then(result => {
             if(result.success){
