@@ -318,7 +318,7 @@ include '../api/login_check.php';
           document.getElementById('zustandInput').value = res[0].book_condition;
           document.getElementById('preisInput').value = res[0].price;
           const seller = document.getElementById('sellerInput')
-          seller.value = res[0].seller_name;
+          seller.value = res[0].seller_name.split('@')[0];
           seller.classList.add('input-readonly');
           seller.readonly = true;
           const sold_by = document.getElementById('sold_byInput');

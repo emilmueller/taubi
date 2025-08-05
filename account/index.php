@@ -121,7 +121,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
               <h5 class="card-title">${book.title}</h5>
               <!--<p class="card-text">${book.description}</p>-->
               <p class="text-muted">Autor: ${book.author}</p>
-              <p class="text-muted">Vekauft: ${book.sold}</p>
+              
               <p class="text-muted" style="display:none">ISBN: ${book.isbn}</p>
             </div>
             <div class="card-footer d-flex">
