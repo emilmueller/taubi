@@ -389,7 +389,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     });
 
     function handleScan(result, token){
-        console.log(result+"  -- "+ token);
+        //console.log(result+"  -- "+ token);
         fetch('../api/submit_scan.php' , {
             method: "POST",
             headers: {

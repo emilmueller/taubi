@@ -162,7 +162,7 @@ include '../api/login_check.php';
           
         
         <div class="col-lg-4 col-md-12" id="sourceSelectPanel" >
-          <div class="pt-3 row">
+          <!-- <div class="pt-3 row">
             <label>Kamerabild drehen</label>
           </div>
           <div class="row pt-2 align-items-center">
@@ -181,10 +181,10 @@ include '../api/login_check.php';
                
               </button>
             </div>
-          </div>
+          </div> -->
           <div class="row pt-5 d-none d-md-block">
             <div class="col">
-              Wechsle aufs Handy
+              ISBN mit dem Handy scannen
             </div>
             <div class="col">
               <div id="qrcode"></div>
@@ -222,11 +222,11 @@ include '../api/login_check.php';
           token = result.token;
 
           //Wieder wegmachen im Prod
-          console.log(scanUrl);
+          //console.log(scanUrl);
           var qrcode = new QRCode(document.getElementById('qrcode'), {
           width:150,
           height:150,
-          correctLevel : QRCode.CorrectLevel.H
+          correctLevel : QRCode.CorrectLevel.L
         });
         qrcode.makeCode(scanUrl);
 
@@ -318,29 +318,22 @@ include '../api/login_check.php';
       const sourceSelectPanel = document.getElementById('sourceSelectPanel');
       const sourceSelect = document.getElementById('sourceSelect');
 
-      document.getElementById('VFlipButton').addEventListener('click', function () {
-        vgespiegelt = !vgespiegelt;
-        video.style.transform = vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
-      });
+      // document.getElementById('VFlipButton').addEventListener('click', function () {
+      //   vgespiegelt = !vgespiegelt;
+      //   video.style.transform = vgespiegelt ? "scaleY(-1)" : "scaleY(1)";
+      // });
 
-      document.getElementById('HFlipButton').addEventListener('click', function () {
-        hgespiegelt = !hgespiegelt;
-        video.style.transform = hgespiegelt ? "scaleX(-1)" : "scaleX(1)";
-      });
+      // document.getElementById('HFlipButton').addEventListener('click', function () {
+      //   hgespiegelt = !hgespiegelt;
+      //   video.style.transform = hgespiegelt ? "scaleX(-1)" : "scaleX(1)";
+      // });
 
-      document.getElementById('RotateButton').addEventListener('click', function () {
-        rotation = (rotation + 90) % 360;
-        video.style.transform = `rotate(${rotation}deg)`;
-      });
+      // document.getElementById('RotateButton').addEventListener('click', function () {
+      //   rotation = (rotation + 90) % 360;
+      //   video.style.transform = `rotate(${rotation}deg)`;
+      // });
 
-      okButton.addEventListener('click', function () {
-        const result = isbnInput.value;
-        if (result) {
-          window.location.href = `getbook.php?book_id=${result}&action=isbn_search`;
-        } else {
-          alert("Keine ISBN-Nummer eingegeben");
-        }
-      });
+      okButton.addEventListener('click', handleScan);
 
       isbnInput.addEventListener('input', function () {
         const value = isbnInput.value;
@@ -380,7 +373,7 @@ include '../api/login_check.php';
 
             const handleScanResult = (result, err) => {
               if (result) {
-                console.log(result);
+                //console.log(result);
                 isbnInput.value = result.text;
                 if (checkISBN(result.text)) {
                   isbnInput.classList.remove('is-invalid');
@@ -389,8 +382,9 @@ include '../api/login_check.php';
                   okButton.classList.add('btn-success');
                   okButton.disabled = false;
 
-                  //kamera deaktivieren, Canvas grau machen.
+                  //kamera deaktivieren
                   codeReader.reset();
+                  handleScan();
                   //video.classList.add('inactive');
 
                 } else {
@@ -424,6 +418,16 @@ include '../api/login_check.php';
           console.error(err);
         });
     });
+
+    function handleScan(){
+      const result = isbnInput.value;
+        if (result) {
+          window.location.href = `getbook.php?book_id=${result}&action=isbn_search`;
+        } else {
+          alert("Keine ISBN-Nummer eingegeben");
+        }
+      
+    }
 
 
     

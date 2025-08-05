@@ -213,7 +213,7 @@ include '../api/login_check.php';
           spinner.classList.add('d-none');
 
           const res = JSON.parse(rawJson); // Wie jQuerys $.parseJSON
-          console.log(res);
+          //console.log(res);
 
           document.getElementById('bookImage').src = res.book.image;
           document.getElementById('image_url_input').value = res.book.image;
@@ -365,10 +365,13 @@ include '../api/login_check.php';
 
     function goBack(){
       const lastTab = sessionStorage.getItem('lastTab') || '';
+      console.log("BG "+sessionStorage.getItem('lastSite'));
       if(lastTab != ''){
-        window.location.href =sessionStorage.getItem('lastSite')+'?tab='+lastTab;
-      }else{
+        window.location.href = sessionStorage.getItem('lastSite')+'?tab='+lastTab;
+      }else if (sessionStorage.getItem('lastSite') != null) {
         window.location.href = sessionStorage.getItem('lastSite');
+      }else{
+        window.location.href = '/app';
       }
       
     }
