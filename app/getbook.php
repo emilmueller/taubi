@@ -186,7 +186,27 @@ include '../api/login_check.php';
 
   </div>
 
+  <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x">
+    <div id="notFoundToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body text-dark bg-light">
+        Das Buch wurde in der ISBN-DB nicht gefunden!
+        <div class="mt-2 pt-2 border-top">
+          <button id="rescanBtn" type="button" class="btn btn-primary btn-sm">Nochmals scannen</button>
+          <button id="taostCloseBtn" type="button" class="btn btn-primary btn-sm" data-bs-dismiss="toast" >Zurück</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+
+    document.getElementById('rescanBtn').addEventListener('click', function () {
+      window.location.href = '/app/scan_barcode.php';
+    });
+
+    document.getElementById('taostCloseBtn').addEventListener('click', function() {
+      goBack();
+    });
 
 
 
@@ -206,8 +226,14 @@ include '../api/login_check.php';
           method: 'GET'
         })
         .then(response => {
-          if (!response.ok) throw new Error("Fehler beim Abrufen");
-          return response.json();
+          if (!response.ok){
+            const toastEl = document.getElementById('notFoundToast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+            
+          } else{
+            return response.json();
+          }
         })
         .then(rawJson => {
           spinner.classList.add('d-none');
@@ -263,8 +289,14 @@ include '../api/login_check.php';
           })
         })
         .then(response => {
-          if (!response.ok) throw new Error("Fehler beim Abrufen");
-          return response.json();
+          if (!response.ok){
+            const toastEl = document.getElementById('notFoundToast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+            
+          } else{
+            return response.json();
+          }
         })
         .then(response => {
           spinner.classList.add('d-none');
