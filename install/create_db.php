@@ -61,10 +61,11 @@
 			$sql="CREATE TABLE IF NOT EXISTS users (
 			    id INT AUTO_INCREMENT PRIMARY KEY,
 			    username VARCHAR(255) NOT NULL UNIQUE,
-			    role VARCHAR(255),
 			    email VARCHAR(255) NOT NULL UNIQUE,
 				password VARCHAR(255),
 			    last_login VARCHAR(255),
+				token VARCHAR(255),
+				ban_mnessage VARCHAR(255),
 				banned INT
 			);";
 
@@ -172,7 +173,7 @@
                         }
 
 				//Create roles table
-						$sql = "CREATE TABLE roles (
+						$sql = "CREATE TABLE IF NOT EXISTS roles (
 							id INT AUTO_INCREMENT PRIMARY KEY,
 							name VARCHAR(50)
 						);";
@@ -189,7 +190,7 @@
                         }
 
 				//Create permissions table
-						$sql = "CREATE TABLE permissions (
+						$sql = "CREATE TABLE IF NOT EXISTS permissions (
 							id INT AUTO_INCREMENT PRIMARY KEY,
 							name VARCHAR(50), -- z. B. 'Ban Users', 'Edit Books', etc.
 							type VARCHAR(20), -- z. B. 'ban_users', 'edit_books' -> für Nutzung in PHP
@@ -208,7 +209,7 @@
                         }
 
 				//Create user_roles table
-						$sql = "CREATE TABLE user_roles (
+						$sql = "CREATE TABLE IF NOT EXISTS user_roles (
 							user_id INT,
 							role_id INT,
 							PRIMARY KEY (user_id, role_id),
@@ -228,7 +229,7 @@
                         }
 
 				//Create role_permission table
-						$sql = "CREATE TABLE role_permissions (
+						$sql = "CREATE TABLE IF NOT EXISTS  role_permissions (
 							role_id INT,
 							permission_id INT,
 							PRIMARY KEY (role_id, permission_id),
@@ -248,7 +249,7 @@
                         }
 
 				//Create temp_tokens table
-						$sql = "CREATE TABLE temp_tokens (
+						$sql = "CREATE TABLE IF NOT EXISTS temp_tokens (
 							token VARCHAR(255) PRIMARY KEY,
 							user_id INT NOT NULL,
 							expires_at TIMESTAMP NOT NULL,
