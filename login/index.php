@@ -416,7 +416,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="reset_pw"){
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
-						<h3 class="text-center">Login</h3>
+						<h3 class="text-center">Logins</h3>
 						<form action="?action=login" method="post">
 							<div class="mb-3">
 								<label for="username" class="form-label">Benutzername:</label>
