@@ -111,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password, role,token, banned,ban_message, email FROM users WHERE username = ?";
+        $sql = "SELECT id, username, password, token, banned,ban_message, email FROM users WHERE username = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -127,7 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $role,$token, $banned,$ban_message, $email);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $token, $banned,$ban_message, $email);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
 							if($banned!=0){
@@ -171,7 +171,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="login"){
 									$_SESSION["id"] = $id;
 									$_SESSION["username"] = $username;
 									$_SESSION['email']=$email;
-									$_SESSION["role"] = $role;
 									$_SESSION["token"]=bin2hex(random_bytes(32));
 									$_SESSION['permissions']=$permissions;
 									// $_SESSION["creation_token"]= urlencode(bin2hex(random_bytes(24/2)));
@@ -282,7 +281,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
     if(empty($err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, email, password, role,banned, token) VALUES (?, ?, ?, ?,?,?)";
+        $sql = "INSERT INTO users (username, email, password, banned, token) VALUES (?, ?, ?, ?,?,?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -292,12 +291,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"]=="create_user"){
 			$banned_reason="Account muss zuerst verifiziert werden (Link in Mail)";
 			$tel=0;
 			$mail=1;
-            mysqli_stmt_bind_param($stmt, "ssssis", $param_username,$param_username, $param_password, $role,$banned, $token);
+            mysqli_stmt_bind_param($stmt, "sssis", $param_username,$param_username, $param_password, $banned, $token);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            $role="00000001";
+            
             $banned=0;
 			$tel=0;
 			$mail=1;

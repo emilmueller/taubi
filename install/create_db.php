@@ -175,7 +175,8 @@
 				//Create roles table
 						$sql = "CREATE TABLE IF NOT EXISTS roles (
 							id INT AUTO_INCREMENT PRIMARY KEY,
-							name VARCHAR(50)
+							name VARCHAR(50),
+							description VARCHAR(255)
 						);";
 
 						 if ($conn->query($sql) === TRUE) {
