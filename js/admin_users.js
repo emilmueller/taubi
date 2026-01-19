@@ -90,7 +90,7 @@ export function initTab(){
 
             actionDiv.className ='d-flex gap-3 h-100 align-items-center';
             const editButton = document.createElement("button");
-            editButton.title = "Nutzer:in bearbeiten!";
+            editButton.title = "Nutzer:inso bearbeiten!";
             
             editButton.innerHTML = '<i class="bi bi-pencil"></i>';
             editButton.className= "btn btn-sm btn-success";

@@ -43,7 +43,7 @@ $bindParams[]=(int)$_POST['id'];
 //error_log("PARAMS: ".print_r($bindParams,true)); 
 
 $sql = "UPDATE users SET ".implode(", ",$updateFields)." WHERE id = ?;";
-// error_log($sql." ---> ".$types);
+//error_log($sql." ------> ".$types);
 $stmt = $conn->prepare($sql);
 call_user_func_array([$stmt, 'bind_param'], $bindParams);
 //$stmt->bind_param($types, $params);
