@@ -9,7 +9,7 @@
     <table class="table table-striped text-center align-middle">
     <thead>
         <tr>
-        <th>Permission</th>
+        <th>Permissions</th>
         <?php foreach ($roles as $role): ?>
             <th title='Click to Edit'>
                 <button type="button" class="btn btn-dark btn-outline-light" data-bs-toggle="modal" data-role-id ='<?= htmlspecialchars(json_encode($role['id']), ENT_QUOTES) ?>' data-bs-target="#roleModal"><?= htmlspecialchars($role['name']) ?></button>
